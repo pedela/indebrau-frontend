@@ -11,7 +11,6 @@ const styles = theme => ({
 });
 
 class Home extends Component {
-
   render() {
     const { classes } = this.props;
     return (
@@ -21,8 +20,6 @@ class Home extends Component {
         </Typography>
         <Typography variant="subtitle1" gutterBottom>
           Here will be some great text
-        </Typography>
-        <Typography gutterBottom>
         </Typography>
       </div>
     );

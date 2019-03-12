@@ -3,9 +3,10 @@ import App, { Container } from 'next/app';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import JssProvider from 'react-jss/lib/JssProvider';
-import getPageContext from '../getPageContext';
+import { ApolloProvider } from 'react-apollo';
+import getPageContext from '../lib/getPageContext';
 import Page from '../components/Page';
-
+import withData from '../lib/withData';
 class MyApp extends App {
   constructor() {
     super();
@@ -21,7 +22,7 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, apollo, pageProps } = this.props;
     return (
       <Container>
         {/* Wrap every page in Jss and Theme providers */}
@@ -35,13 +36,15 @@ class MyApp extends App {
             theme={this.pageContext.theme}
             sheetsManager={this.pageContext.sheetsManager}
           >
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <CssBaseline />
-            {/* Pass pageContext to the _document though the renderPage enhancer
+            <ApolloProvider client={apollo}>
+              {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+              <CssBaseline />
+              {/* Pass pageContext to the _document though the renderPage enhancer
                 to render collected styles on server-side. */}
-            <Page>
-              <Component pageContext={this.pageContext} {...pageProps} />
-            </Page>
+              <Page>
+                <Component pageContext={this.pageContext} {...pageProps} />
+              </Page>
+            </ApolloProvider>
           </MuiThemeProvider>
         </JssProvider>
       </Container>
@@ -49,4 +52,4 @@ class MyApp extends App {
   }
 }
 
-export default MyApp;
+export default withData(MyApp);
