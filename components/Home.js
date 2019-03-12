@@ -22,6 +22,7 @@ class Home extends Component {
           Here will be some great text
         </Typography>
       </div>
+
     );
   }
 }

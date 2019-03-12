@@ -60,9 +60,13 @@ class Nav extends Component {
         >
           Indebrau
         </Typography>
-        <Button variant="outlined" size="small">
+        <Link href="/signin">
+          <a>
+            <Button variant="outlined" size="small">
           Sign In
-        </Button>
+            </Button>
+          </a>
+        </Link>
         <Button variant="outlined" size="small">
           Sign Up
         </Button>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
@@ -23,46 +23,48 @@ const styles = theme => ({
   }
 });
 
-function About(props) {
-  const { classes } = props;
+class About extends Component {
+  render() {
+    const { classes } = this.props;
 
-  return (
-    <div className={classes.root}>
-      <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justify="center"
-      >
-        <Grid item xs={5}>
-          <Card className={classes.card}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image="../static/drunken-deer.jpg"
-                title="The Drunken Deer"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
+    return (
+      <div className={classes.root}>
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justify="center"
+        >
+          <Grid item xs={5}>
+            <Card className={classes.card}>
+              <CardActionArea>
+                <CardMedia
+                  className={classes.media}
+                  image="../static/drunken-deer.jpg"
+                  title="The Drunken Deer"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
                   Our Drunken Deer Beer
-                </Typography>
-                <Typography component="p">
+                  </Typography>
+                  <Typography component="p">
                   Best beer in the world! Drink Drink Drink Drink! Drink Drink
                   Drink Drink! Drink Drink Drink Drink! Drink Drink Drink Drink!
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <Button size="small" color="primary">
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions>
+                <Button size="small" color="primary">
                 Learn More
-              </Button>
-            </CardActions>
-          </Card>
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
 About.propTypes = {
