@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
+import ErrorMessage from './ErrorMessage';
 
 const styles = theme => ({
   main: {
@@ -55,7 +56,6 @@ const SIGNIN_MUTATION = gql`
 
 class SignIn extends Component {
   state = {
-    name: '',
     password: '',
     email: ''
   };
@@ -68,8 +68,9 @@ class SignIn extends Component {
 
     return (
       <Mutation mutation={SIGNIN_MUTATION} variables={this.state}>
-        {(signin, { error, loading }) => (
+        {(signin, { loading, error }) => (
           <main className={classes.main}>
+            <ErrorMessage error={error} />
             <Paper className={classes.paper}>
               <Avatar className={classes.avatar}>
                 <LockOutlinedIcon />
@@ -77,13 +78,14 @@ class SignIn extends Component {
               <Typography component="h1" variant="h5">
                 Sign in
               </Typography>
+
               <form
                 className={classes.form}
                 method="post"
                 onSubmit={async e => {
                   e.preventDefault();
-                  await signin();
-                  this.setState({ name: '', email: '', password: '' });
+                  await signin().catch(() => {});
+                  this.setState({ email: '', password: '' });
                 }}
               >
                 <FormControl margin="normal" required fullWidth>
