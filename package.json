@@ -30,9 +30,9 @@
     "eslint-plugin-react": "^7.12.4"
   },
   "scripts": {
-    "dev": "next -p process.env.PORT",
+    "dev": "next -p $PORT",
     "build": "next build",
-    "start": "next start -p process.env.PORT",
+    "start": "next start -p $PORT",
     "heroku-postbuild": "npm run build"
   }
 }
