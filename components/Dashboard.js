@@ -11,8 +11,13 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { mainListItems } from './listItems';
-import SimpleLineChart from './SimpleLineChart';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import Link from 'next/link';
+import DashboardContent from './DashboardContent';
 
 const drawerWidth = 240;
 
@@ -89,7 +94,12 @@ const styles = theme => ({
 
 class Dashboard extends Component {
   state = {
-    open: true
+    open: true,
+    activeWindow: null
+  };
+
+  setActiveWindow = activeWindow => {
+    this.setState({ activeWindow: activeWindow });
   };
 
   handleDrawerOpen = () => {
@@ -154,16 +164,41 @@ class Dashboard extends Component {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems}</List>
+          <List>
+            {' '}
+            <Link href="/">
+              <a>
+                <ListItem button>
+                  <ListItemIcon>
+                    <DashboardIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Home" />
+                </ListItem>
+              </a>
+            </Link>
+            <ListItem
+              button
+              onClick={() => this.setActiveWindow('BrewingProcesses')}
+            >
+              <ListItemIcon>
+                <AssignmentIcon />
+              </ListItemIcon>
+              <ListItemText primary="Brewdays" />
+            </ListItem>
+            <ListItem
+              button
+              onClick={() => this.setActiveWindow('GraphChart')}
+            >
+              <ListItemIcon>
+                <AssignmentIcon />
+              </ListItemIcon>
+              <ListItemText primary="Sample Graph" />
+            </ListItem>
+          </List>
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Typography variant="h4" gutterBottom component="h2">
-            Sample Chart
-          </Typography>
-          <Typography component="div" className={classes.chartContainer}>
-            <SimpleLineChart />
-          </Typography>
+          <DashboardContent activeWindow={this.state.activeWindow} />
         </main>
       </div>
     );

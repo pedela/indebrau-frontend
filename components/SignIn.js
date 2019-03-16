@@ -12,6 +12,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import ErrorMessage from './ErrorMessage';
+import { CURRENT_USER_QUERY } from './User';
 
 const styles = theme => ({
   main: {
@@ -49,7 +50,7 @@ const styles = theme => ({
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION($email: String!, $password: String!) {
     signin(email: $email, password: $password) {
-      token
+      id
     }
   }
 `;
@@ -67,7 +68,11 @@ class SignIn extends Component {
     const { classes } = this.props;
 
     return (
-      <Mutation mutation={SIGNIN_MUTATION} variables={this.state}>
+      <Mutation
+        mutation={SIGNIN_MUTATION}
+        variables={this.state}
+        refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+      >
         {(signin, { loading, error }) => (
           <main className={classes.main}>
             <ErrorMessage error={error} />

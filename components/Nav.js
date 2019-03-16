@@ -4,8 +4,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import SignOut from './SignOut';
 import Link from 'next/link';
+
+import SignOut from './SignOut';
+import User from './User';
 
 const styles = theme => ({
   main: {
@@ -32,44 +34,68 @@ const styles = theme => ({
 });
 
 class Nav extends Component {
+
+  state = {
+    signedIn: false
+  };
+
+  setActiveWindow = activeWindow => {
+    this.setState({ activeWindow: activeWindow });
+  };
+
   render() {
     const { classes } = this.props;
+
     return (
       <main className={classes.main}>
-        <Toolbar className={classes.toolbarMain}>
-          <Link href="/">
-            <a className={classes.buttonLinks}>
-              <Button>Home</Button>
-            </a>
-          </Link>
-          <Link href="/about">
-            <a className={classes.buttonLinks}>
-              <Button>About</Button>
-            </a>
-          </Link>
-          <Link href="/dashboard">
-            <a className={classes.buttonLinks}>
-              <Button>Admin Area</Button>
-            </a>
-          </Link>
-          <Typography
-            component="h2"
-            variant="h5"
-            color="inherit"
-            align="center"
-            noWrap
-            className={classes.toolbarTitle}
-          >
+        <User>
+          {({ data }) => {
+            const me = data ? data.me : null;
+            return(
+              <Toolbar className={classes.toolbarMain}>
+                <Link href="/">
+                  <a className={classes.buttonLinks}>
+                    <Button>Home</Button>
+                  </a>
+                </Link>
+                <Link href="/about">
+                  <a className={classes.buttonLinks}>
+                    <Button>About</Button>
+                  </a>
+                </Link>
+                {me &&
+                <Link href="/dashboard">
+                  <a className={classes.buttonLinks}>
+                    <Button>Admin Area</Button>
+                  </a>
+                </Link>
+                }
+                <Typography
+                  component="h2"
+                  variant="h5"
+                  color="inherit"
+                  align="center"
+                  noWrap
+                  className={classes.toolbarTitle}
+                >
             Indebrau
-          </Typography>
-          <Link href="/signin">
-            <a className={classes.buttonLinks}>
-              <Button>Sign In</Button>
-            </a>
-          </Link>
-          <SignOut />
-          <Button>Sign Up</Button>
-        </Toolbar>
+                </Typography>
+                {!me &&
+                <Link href="/signin">
+                  <a className={classes.buttonLinks}>
+                    <Button>Sign In</Button>
+                  </a>
+                </Link>
+                }
+                {me &&
+                <SignOut />
+                }
+                {!me &&
+                <Button>Sign Up</Button>
+                }
+              </Toolbar>);
+          }}
+        </User>
       </main>
     );
   }

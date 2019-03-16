@@ -18,7 +18,7 @@ const data = [
   { time: '2018-09-26T12:36:05Z', value: 22.5 }
 ];
 
-function SimpleLineChart() {
+function GraphChart() {
   return (
     // 99% per https://github.com/recharts/recharts/issues/172
     <ResponsiveContainer width="99%" height={320}>
@@ -40,4 +40,4 @@ function SimpleLineChart() {
   );
 }
 
-export default SimpleLineChart;
+export default GraphChart;
