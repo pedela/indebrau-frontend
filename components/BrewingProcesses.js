@@ -48,11 +48,11 @@ class BrewingProcesses extends Component {
               <Table className={classes.table}>
                 <TableHead>
                   <TableRow>
-                    <TableCell>ID</TableCell>
-                    <TableCell align="right">Name</TableCell>
-                    <TableCell align="right">Start</TableCell>
-                    <TableCell align="right">End</TableCell>
-                    <TableCell align="right">Active</TableCell>
+                    <TableCell align="center">ID</TableCell>
+                    <TableCell align="center">Name</TableCell>
+                    <TableCell align="center">Start</TableCell>
+                    <TableCell align="center">End</TableCell>
+                    <TableCell align="center">Active</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -64,7 +64,7 @@ class BrewingProcesses extends Component {
                       <TableCell align="right">{n.name}</TableCell>
                       <TableCell align="right">{n.start}</TableCell>
                       <TableCell align="right">{n.end}</TableCell>
-                      <TableCell align="right">{n.active}</TableCell>
+                      <TableCell align="right">{n.active.toString()}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

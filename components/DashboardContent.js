@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import GraphChart from './GraphChart';
 import BrewingProcesses from './BrewingProcesses';
+
 
 class DashboardContent extends Component {
   returnActiveWindow = () => {
@@ -19,21 +21,21 @@ class DashboardContent extends Component {
     const { classes } = this.props;
 
     return (
-      <div>
+      <Paper>
         <Typography variant="h4" gutterBottom component="h2">
           {this.props.activeWindow}
         </Typography>
         <Typography component="div" className={classes.chartContainer}>
           {this.returnActiveWindow()}
         </Typography>
-      </div>
+      </Paper>
     );
   }
 }
 
 DashboardContent.propTypes = {
   classes: PropTypes.object.isRequired,
-  activeWindow: PropTypes.object.isRequired
+  activeWindow: PropTypes.string.isRequired
 };
 
 export default withStyles()(DashboardContent);

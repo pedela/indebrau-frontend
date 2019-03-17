@@ -6,7 +6,8 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = theme => ({
   root: {
     textAlign: 'center',
-    paddingTop: theme.spacing.unit * 20
+    paddingTop: theme.spacing.unit * 2,
+    maxHeight: '100%'
   }
 });
 
@@ -16,13 +17,13 @@ class Home extends Component {
     return (
       <div className={classes.root}>
         <Typography variant="h4" gutterBottom>
-          Indebrau Landing Page
+          Indebrau: Beer from Eschweiler
         </Typography>
         <Typography variant="subtitle1" gutterBottom>
-          Here will be some great text
+          A beer as smooth as its river!
         </Typography>
+        <img src="../static/brewery.jpeg" height="500" />
       </div>
-
     );
   }
 }

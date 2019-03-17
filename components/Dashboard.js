@@ -56,6 +56,9 @@ const styles = theme => ({
     marginLeft: 12,
     marginRight: 36
   },
+  buttonLinks: {
+    textDecoration: 'none'
+  },
   menuButtonHidden: {
     display: 'none'
   },
@@ -97,7 +100,7 @@ const styles = theme => ({
 class Dashboard extends Component {
   state = {
     open: true,
-    activeWindow: null
+    activeWindow: 'welcome'
   };
 
   setActiveWindow = activeWindow => {
@@ -126,9 +129,11 @@ class Dashboard extends Component {
                 <div className={classes.root}>
                   <main className={classes.content}>
                     <div className={classes.appBarSpacer} />
-                    <Error error={{ message: 'You are no admin, please go back' }} />
+                    <Error
+                      error={{ message: 'You are no admin, please go back' }}
+                    />
                     <Link href="/">
-                      <a>
+                      <a className={classes.buttonLinks}>
                         <ListItem button>
                           <ListItemIcon>
                             <HomeIcon />
@@ -195,7 +200,7 @@ class Dashboard extends Component {
                   <List>
                     {' '}
                     <Link href="/">
-                      <a>
+                      <a className={classes.buttonLinks}>
                         <ListItem button>
                           <ListItemIcon>
                             <HomeIcon />
@@ -211,7 +216,7 @@ class Dashboard extends Component {
                       <ListItemIcon>
                         <AssignmentIcon />
                       </ListItemIcon>
-                      <ListItemText primary="Brewdays" />
+                      <ListItemText primary="Brewing Processes" />
                     </ListItem>
                     <ListItem
                       button
@@ -220,7 +225,7 @@ class Dashboard extends Component {
                       <ListItemIcon>
                         <AssignmentIcon />
                       </ListItemIcon>
-                      <ListItemText primary="Sample Graph" />
+                      <ListItemText primary="Graphs" />
                     </ListItem>
                   </List>
                 </Drawer>

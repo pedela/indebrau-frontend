@@ -59,13 +59,6 @@ class Nav extends Component {
                     <Button>About</Button>
                   </a>
                 </Link>
-                {me && me.permissions.includes('ADMIN') &&
-                <Link href="/dashboard">
-                  <a className={classes.buttonLinks}>
-                    <Button>Admin Area</Button>
-                  </a>
-                </Link>
-                }
                 <Typography
                   component="h2"
                   variant="h5"
@@ -76,6 +69,13 @@ class Nav extends Component {
                 >
                   Indebrau
                 </Typography>
+                {me && me.permissions.includes('ADMIN') &&
+                  <Link href="/dashboard">
+                    <a className={classes.buttonLinks}>
+                      <Button>Admin Area</Button>
+                    </a>
+                  </Link>
+                }
                 {!me &&
                 <Link href="/signin">
                   <a className={classes.buttonLinks}>

@@ -2,8 +2,7 @@
   "name": "indebrau-frontend",
   "version": "0.0.1",
   "description": "The frontend of indebrau",
-  "main": "index.js",
-  "author": "Peter de Lange",
+  "repository": "https://github.com/PedeLa/indebrau-frontend",
   "scripts": {
     "dev": "next -p $PORT",
     "build": "next build",
@@ -38,5 +37,7 @@
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4"
-  }
+  },
+  "author": "Peter de Lange",
+  "license": "ISC"
 }
