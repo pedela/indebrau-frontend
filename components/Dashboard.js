@@ -14,10 +14,12 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import DashboardIcon from '@material-ui/icons/Dashboard';
+import HomeIcon from '@material-ui/icons/Home';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import Link from 'next/link';
 import DashboardContent from './DashboardContent';
+import Error from './Error';
+import User from './User';
 
 const drawerWidth = 240;
 
@@ -114,93 +116,123 @@ class Dashboard extends Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
-        <AppBar
-          position="absolute"
-          className={classNames(
-            classes.appBar,
-            this.state.open && classes.appBarShift
-          )}
-        >
-          <Toolbar
-            disableGutters={!this.state.open}
-            className={classes.toolbar}
-          >
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.handleDrawerOpen}
-              className={classNames(
-                classes.menuButton,
-                this.state.open && classes.menuButtonHidden
-              )}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              className={classes.title}
-            >
-              Dashboard
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: classNames(
-              classes.drawerPaper,
-              !this.state.open && classes.drawerPaperClose
-            )
+      <main className={classes.main}>
+        <User>
+          {({ data }) => {
+            const me = data ? data.me : null;
+            // frontend check, only for display, real check is done in backend
+            if (!me || !me.permissions.includes('ADMIN')) {
+              return (
+                <div className={classes.root}>
+                  <main className={classes.content}>
+                    <div className={classes.appBarSpacer} />
+                    <Error error={{ message: 'You are no admin, please go back' }} />
+                    <Link href="/">
+                      <a>
+                        <ListItem button>
+                          <ListItemIcon>
+                            <HomeIcon />
+                          </ListItemIcon>
+                          <ListItemText primary="Home" />
+                        </ListItem>
+                      </a>
+                    </Link>
+                  </main>
+                </div>
+              );
+            }
+            return (
+              <div className={classes.root}>
+                <AppBar
+                  position="absolute"
+                  className={classNames(
+                    classes.appBar,
+                    this.state.open && classes.appBarShift
+                  )}
+                >
+                  <Toolbar
+                    disableGutters={!this.state.open}
+                    className={classes.toolbar}
+                  >
+                    <IconButton
+                      color="inherit"
+                      aria-label="Open drawer"
+                      onClick={this.handleDrawerOpen}
+                      className={classNames(
+                        classes.menuButton,
+                        this.state.open && classes.menuButtonHidden
+                      )}
+                    >
+                      <MenuIcon />
+                    </IconButton>
+                    <Typography
+                      component="h1"
+                      variant="h6"
+                      color="inherit"
+                      noWrap
+                      className={classes.title}
+                    >
+                      Dashboard
+                    </Typography>
+                  </Toolbar>
+                </AppBar>
+                <Drawer
+                  variant="permanent"
+                  classes={{
+                    paper: classNames(
+                      classes.drawerPaper,
+                      !this.state.open && classes.drawerPaperClose
+                    )
+                  }}
+                  open={this.state.open}
+                >
+                  <div className={classes.toolbarIcon}>
+                    <IconButton onClick={this.handleDrawerClose}>
+                      <ChevronLeftIcon />
+                    </IconButton>
+                  </div>
+                  <Divider />
+                  <List>
+                    {' '}
+                    <Link href="/">
+                      <a>
+                        <ListItem button>
+                          <ListItemIcon>
+                            <HomeIcon />
+                          </ListItemIcon>
+                          <ListItemText primary="Home" />
+                        </ListItem>
+                      </a>
+                    </Link>
+                    <ListItem
+                      button
+                      onClick={() => this.setActiveWindow('BrewingProcesses')}
+                    >
+                      <ListItemIcon>
+                        <AssignmentIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Brewdays" />
+                    </ListItem>
+                    <ListItem
+                      button
+                      onClick={() => this.setActiveWindow('GraphChart')}
+                    >
+                      <ListItemIcon>
+                        <AssignmentIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Sample Graph" />
+                    </ListItem>
+                  </List>
+                </Drawer>
+                <main className={classes.content}>
+                  <div className={classes.appBarSpacer} />
+                  <DashboardContent activeWindow={this.state.activeWindow} />
+                </main>
+              </div>
+            );
           }}
-          open={this.state.open}
-        >
-          <div className={classes.toolbarIcon}>
-            <IconButton onClick={this.handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <List>
-            {' '}
-            <Link href="/">
-              <a>
-                <ListItem button>
-                  <ListItemIcon>
-                    <DashboardIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Home" />
-                </ListItem>
-              </a>
-            </Link>
-            <ListItem
-              button
-              onClick={() => this.setActiveWindow('BrewingProcesses')}
-            >
-              <ListItemIcon>
-                <AssignmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="Brewdays" />
-            </ListItem>
-            <ListItem
-              button
-              onClick={() => this.setActiveWindow('GraphChart')}
-            >
-              <ListItemIcon>
-                <AssignmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="Sample Graph" />
-            </ListItem>
-          </List>
-        </Drawer>
-        <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
-          <DashboardContent activeWindow={this.state.activeWindow} />
-        </main>
-      </div>
+        </User>
+      </main>
     );
   }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Meta from './Meta';
 
 class Page extends Component {
@@ -12,4 +13,7 @@ class Page extends Component {
   }
 }
 
+Page.propTypes = {
+  children: PropTypes.object.isRequired
+};
 export default Page;

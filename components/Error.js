@@ -11,9 +11,9 @@ const styles = theme => ({
   }
 });
 
-class ErrorMessage extends Component {
+class Error extends Component {
   state = {
-    open: false
+    open: true
   };
 
   handleOpen = () => {
@@ -34,6 +34,11 @@ class ErrorMessage extends Component {
     const { classes, error } = this.props;
     // no error
     if (!error || !error.message) return null;
+    let errorMessage = 'Undefined Error!';
+    if (error && error.message) {
+      errorMessage = error.message;
+    }
+
     return (
       <div>
         <Snackbar
@@ -49,7 +54,7 @@ class ErrorMessage extends Component {
           }}
           message={
             <span id="message-id">
-              {error.message.replace('GraphQL error: ', '')}
+              {errorMessage.replace('GraphQL error: ', '')}
             </span>
           }
           action={[
@@ -69,13 +74,13 @@ class ErrorMessage extends Component {
   }
 }
 
-ErrorMessage.defaultProps = {
+Error.defaultProps = {
   error: {}
 };
 
-ErrorMessage.propTypes = {
+Error.propTypes = {
   error: PropTypes.object,
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ErrorMessage);
+export default withStyles(styles)(Error);

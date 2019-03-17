@@ -39,10 +39,6 @@ class Nav extends Component {
     signedIn: false
   };
 
-  setActiveWindow = activeWindow => {
-    this.setState({ activeWindow: activeWindow });
-  };
-
   render() {
     const { classes } = this.props;
 
@@ -63,7 +59,7 @@ class Nav extends Component {
                     <Button>About</Button>
                   </a>
                 </Link>
-                {me &&
+                {me && me.permissions.includes('ADMIN') &&
                 <Link href="/dashboard">
                   <a className={classes.buttonLinks}>
                     <Button>Admin Area</Button>
@@ -78,7 +74,7 @@ class Nav extends Component {
                   noWrap
                   className={classes.toolbarTitle}
                 >
-            Indebrau
+                  Indebrau
                 </Typography>
                 {!me &&
                 <Link href="/signin">
@@ -91,7 +87,11 @@ class Nav extends Component {
                 <SignOut />
                 }
                 {!me &&
-                <Button>Sign Up</Button>
+                  <Link href="/signup">
+                    <a className={classes.buttonLinks}>
+                      <Button>Sign Up</Button>
+                    </a>
+                  </Link>
                 }
               </Toolbar>);
           }}

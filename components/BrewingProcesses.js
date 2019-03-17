@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import ErrorMessage from './ErrorMessage';
+import Error from './Error';
 
 const styles = {
   root: {
@@ -41,7 +41,7 @@ class BrewingProcesses extends Component {
       <Query query={BREWING_PROCESSES_QUERY}>
         {({ data, error, loading }) => {
           if (loading) return <p>Loading...</p>;
-          if (error) return <ErrorMessage error={error} />;
+          if (error) return <Error error={error} />;
           // success!
           return (
             <Paper className={classes.root}>

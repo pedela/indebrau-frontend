@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -47,19 +47,25 @@ const styles = theme => ({
   }
 });
 
-const SIGNIN_MUTATION = gql`
-  mutation SIGNIN_MUTATION($email: String!, $password: String!) {
-    signin(email: $email, password: $password) {
+const SIGNUP_MUTATION = gql`
+  mutation SIGNUP_MUTATION(
+    $name: String!
+    $email: String!
+    $password: String!
+  ) {
+    signup(name: $name, email: $email, password: $password) {
       id
     }
   }
 `;
 
-class SignIn extends Component {
+class SignUp extends Component {
   state = {
-    password: '',
-    email: ''
+    name: '',
+    email: '',
+    password: ''
   };
+
   saveToState = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -69,19 +75,19 @@ class SignIn extends Component {
 
     return (
       <Mutation
-        mutation={SIGNIN_MUTATION}
+        mutation={SIGNUP_MUTATION}
         variables={this.state}
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       >
-        {(signin, { loading, error }) => (
+        {(signup, { loading, error }) => (
           <main className={classes.main}>
             <Error error={error} />
             <Paper className={classes.paper}>
               <Avatar className={classes.avatar}>
-                <LockOutlinedIcon />
+                <ThumbUpIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Sign in
+                Sign Up
               </Typography>
 
               <form
@@ -89,10 +95,21 @@ class SignIn extends Component {
                 method="post"
                 onSubmit={async e => {
                   e.preventDefault();
-                  await signin().catch(() => {});
-                  this.setState({ email: '', password: '' });
+                  await signup().catch(() => {});
+                  this.setState({ name: '', email: '', password: '' });
                 }}
               >
+                <FormControl margin="normal" required fullWidth>
+                  <InputLabel htmlFor="name">User Name</InputLabel>
+                  <Input
+                    id="name"
+                    name="name"
+                    autoComplete="name"
+                    value={this.state.name}
+                    onChange={this.saveToState}
+                    autoFocus
+                  />
+                </FormControl>
                 <FormControl margin="normal" required fullWidth>
                   <InputLabel htmlFor="email">Email Address</InputLabel>
                   <Input
@@ -134,8 +151,8 @@ class SignIn extends Component {
   }
 }
 
-SignIn.propTypes = {
+SignUp.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SignIn);
+export default withStyles(styles)(SignUp);
