@@ -24,7 +24,7 @@ const GRAPH_QUERY = gql`
 
 function GraphChart() {
   // as long as id setting in frontend is not worky
-  const tempId = { id: 'cjtal4jvt00680808yr1cp72r' };
+  const tempId = { id: 'cjtal4hjv005m0808e10lbyr2' };
 
   return (
     <Query query={GRAPH_QUERY} variables={tempId}>
