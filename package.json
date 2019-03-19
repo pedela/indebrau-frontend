@@ -4,7 +4,7 @@
   "description": "The frontend of indebrau",
   "repository": "https://github.com/PedeLa/indebrau-frontend",
   "scripts": {
-    "dev": "next -p $PORT",
+    "dev": "next",
     "build": "next build",
     "start": "next start -p $PORT",
     "heroku-postbuild": "npm run build"

@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import GraphChart from './GraphChart';
 import BrewingProcesses from './BrewingProcesses';
 
+const styles = theme => ({});
 
 class DashboardContent extends Component {
   returnActiveWindow = () => {
@@ -38,4 +39,4 @@ DashboardContent.propTypes = {
   activeWindow: PropTypes.string.isRequired
 };
 
-export default withStyles()(DashboardContent);
+export default withStyles(styles)(DashboardContent);

@@ -100,7 +100,7 @@ const styles = theme => ({
 class Dashboard extends Component {
   state = {
     open: true,
-    activeWindow: 'welcome'
+    activeWindow: 'Admin Area'
   };
 
   setActiveWindow = activeWindow => {
