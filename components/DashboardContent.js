@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import GraphChart from './GraphChart';
+import ActiveGraphs from './ActiveGraphs';
 import BrewingProcesses from './BrewingProcesses';
 
 const styles = theme => ({});
 
 class DashboardContent extends Component {
   returnActiveWindow = () => {
-    if (this.props.activeWindow == 'GraphChart') {
-      return <GraphChart />;
+    if (this.props.activeWindow == 'ActiveGraphs') {
+      return <ActiveGraphs />;
     }
     if (this.props.activeWindow == 'BrewingProcesses') {
       return <BrewingProcesses />;
@@ -23,9 +23,6 @@ class DashboardContent extends Component {
 
     return (
       <Paper>
-        <Typography variant="h4" gutterBottom component="h2">
-          {this.props.activeWindow}
-        </Typography>
         <Typography component="div" className={classes.chartContainer}>
           {this.returnActiveWindow()}
         </Typography>

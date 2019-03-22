@@ -220,12 +220,12 @@ class Dashboard extends Component {
                     </ListItem>
                     <ListItem
                       button
-                      onClick={() => this.setActiveWindow('GraphChart')}
+                      onClick={() => this.setActiveWindow('ActiveGraphs')}
                     >
                       <ListItemIcon>
                         <AssignmentIcon />
                       </ListItemIcon>
-                      <ListItemText primary="Graphs" />
+                      <ListItemText primary="Active Graphs" />
                     </ListItem>
                   </List>
                 </Drawer>
