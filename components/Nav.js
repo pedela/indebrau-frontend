@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Link from 'next/link';
 
 import SignOut from './SignOut';
-import User from './User';
+import { CurrentUser } from './User';
 
 const styles = theme => ({
   main: {
@@ -34,7 +34,6 @@ const styles = theme => ({
 });
 
 class Nav extends Component {
-
   state = {
     signedIn: false
   };
@@ -44,10 +43,10 @@ class Nav extends Component {
 
     return (
       <main className={classes.main}>
-        <User>
+        <CurrentUser>
           {({ data }) => {
             const me = data ? data.me : null;
-            return(
+            return (
               <Toolbar className={classes.toolbarMain}>
                 <Link href="/">
                   <a className={classes.buttonLinks}>
@@ -69,33 +68,33 @@ class Nav extends Component {
                 >
                   Indebrau
                 </Typography>
-                {me && me.permissions.includes('ADMIN') &&
+                {me && me.permissions.includes('ADMIN') && (
                   <Link href="/dashboard">
                     <a className={classes.buttonLinks}>
                       <Button>Admin Area</Button>
                     </a>
                   </Link>
-                }
-                {!me &&
-                <Link href="/signin">
+                )}
+
+                <Link href="/user">
                   <a className={classes.buttonLinks}>
-                    <Button>Sign In</Button>
+                    {!me && <Button>Sign In</Button>}
+                    {me && <Button>{me.name}</Button>}
                   </a>
                 </Link>
-                }
-                {me &&
-                <SignOut />
-                }
-                {!me &&
+
+                {me && <SignOut />}
+                {!me && (
                   <Link href="/signup">
                     <a className={classes.buttonLinks}>
                       <Button>Sign Up</Button>
                     </a>
                   </Link>
-                }
-              </Toolbar>);
+                )}
+              </Toolbar>
+            );
           }}
-        </User>
+        </CurrentUser>
       </main>
     );
   }

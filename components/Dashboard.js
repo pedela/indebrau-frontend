@@ -19,7 +19,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import Link from 'next/link';
 import DashboardContent from './DashboardContent';
 import Error from './Error';
-import User from './User';
+import { CurrentUser } from './User';
 
 const drawerWidth = 240;
 
@@ -120,7 +120,7 @@ class Dashboard extends Component {
 
     return (
       <main className={classes.main}>
-        <User>
+        <CurrentUser>
           {({ data }) => {
             const me = data ? data.me : null;
             // frontend check, only for display, real check is done in backend
@@ -211,7 +211,7 @@ class Dashboard extends Component {
                     </Link>
                     <ListItem
                       button
-                      onClick={() => this.setActiveWindow('BrewingProcesses')}
+                      onClick={() => this.setActiveWindow('AllBrewingProcesses')}
                     >
                       <ListItemIcon>
                         <AssignmentIcon />
@@ -236,7 +236,7 @@ class Dashboard extends Component {
               </div>
             );
           }}
-        </User>
+        </CurrentUser>
       </main>
     );
   }

@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import ActiveGraphs from './ActiveGraphs';
-import BrewingProcesses from './BrewingProcesses';
+import AllBrewingProcesses from './AllBrewingProcesses';
 
 const styles = theme => ({});
 
@@ -13,8 +13,8 @@ class DashboardContent extends Component {
     if (this.props.activeWindow == 'ActiveGraphs') {
       return <ActiveGraphs />;
     }
-    if (this.props.activeWindow == 'BrewingProcesses') {
-      return <BrewingProcesses />;
+    if (this.props.activeWindow == 'AllBrewingProcesses') {
+      return <AllBrewingProcesses />;
     }
   };
 
