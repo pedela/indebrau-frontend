@@ -53,9 +53,14 @@ class Nav extends Component {
                     <Button>Home</Button>
                   </a>
                 </Link>
-                <Link href="/about">
+                <Link href="/beers">
                   <a className={classes.buttonLinks}>
-                    <Button>About</Button>
+                    <Button>Our Beers</Button>
+                  </a>
+                </Link>
+                <Link href="/brewery">
+                  <a className={classes.buttonLinks}>
+                    <Button>The Brewery</Button>
                   </a>
                 </Link>
                 <Typography

@@ -1,10 +1,10 @@
-import About from '../components/About';
 import Nav from '../components/Nav';
+import Brewery from '../components/Brewery';
 
 const AboutPage = () => (
   <div>
     <Nav />
-    <About />
+    <Brewery />
   </div>
 );
 
