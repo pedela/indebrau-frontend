@@ -16,7 +16,7 @@ class BrewingProcessTable extends Component {
             <TableCell align="center">Name</TableCell>
             <TableCell align="center">Start</TableCell>
             <TableCell align="center">End</TableCell>
-            <TableCell align="center">Active</TableCell>
+            <TableCell align="center">Description</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -28,7 +28,7 @@ class BrewingProcessTable extends Component {
               <TableCell align="right">{n.name}</TableCell>
               <TableCell align="right">{n.start}</TableCell>
               <TableCell align="right">{n.end}</TableCell>
-              <TableCell align="right">{n.active.toString()}</TableCell>
+              <TableCell align="right">{n.description}</TableCell>
             </TableRow>
           ))}
         </TableBody>

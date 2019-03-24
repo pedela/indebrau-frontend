@@ -28,7 +28,7 @@ const CURRENT_USER_QUERY = gql`
         name
         start
         end
-        active
+        description
       }
     }
   }
@@ -61,10 +61,10 @@ class User extends Component {
                     <Typography variant="h4" gutterBottom>
                       Hello {me.name}
                     </Typography>
-                    <Typography variant="subtitle1" gutterBottom>
-                      Look at your Brewing Processes:
-                    </Typography>
                     <Paper className={classes.root}>
+                      <Typography variant="subtitle1" gutterBottom>
+                      Your Brewing Processes
+                      </Typography>
                       <BrewingProcessTable
                         brewingProcesses={
                           data.me.participatingBrewingProcesses

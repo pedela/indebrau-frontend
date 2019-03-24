@@ -20,8 +20,8 @@ const BREWING_PROCESSES_QUERY = gql`
       id
       name
       start
+      description
       end
-      active
     }
   }
 `;
