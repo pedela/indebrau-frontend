@@ -76,7 +76,7 @@ class Brewery extends Component {
               <img
                 className={classes.media}
                 src="../static/breweryImages/fermenter.png"
-                title="The"
+                title="The Fermenter"
               />
               <Typography>The Fermenter</Typography>
             </Paper>

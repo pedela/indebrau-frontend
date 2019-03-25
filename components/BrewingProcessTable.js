@@ -5,6 +5,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import PropTypes from 'prop-types';
+import { renderDate } from '../lib/utils.js';
 
 class BrewingProcessTable extends Component {
   render() {
@@ -26,7 +27,7 @@ class BrewingProcessTable extends Component {
                 {n.id}
               </TableCell>
               <TableCell align="right">{n.name}</TableCell>
-              <TableCell align="right">{n.start}</TableCell>
+              <TableCell align="right">{renderDate(n.start)}</TableCell>
               <TableCell align="right">{n.end}</TableCell>
               <TableCell align="right">{n.description}</TableCell>
             </TableRow>
