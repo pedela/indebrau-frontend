@@ -12,10 +12,12 @@ const styles = theme => ({
     flexGrow: 1
   },
   container: {},
+  item: {
+    alignSelf: 'center',
+    maxWidth: '50%'
+  },
   media: {
-    height: 400,
-    maxWidth: '100%',
-    objectFit: 'cover'
+    maxWidth: '90%'
   }
 });
 
@@ -28,10 +30,9 @@ class Brewery extends Component {
         <Grid
           container
           className={classes.container}
-          justify="center"
           spacing={8}
         >
-          <Grid item>
+          <Grid item className={classes.item}>
             <Paper>
               <img
                 className={classes.media}
@@ -41,7 +42,7 @@ class Brewery extends Component {
               <Typography>The Grain Mill</Typography>
             </Paper>
           </Grid>
-          <Grid item>
+          <Grid item className={classes.item}>
             <Paper>
               <img
                 className={classes.media}
@@ -51,7 +52,7 @@ class Brewery extends Component {
               <Typography>The Mash Tun</Typography>
             </Paper>
           </Grid>
-          <Grid item>
+          <Grid item className={classes.item}>
             <Paper>
               <img
                 className={classes.media}
@@ -61,7 +62,7 @@ class Brewery extends Component {
               <Typography>The Sparging Vessel</Typography>
             </Paper>
           </Grid>
-          <Grid item>
+          <Grid item className={classes.item}>
             <Paper>
               <img
                 className={classes.media}
@@ -71,7 +72,7 @@ class Brewery extends Component {
               <Typography>The Wort Chiller</Typography>
             </Paper>
           </Grid>
-          <Grid item>
+          <Grid item className={classes.item}>
             <Paper>
               <img
                 className={classes.media}
