@@ -211,7 +211,9 @@ class Dashboard extends Component {
                     </Link>
                     <ListItem
                       button
-                      onClick={() => this.setActiveWindow('AllBrewingProcesses')}
+                      onClick={() =>
+                        this.setActiveWindow('AllBrewingProcesses')
+                      }
                     >
                       <ListItemIcon>
                         <AssignmentIcon />
@@ -220,12 +222,12 @@ class Dashboard extends Component {
                     </ListItem>
                     <ListItem
                       button
-                      onClick={() => this.setActiveWindow('ActiveGraphs')}
+                      onClick={() => this.setActiveWindow('AllGraphs')}
                     >
                       <ListItemIcon>
                         <AssignmentIcon />
                       </ListItemIcon>
-                      <ListItemText primary="Active Graphs" />
+                      <ListItemText primary="Graphs" />
                     </ListItem>
                   </List>
                 </Drawer>

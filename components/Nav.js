@@ -12,9 +12,9 @@ import { CurrentUser } from './User';
 const styles = theme => ({
   main: {
     width: 'auto',
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    [theme.breakpoints.up(1100 + theme.spacing.unit * 2)]: {
       width: 1100,
       marginLeft: 'auto',
       marginRight: 'auto'
@@ -24,7 +24,10 @@ const styles = theme => ({
     borderBottom: `1px solid ${theme.palette.grey[300]}`
   },
   toolbarTitle: {
-    flex: 1
+    flex: 1,
+    [theme.breakpoints.down(700 + theme.spacing.unit * 2)]: {
+      display: 'none'
+    }
   },
   buttonLinks: {
     width: 'auto',

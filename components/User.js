@@ -58,10 +58,11 @@ class User extends Component {
                 {!me && <SignIn />}
                 {me && (
                   <>
-                    <Typography variant="h4" gutterBottom>
-                      Hello {me.name}
-                    </Typography>
+
                     <Paper className={classes.root}>
+                      <Typography variant="h4" gutterBottom>
+                        Hello {me.name}
+                      </Typography>
                       <Typography variant="subtitle1" gutterBottom>
                       Your Brewing Processes
                       </Typography>

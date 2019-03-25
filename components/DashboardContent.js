@@ -3,31 +3,39 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import ActiveGraphs from './ActiveGraphs';
+import AllGraphs from './AllGraphs';
 import AllBrewingProcesses from './AllBrewingProcesses';
 
-const styles = theme => ({});
+const styles = theme => ({
+  root: {
+    textAlign: 'center',
+    paddingTop: theme.spacing.unit * 2,
+    maxHeight: '100%'
+  }
+});
 
 class DashboardContent extends Component {
   returnActiveWindow = () => {
-    if (this.props.activeWindow == 'ActiveGraphs') {
-      return <ActiveGraphs />;
+    if (this.props.activeWindow == 'AllGraphs') {
+      return <AllGraphs />;
     }
     if (this.props.activeWindow == 'AllBrewingProcesses') {
       return <AllBrewingProcesses />;
     }
-  };
-
-  render() {
-    const { classes } = this.props;
-
     return (
-      <Paper>
-        <Typography component="div" className={classes.chartContainer}>
-          {this.returnActiveWindow()}
+      <Paper className={this.props.classes.root}>
+        <Typography variant="h4" gutterBottom>
+          Admin Area
+        </Typography>
+        <Typography variant="subtitle1" gutterBottom>
+          please choose your view
         </Typography>
       </Paper>
     );
+  };
+
+  render() {
+    return <Paper>{this.returnActiveWindow()}</Paper>;
   }
 }
 

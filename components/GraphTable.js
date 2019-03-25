@@ -9,7 +9,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { renderDate } from '../lib/utils.js';
 
 const styles = theme => ({
   root: {
@@ -25,7 +24,7 @@ const styles = theme => ({
   }
 });
 
-class BrewingProcessTable extends Component {
+class GraphTable extends Component {
   render() {
     const { classes } = this.props;
     return (
@@ -34,22 +33,24 @@ class BrewingProcessTable extends Component {
           <TableRow>
             <TableCell align="center">ID</TableCell>
             <TableCell align="center">Name</TableCell>
-            <TableCell align="center">Start</TableCell>
-            <TableCell align="center">End</TableCell>
-            <TableCell align="center">Description</TableCell>
+            <TableCell align="center">Sensor Name</TableCell>
+            <TableCell align="center">Active</TableCell>
+            <TableCell align="center">Update Frequency</TableCell>
+            <TableCell align="center">Linked Brewing Process</TableCell>
             <TableCell align="center" />
           </TableRow>
         </TableHead>
         <TableBody>
-          {this.props.brewingProcesses.map(n => (
+          {this.props.graphs.map(n => (
             <TableRow key={n.id}>
               <TableCell component="th" scope="row">
                 {n.id}
               </TableCell>
               <TableCell align="right">{n.name}</TableCell>
-              <TableCell align="right">{renderDate(n.start)}</TableCell>
-              <TableCell align="right">{n.end}</TableCell>
-              <TableCell align="right">{n.description}</TableCell>
+              <TableCell align="right">{n.sensorName}</TableCell>
+              <TableCell align="right">{n.active.toString()}</TableCell>
+              <TableCell align="right">{n.updateFrequency}</TableCell>
+              <TableCell align="right">{n.brewingProcess}</TableCell>
               <TableCell align="right">
                 <Fab
                   color="secondary"
@@ -70,9 +71,9 @@ class BrewingProcessTable extends Component {
   }
 }
 
-BrewingProcessTable.propTypes = {
-  brewingProcesses: PropTypes.array.isRequired,
+GraphTable.propTypes = {
+  graphs: PropTypes.array.isRequired,
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(BrewingProcessTable);
+export default withStyles(styles)(GraphTable);
