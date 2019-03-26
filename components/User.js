@@ -77,7 +77,7 @@ class User extends Component {
                       </Paper>
                     </Paper>
                     {me && me.permissions.includes('ADMIN') && (
-                      <Link href="/dashboard">
+                      <Link href="/adminDashboard">
                         <a className={classes.buttonLinks}>
                           <Button>Admin Area</Button>
                         </a>

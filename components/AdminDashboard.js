@@ -97,7 +97,7 @@ const styles = theme => ({
   }
 });
 
-class Dashboard extends Component {
+class AdminDashboard extends Component {
   state = {
     open: true,
     activeWindow: 'Admin Area'
@@ -177,7 +177,7 @@ class Dashboard extends Component {
                       noWrap
                       className={classes.title}
                     >
-                      Dashboard
+                      Indebrau - Admin Area
                     </Typography>
                   </Toolbar>
                 </AppBar>
@@ -244,8 +244,8 @@ class Dashboard extends Component {
   }
 }
 
-Dashboard.propTypes = {
+AdminDashboard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Dashboard);
+export default withStyles(styles)(AdminDashboard);
