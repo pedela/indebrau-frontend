@@ -50,7 +50,7 @@ class GraphTable extends Component {
               <TableCell align="right">{n.sensorName}</TableCell>
               <TableCell align="right">{n.active.toString()}</TableCell>
               <TableCell align="right">{n.updateFrequency}</TableCell>
-              <TableCell align="right">{n.brewingProcess}</TableCell>
+              <TableCell align="right">{n.brewingProcess.id}</TableCell>
               <TableCell align="right">
                 <Fab
                   color="secondary"

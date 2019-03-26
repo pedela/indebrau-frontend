@@ -23,9 +23,9 @@ const styles = theme => ({
   }
 });
 
-const ACTIVE_GRAPH_QUERY = gql`
-  query ACTIVE_GRAPH_QUERY($dataPoints: Int!) {
-    activeGraphs(dataPoints: $dataPoints) {
+const ACTIVE_GRAPHS_QUERY = gql`
+  query ACTIVE_GRAPHS_QUERY($dataPoints: Int!) {
+    graphs(dataPoints: $dataPoints, active: true) {
       id
       name
       graphData(orderBy: time_ASC) {
@@ -36,27 +36,46 @@ const ACTIVE_GRAPH_QUERY = gql`
   }
 `;
 
+const ALL_GRAPHS_QUERY = gql`
+  query ALL_GRAPHS_QUERY($dataPoints: Int!) {
+    graphs(dataPoints: $dataPoints) {
+      id
+      name
+      sensorName
+      active
+      updateFrequency
+      brewingProcess {
+        id
+      }
+    }
+  }
+`;
+
 class AllGraphs extends Component {
   render() {
     const { classes } = this.props;
 
-    // hardcoded: names of all sensors
-    const dataPoints = {
+    const activeGraphsVariables = {
+      dataPoints: 50,
+      active: true
+    };
+
+    const allGraphsVariables = {
       dataPoints: 50
     };
 
     return (
       <>
         <Query
-          query={ACTIVE_GRAPH_QUERY}
-          variables={dataPoints}
+          query={ACTIVE_GRAPHS_QUERY}
+          variables={activeGraphsVariables}
           pollInterval={10000}
         >
           {({ data, error, loading }) => {
             if (loading) return <Loading />;
             if (error) return <Error error={error} />;
             if (data) {
-              const activeGraphs = data.activeGraphs.map(activeGraph => (
+              const activeGraphs = data.graphs.map(activeGraph => (
                 <GraphChart
                   data={activeGraph.graphData}
                   key={activeGraph.id}
@@ -75,12 +94,27 @@ class AllGraphs extends Component {
           }}
         </Query>
         <Paper className={classes.root}>
-          <Typography variant="h4" className={classes.root}>
-            All Graphs (ToDo)
-          </Typography>
-          <GraphTable graphs={[]} />
+          <Query
+            query={ALL_GRAPHS_QUERY}
+            variables={allGraphsVariables}
+            pollInterval={10000}
+          >
+            {({ data, error, loading }) => {
+              if (loading) return <Loading />;
+              if (error) return <Error error={error} />;
+              if (data) {
+                return (
+                  <Paper className={classes.root}>
+                    <Typography variant="h4" className={classes.root}>
+                      All Graphs (ToDo)
+                    </Typography>
+                    <GraphTable graphs={data.graphs} />
+                  </Paper>
+                );
+              }
+            }}
+          </Query>
         </Paper>
-
         <Paper>
           <Fab color="primary" aria-label="Add" className={classes.fab}>
             <AddIcon />
