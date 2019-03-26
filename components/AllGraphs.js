@@ -17,7 +17,7 @@ const styles = theme => ({
     textAlign: 'center',
     paddingTop: theme.spacing.unit * 2,
     maxHeight: '100%',
-    overflowX: 'auto',
+    overflowX: 'auto'
   },
   fab: {
     margin: theme.spacing.unit
@@ -85,7 +85,7 @@ class AllGraphs extends Component {
               ));
               return (
                 <Paper className={classes.root}>
-                  <Typography variant="h4" gutterBottom>
+                  <Typography variant="h5" gutterBottom>
                     Currently Active Graphs
                   </Typography>
                   {activeGraphs}
@@ -94,26 +94,28 @@ class AllGraphs extends Component {
             }
           }}
         </Query>
-          <Query
-            query={ALL_GRAPHS_QUERY}
-            variables={allGraphsVariables}
-            pollInterval={10000}
-          >
-            {({ data, error, loading }) => {
-              if (loading) return <Loading />;
-              if (error) return <Error error={error} />;
-              if (data) {
-                return (
+        <Query
+          query={ALL_GRAPHS_QUERY}
+          variables={allGraphsVariables}
+          pollInterval={10000}
+        >
+          {({ data, error, loading }) => {
+            if (loading) return <Loading />;
+            if (error) return <Error error={error} />;
+            if (data) {
+              return (
+                <Paper>
+                  <Typography variant="h5" className={classes.root}>
+                    All Graphs
+                  </Typography>
                   <Paper className={classes.root}>
-                    <Typography variant="h4" className={classes.root}>
-                      All Graphs (ToDo)
-                    </Typography>
                     <GraphTable graphs={data.graphs} />
                   </Paper>
-                );
-              }
-            }}
-          </Query>
+                </Paper>
+              );
+            }
+          }}
+        </Query>
         <Paper>
           <Fab color="primary" aria-label="Add" className={classes.fab}>
             <AddIcon />

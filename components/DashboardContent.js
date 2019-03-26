@@ -24,7 +24,7 @@ class DashboardContent extends Component {
     }
     return (
       <Paper className={this.props.classes.root}>
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h5" gutterBottom>
           Admin Area
         </Typography>
         <Typography variant="subtitle1" gutterBottom>

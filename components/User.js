@@ -16,7 +16,10 @@ const styles = theme => ({
     overflowX: 'auto',
     textAlign: 'center',
     paddingTop: theme.spacing.unit * 2,
-    maxHeight: '100%'
+    maxHeight: '100%',
+  },
+  buttonLinks: {
+    textDecoration: 'none'
   }
 });
 
@@ -63,7 +66,7 @@ class User extends Component {
                 {me && (
                   <>
                     <Paper className={classes.root}>
-                      <Typography variant="h4" gutterBottom>
+                      <Typography variant="h5" gutterBottom>
                         Hello {me.name}
                       </Typography>
                       <Typography variant="subtitle1" gutterBottom>
@@ -71,18 +74,22 @@ class User extends Component {
                       </Typography>
                       <Paper className={classes.root}>
                         <BrewingProcessTable
-                          brewingProcesses={data.me.participatingBrewingProcesses}
+                          brewingProcesses={
+                            data.me.participatingBrewingProcesses
+                          }
                           adminView={false}
                         />
                       </Paper>
                     </Paper>
-                    {me && me.permissions.includes('ADMIN') && (
-                      <Link href="/adminDashboard">
-                        <a className={classes.buttonLinks}>
-                          <Button>Admin Area</Button>
-                        </a>
-                      </Link>
-                    )}
+                    <Paper className={classes.root}>
+                      {me && me.permissions.includes('ADMIN') && (
+                        <Link href="/adminDashboard">
+                          <a className={classes.buttonLinks}>
+                            <Button>Go to Admin Area</Button>
+                          </a>
+                        </Link>
+                      )}
+                    </Paper>
                   </>
                 )}
               </>

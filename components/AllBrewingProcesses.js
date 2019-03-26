@@ -6,9 +6,15 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Typography from '@material-ui/core/Typography';
+
 import Loading from './Loading';
 import Error from './Error';
 import BrewingProcessTable from './BrewingProcessTable';
+import CreateBrewingProcess from './CreateBrewingProcess';
 
 const styles = theme => ({
   root: {
@@ -35,6 +41,18 @@ const BREWING_PROCESSES_QUERY = gql`
 `;
 
 class AllBrewingProcesses extends Component {
+  state = {
+    open: false
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -45,17 +63,43 @@ class AllBrewingProcesses extends Component {
             if (error) return <Error error={error} />;
             // success!
             return (
-              <Paper className={classes.root}>
-                <BrewingProcessTable brewingProcesses={data.brewingProcesses} adminView={true}/>
+              <Paper>
+                <Typography variant="h5" className={classes.root}>
+                  All Brewing Processes
+                </Typography>
+                <Paper className={classes.root}>
+                  <BrewingProcessTable
+                    brewingProcesses={data.brewingProcesses}
+                    adminView={true}
+                  />
+                </Paper>
               </Paper>
             );
           }}
         </Query>
         <Paper className={classes.root}>
-          <Fab color="primary" aria-label="Add" className={classes.fab}>
+          <Fab
+            color="primary"
+            aria-label="Add"
+            className={classes.fab}
+            onClick={this.handleClickOpen}
+          >
             <AddIcon />
           </Fab>
         </Paper>
+
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">
+            Create Brewing Process
+          </DialogTitle>
+          <DialogContent>
+            <CreateBrewingProcess handleClose={this.handleClose} />
+          </DialogContent>
+        </Dialog>
       </div>
     );
   }

@@ -16,7 +16,7 @@ class Home extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h5" gutterBottom>
           Indebrau: Beer from Eschweiler
         </Typography>
         <Typography variant="subtitle1" gutterBottom>

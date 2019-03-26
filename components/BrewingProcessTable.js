@@ -25,6 +25,7 @@ const styles = theme => ({
 });
 
 class BrewingProcessTable extends Component {
+
   render() {
     const { classes } = this.props;
     let adminHead = null;
@@ -33,7 +34,11 @@ class BrewingProcessTable extends Component {
       adminHead = <TableCell align="center">Edit</TableCell>;
       adminCell = (
         <TableCell align="right">
-          <Fab color="secondary" aria-label="Edit" className={classes.fab}>
+          <Fab
+            color="secondary"
+            aria-label="Edit"
+            className={classes.fab}
+          >
             <EditIcon />
           </Fab>
           <Fab aria-label="Delete" className={classes.fab}>
