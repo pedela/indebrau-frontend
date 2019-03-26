@@ -199,7 +199,7 @@ class AdminDashboard extends Component {
                   <Divider />
                   <List>
                     {' '}
-                    <Link href="/">
+                    <Link href="/user">
                       <a className={classes.buttonLinks}>
                         <ListItem button>
                           <ListItemIcon>

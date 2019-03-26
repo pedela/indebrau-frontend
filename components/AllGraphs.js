@@ -16,7 +16,8 @@ const styles = theme => ({
   root: {
     textAlign: 'center',
     paddingTop: theme.spacing.unit * 2,
-    maxHeight: '100%'
+    maxHeight: '100%',
+    overflowX: 'auto',
   },
   fab: {
     margin: theme.spacing.unit
@@ -93,7 +94,6 @@ class AllGraphs extends Component {
             }
           }}
         </Query>
-        <Paper className={classes.root}>
           <Query
             query={ALL_GRAPHS_QUERY}
             variables={allGraphsVariables}
@@ -114,7 +114,6 @@ class AllGraphs extends Component {
               }
             }}
           </Query>
-        </Paper>
         <Paper>
           <Fab color="primary" aria-label="Add" className={classes.fab}>
             <AddIcon />
