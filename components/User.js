@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Link from 'next/link';
 import { Query } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
 import BrewingProcessTable from './BrewingProcessTable';
@@ -10,6 +12,8 @@ import SignIn from './SignIn';
 
 const styles = theme => ({
   root: {
+    width: '100%',
+    overflowX: 'auto',
     textAlign: 'center',
     paddingTop: theme.spacing.unit * 2,
     maxHeight: '100%'
@@ -58,20 +62,27 @@ class User extends Component {
                 {!me && <SignIn />}
                 {me && (
                   <>
-
                     <Paper className={classes.root}>
                       <Typography variant="h4" gutterBottom>
                         Hello {me.name}
                       </Typography>
                       <Typography variant="subtitle1" gutterBottom>
-                      Your Brewing Processes
+                        Your Brewing Processes
                       </Typography>
-                      <BrewingProcessTable
-                        brewingProcesses={
-                          data.me.participatingBrewingProcesses
-                        }
-                      />
+                      <Paper className={classes.root}>
+                        <BrewingProcessTable
+                          brewingProcesses={data.me.participatingBrewingProcesses}
+                          adminView={false}
+                        />
+                      </Paper>
                     </Paper>
+                    {me && me.permissions.includes('ADMIN') && (
+                      <Link href="/dashboard">
+                        <a className={classes.buttonLinks}>
+                          <Button>Admin Area</Button>
+                        </a>
+                      </Link>
+                    )}
                   </>
                 )}
               </>

@@ -25,7 +25,7 @@ const styles = theme => ({
   },
   toolbarTitle: {
     flex: 1,
-    [theme.breakpoints.down(700 + theme.spacing.unit * 2)]: {
+    [theme.breakpoints.down(580 + theme.spacing.unit * 2)]: {
       display: 'none'
     }
   },
@@ -76,14 +76,6 @@ class Nav extends Component {
                 >
                   Indebrau
                 </Typography>
-                {me && me.permissions.includes('ADMIN') && (
-                  <Link href="/dashboard">
-                    <a className={classes.buttonLinks}>
-                      <Button>Admin Area</Button>
-                    </a>
-                  </Link>
-                )}
-
                 <Link href="/user">
                   <a className={classes.buttonLinks}>
                     {!me && <Button>Sign In</Button>}

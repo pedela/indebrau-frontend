@@ -13,7 +13,6 @@ import { renderDate } from '../lib/utils.js';
 
 const styles = theme => ({
   root: {
-    textAlign: 'center',
     paddingTop: theme.spacing.unit * 2,
     maxHeight: '100%'
   },
@@ -28,40 +27,40 @@ const styles = theme => ({
 class BrewingProcessTable extends Component {
   render() {
     const { classes } = this.props;
+    let adminHead = null;
+    let adminCell = null;
+    if (this.props.adminView) {
+      adminHead = <TableCell align="center">Edit</TableCell>;
+      adminCell = (
+        <TableCell align="right">
+          <Fab color="secondary" aria-label="Edit" className={classes.fab}>
+            <EditIcon />
+          </Fab>
+          <Fab aria-label="Delete" className={classes.fab}>
+            <DeleteIcon />
+          </Fab>
+        </TableCell>
+      );
+    }
     return (
-      <Table>
+      <Table className={classes.root}>
         <TableHead>
           <TableRow>
-            <TableCell align="center">ID</TableCell>
             <TableCell align="center">Name</TableCell>
+            <TableCell align="center">Description</TableCell>
             <TableCell align="center">Start</TableCell>
             <TableCell align="center">End</TableCell>
-            <TableCell align="center">Description</TableCell>
-            <TableCell align="center" />
+            {adminHead}
           </TableRow>
         </TableHead>
         <TableBody>
           {this.props.brewingProcesses.map(n => (
             <TableRow key={n.id}>
-              <TableCell component="th" scope="row">
-                {n.id}
-              </TableCell>
-              <TableCell align="right">{n.name}</TableCell>
-              <TableCell align="right">{renderDate(n.start)}</TableCell>
-              <TableCell align="right">{n.end}</TableCell>
-              <TableCell align="right">{n.description}</TableCell>
-              <TableCell align="right">
-                <Fab
-                  color="secondary"
-                  aria-label="Edit"
-                  className={classes.fab}
-                >
-                  <EditIcon />
-                </Fab>
-                <Fab aria-label="Delete" className={classes.fab}>
-                  <DeleteIcon />
-                </Fab>
-              </TableCell>
+              <TableCell align="center">{n.name}</TableCell>
+              <TableCell align="center">{n.description}</TableCell>
+              <TableCell align="center">{renderDate(n.start)}</TableCell>
+              <TableCell align="center">{n.end}</TableCell>
+              {adminCell}
             </TableRow>
           ))}
         </TableBody>
@@ -72,6 +71,7 @@ class BrewingProcessTable extends Component {
 
 BrewingProcessTable.propTypes = {
   brewingProcesses: PropTypes.array.isRequired,
+  adminView: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired
 };
 

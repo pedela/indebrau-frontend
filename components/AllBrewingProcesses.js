@@ -46,7 +46,7 @@ class AllBrewingProcesses extends Component {
             // success!
             return (
               <Paper className={classes.root}>
-                <BrewingProcessTable brewingProcesses={data.brewingProcesses} />
+                <BrewingProcessTable brewingProcesses={data.brewingProcesses} adminView={true}/>
               </Paper>
             );
           }}
