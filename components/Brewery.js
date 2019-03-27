@@ -14,8 +14,7 @@ const styles = theme => ({
   container: {},
   item: {
     alignSelf: 'center',
-    maxWidth: '50%',
-
+    maxWidth: '50%'
   },
   media: {
     maxWidth: '90%'
@@ -74,9 +73,29 @@ class Brewery extends Component {
               <img
                 className={classes.media}
                 src="../static/breweryImages/fermenter.png"
-                title="The Fermenter"
+                title="Fermenter"
               />
               <Typography>The Fermenter</Typography>
+            </Paper>
+          </Grid>
+          <Grid item className={classes.item}>
+            <Paper>
+              <img
+                className={classes.media}
+                src="../static/breweryImages/spindle.png"
+                title="Electronic Spindle"
+              />
+              <Typography>The Electronic Spindle</Typography>
+            </Paper>
+          </Grid>
+          <Grid item className={classes.item}>
+            <Paper>
+              <img
+                className={classes.media}
+                src="../static/breweryImages/keg.png"
+                title="The Keg"
+              />
+              <Typography>The Keg</Typography>
             </Paper>
           </Grid>
           <Grid item className={classes.item}>
