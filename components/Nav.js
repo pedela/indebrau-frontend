@@ -58,7 +58,7 @@ class Nav extends Component {
                 </Link>
                 <Link href="/beers">
                   <a className={classes.buttonLinks}>
-                    <Button>Our Beers</Button>
+                    <Button>Our Beer</Button>
                   </a>
                 </Link>
                 <Link href="/brewery">

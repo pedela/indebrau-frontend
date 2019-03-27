@@ -8,6 +8,11 @@ const styles = theme => ({
     textAlign: 'center',
     paddingTop: theme.spacing.unit * 2,
     maxHeight: '100%'
+  },
+  image: {
+    float: 'center',
+    maxWidth: '60%',
+    height: 'auto'
   }
 });
 
@@ -22,7 +27,7 @@ class Home extends Component {
         <Typography variant="subtitle1" gutterBottom>
           A beer as smooth as its river!
         </Typography>
-        <img src="../static/brewery.jpeg" height="500" />
+        <img src="../static/brewery.jpeg" className={classes.image}/>
       </div>
     );
   }
