@@ -4,11 +4,6 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
 
 import Loading from './Loading';
@@ -20,7 +15,7 @@ const styles = theme => ({
   root: {
     width: '100%',
     overflowX: 'auto',
-    paddingTop: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 2,
     maxHeight: '100%'
   },
   fab: {
@@ -41,18 +36,6 @@ const BREWING_PROCESSES_QUERY = gql`
 `;
 
 class AllBrewingProcesses extends Component {
-  state = {
-    open: false
-  };
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
   render() {
     const { classes } = this.props;
     return (
@@ -78,28 +61,8 @@ class AllBrewingProcesses extends Component {
           }}
         </Query>
         <Paper className={classes.root}>
-          <Fab
-            color="primary"
-            aria-label="Add"
-            className={classes.fab}
-            onClick={this.handleClickOpen}
-          >
-            <AddIcon />
-          </Fab>
+          <CreateBrewingProcess className={classes.root} />
         </Paper>
-
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">
-            Create Brewing Process
-          </DialogTitle>
-          <DialogContent>
-            <CreateBrewingProcess handleClose={this.handleClose} />
-          </DialogContent>
-        </Dialog>
       </div>
     );
   }

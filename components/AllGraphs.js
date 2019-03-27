@@ -14,10 +14,10 @@ import GraphTable from './GraphTable';
 
 const styles = theme => ({
   root: {
-    textAlign: 'center',
-    paddingTop: theme.spacing.unit * 2,
-    maxHeight: '100%',
-    overflowX: 'auto'
+    width: '100%',
+    overflowX: 'auto',
+    padding: theme.spacing.unit * 2,
+    maxHeight: '100%'
   },
   fab: {
     margin: theme.spacing.unit
@@ -66,7 +66,7 @@ class AllGraphs extends Component {
     };
 
     return (
-      <>
+      <div className={classes.root}>
         <Query
           query={ACTIVE_GRAPHS_QUERY}
           variables={activeGraphsVariables}
@@ -85,9 +85,7 @@ class AllGraphs extends Component {
               ));
               return (
                 <Paper className={classes.root}>
-                  <Typography variant="h5" gutterBottom>
-                    Currently Active Graphs
-                  </Typography>
+                  <Typography variant="h5">Active Graphs</Typography>
                   {activeGraphs}
                 </Paper>
               );
@@ -104,24 +102,20 @@ class AllGraphs extends Component {
             if (error) return <Error error={error} />;
             if (data) {
               return (
-                <Paper>
-                  <Typography variant="h5" className={classes.root}>
-                    All Graphs
-                  </Typography>
-                  <Paper className={classes.root}>
+                <Paper className={classes.root}>
+                  <Typography variant="h5">All Graphs</Typography>
+                  <>
                     <GraphTable graphs={data.graphs} />
-                  </Paper>
+                  </>
                 </Paper>
               );
             }
           }}
         </Query>
-        <Paper>
-          <Fab color="primary" aria-label="Add" className={classes.fab}>
-            <AddIcon />
-          </Fab>
-        </Paper>
-      </>
+        <Fab color="primary" aria-label="Add" className={classes.fab}>
+          <AddIcon />
+        </Fab>
+      </div>
     );
   }
 }

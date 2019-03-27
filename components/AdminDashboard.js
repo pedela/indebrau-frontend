@@ -88,7 +88,7 @@ const styles = theme => ({
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing.unit,
     height: '100vh',
     overflow: 'auto'
   },
@@ -99,7 +99,8 @@ const styles = theme => ({
 
 class AdminDashboard extends Component {
   state = {
-    open: false
+    open: false,
+    activeWindow: 'none'
   };
 
   setActiveWindow = activeWindow => {

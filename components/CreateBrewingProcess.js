@@ -10,6 +10,11 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const styles = theme => ({
   layout: {
@@ -37,6 +42,9 @@ const styles = theme => ({
   button: {
     marginTop: theme.spacing.unit * 3,
     marginLeft: theme.spacing.unit
+  },
+  fab: {
+    margin: theme.spacing.unit
   }
 });
 
@@ -97,22 +105,101 @@ function getStepContent(step) {
                 fullWidth
               />
             </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                required
+                id="yieldsLiter"
+                label="yieldsLiter"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                required
+                id="carbonizationGramPerLiter"
+                label="carbonizationGramPerLiter"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                required
+                id="mashInTemperature"
+                label="mashInTemperature"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField required id="mashSteps" label="mashSteps" fullWidth />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                required
+                id="spargingTemperature"
+                label="spargingTemperature"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                required
+                id="boilingMinutes"
+                label="boilingMinutes"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                required
+                id="boilHopAdditions"
+                label="boilHopAdditions"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                required
+                id="dryHopping"
+                label="dryHopping"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                required
+                id="fermentationSteps"
+                label="fermentationSteps"
+                fullWidth
+              />
+            </Grid>
           </Grid>
         </>
     );
   }
 }
 
-class Checkout extends React.Component {
+class CreateBrewingProcess extends React.Component {
   state = {
+    open: false,
     activeStep: 0
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true, activeStep: 0 });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   handleNext = () => {
     this.setState(state => ({
       activeStep: state.activeStep + 1
     }));
-    if (this.state.activeStep == 1) this.props.handleClose();
+    // final step
+    if (this.state.activeStep == steps.length - 1) {
+      this.handleClose();
+    }
   };
 
   handleBack = () => {
@@ -127,46 +214,76 @@ class Checkout extends React.Component {
 
     return (
       <>
-        <main className={classes.layout}>
-          <Paper className={classes.paper}>
-            <Stepper activeStep={activeStep} className={classes.stepper}>
-              {steps.map(label => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </Stepper>
-            <>
-              {getStepContent(activeStep)}
-              <div className={classes.buttons}>
-                {activeStep !== 0 && (
-                  <Button
-                    onClick={this.handleBack}
-                    className={classes.button}
-                  >
-                    Back
-                  </Button>
-                )}
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={this.handleNext}
-                  className={classes.button}
-                >
-                  {activeStep === steps.length - 1 ? 'Create' : 'Next'}
-                </Button>
-              </div>
-            </>
-          </Paper>
-        </main>
+        <Fab
+          color="primary"
+          aria-label="Add"
+          className={classes.fab}
+          onClick={this.handleClickOpen}
+        >
+          <AddIcon />
+        </Fab>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+          disableBackdropClick
+          fullScreen
+        >
+          <DialogTitle id="form-dialog-title">
+            Create Brewing Process
+          </DialogTitle>
+
+          <DialogContent>
+            <main className={classes.layout}>
+              <Paper className={classes.paper}>
+                <Stepper activeStep={activeStep} className={classes.stepper}>
+                  {steps.map(label => (
+                    <Step key={label}>
+                      <StepLabel>{label}</StepLabel>
+                    </Step>
+                  ))}
+                </Stepper>
+                <>
+                  {getStepContent(activeStep)}
+                  <div className={classes.buttons}>
+                    <Button
+                      onClick={this.handleClose}
+                      className={classes.button}
+                      color="secondary"
+                      variant="contained"
+                    >
+                      Cancel
+                    </Button>
+                    {activeStep !== 0 && (
+                      <Button
+                        onClick={this.handleBack}
+                        className={classes.button}
+                        variant="contained"
+                      >
+                        Back
+                      </Button>
+                    )}
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={this.handleNext}
+                      className={classes.button}
+                    >
+                      {activeStep === steps.length - 1 ? 'Create' : 'Next'}
+                    </Button>
+                  </div>
+                </>
+              </Paper>
+            </main>
+          </DialogContent>
+        </Dialog>
       </>
     );
   }
 }
 
-Checkout.propTypes = {
-  classes: PropTypes.object.isRequired,
-  handleClose: PropTypes.func.isRequired
+CreateBrewingProcess.propTypes = {
+  classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Checkout);
+export default withStyles(styles)(CreateBrewingProcess);

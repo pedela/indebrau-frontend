@@ -13,19 +13,17 @@ import { renderDate } from '../lib/utils.js';
 
 const styles = theme => ({
   root: {
-    paddingTop: theme.spacing.unit * 2,
-    maxHeight: '100%'
+    textAlign: 'center',
+    padding: theme.spacing.unit * 2,
+    maxHeight: '100%',
+    overflowX: 'auto'
   },
   fab: {
     margin: theme.spacing.unit
-  },
-  extendedIcon: {
-    marginRight: theme.spacing.unit
   }
 });
 
 class BrewingProcessTable extends Component {
-
   render() {
     const { classes } = this.props;
     let adminHead = null;
@@ -34,11 +32,7 @@ class BrewingProcessTable extends Component {
       adminHead = <TableCell align="center">Edit</TableCell>;
       adminCell = (
         <TableCell align="right">
-          <Fab
-            color="secondary"
-            aria-label="Edit"
-            className={classes.fab}
-          >
+          <Fab color="secondary" aria-label="Edit" className={classes.fab}>
             <EditIcon />
           </Fab>
           <Fab aria-label="Delete" className={classes.fab}>
@@ -48,28 +42,30 @@ class BrewingProcessTable extends Component {
       );
     }
     return (
-      <Table className={classes.root}>
-        <TableHead>
-          <TableRow>
-            <TableCell align="center">Name</TableCell>
-            <TableCell align="center">Description</TableCell>
-            <TableCell align="center">Start</TableCell>
-            <TableCell align="center">End</TableCell>
-            {adminHead}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {this.props.brewingProcesses.map(n => (
-            <TableRow key={n.id}>
-              <TableCell align="center">{n.name}</TableCell>
-              <TableCell align="center">{n.description}</TableCell>
-              <TableCell align="center">{renderDate(n.start)}</TableCell>
-              <TableCell align="center">{n.end}</TableCell>
-              {adminCell}
+      <div className={classes.root}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">Name</TableCell>
+              <TableCell align="center">Description</TableCell>
+              <TableCell align="center">Start</TableCell>
+              <TableCell align="center">End</TableCell>
+              {adminHead}
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {this.props.brewingProcesses.map(n => (
+              <TableRow key={n.id}>
+                <TableCell align="center">{n.name}</TableCell>
+                <TableCell align="center">{n.description}</TableCell>
+                <TableCell align="center">{renderDate(n.start)}</TableCell>
+                <TableCell align="center">{n.end}</TableCell>
+                {adminCell}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     );
   }
 }

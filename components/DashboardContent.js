@@ -9,7 +9,7 @@ import AllBrewingProcesses from './AllBrewingProcesses';
 const styles = theme => ({
   root: {
     textAlign: 'center',
-    paddingTop: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 2,
     maxHeight: '100%'
   }
 });
