@@ -11,13 +11,15 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2,
     flexGrow: 1
   },
-  container: {},
-  item: {
-    alignSelf: 'center',
-    maxWidth: '50%'
+  container: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr 1fr',
+    gridTemplateRows: '100 100 100'
   },
   media: {
-    maxWidth: '90%'
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover'
   }
 });
 
@@ -56,6 +58,16 @@ class Brewery extends Component {
                 title="Sparging Vessel"
               />
               <Typography>The Sparging Vessel</Typography>
+            </Paper>
+          </Grid>
+          <Grid item className={classes.item}>
+            <Paper>
+              <img
+                className={classes.media}
+                src="../static/breweryImages/wortCopper.png"
+                title="Wort Copper"
+              />
+              <Typography>The Wort Copper</Typography>
             </Paper>
           </Grid>
           <Grid item className={classes.item}>
