@@ -50,146 +50,52 @@ const styles = theme => ({
 
 const steps = ['General Info', 'Add Details'];
 
-function getStepContent(step) {
-  switch (step) {
-  case 0:
-    return (
-        <>
-          <Grid container spacing={8}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                id="name"
-                name="name"
-                label="Name"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                id="description"
-                name="description"
-                label="Description"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <Checkbox color="secondary" name="startNow" value="yes" />
-                }
-                label="Start Now"
-              />
-            </Grid>
-          </Grid>
-        </>
-    );
-  case 1:
-    return (
-        <>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
-              <TextField
-                required
-                id="mashWaterLiter"
-                label="Mash Water (l)"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                required
-                id="spargingWaterLiter"
-                label="Sparging Water (l)"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                required
-                id="yieldsLiter"
-                label="yieldsLiter"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                required
-                id="carbonizationGramPerLiter"
-                label="carbonizationGramPerLiter"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                required
-                id="mashInTemperature"
-                label="mashInTemperature"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField required id="mashSteps" label="mashSteps" fullWidth />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                required
-                id="spargingTemperature"
-                label="spargingTemperature"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                required
-                id="boilingMinutes"
-                label="boilingMinutes"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                required
-                id="boilHopAdditions"
-                label="boilHopAdditions"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                required
-                id="dryHopping"
-                label="dryHopping"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                required
-                id="fermentationSteps"
-                label="fermentationSteps"
-                fullWidth
-              />
-            </Grid>
-          </Grid>
-        </>
-    );
-  }
-}
-
 class CreateBrewingProcess extends React.Component {
   state = {
     open: false,
-    activeStep: 0
+    activeStep: 0,
+    name: '',
+    description: '',
+    startNow: false,
+    mashWaterLiter: '',
+    spargingWaterLiter: '',
+    yieldsLiter: '',
+    mashInTemperature: '',
+    mashSteps: '',
+    spargingTemperature: '',
+    boilingMinutes: '',
+    boilHopAdditions: '',
+    dryHopping: '',
+    fermentationSteps: ''
   };
 
+  saveToState = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+  saveCheckToState = name => event => {
+    this.setState({ [name]: event.target.checked });
+  };
   handleClickOpen = () => {
-    this.setState({ open: true, activeStep: 0 });
+    this.setState({ open: true, });
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({
+      open: false,
+      activeStep: 0,
+      name: '',
+      description: '',
+      startNow: false,
+      mashWaterLiter: '',
+      spargingWaterLiter: '',
+      yieldsLiter: '',
+      mashInTemperature: '',
+      mashSteps: '',
+      spargingTemperature: '',
+      boilingMinutes: '',
+      boilHopAdditions: '',
+      dryHopping: '',
+      fermentationSteps: ''});
   };
 
   handleNext = () => {
@@ -206,6 +112,181 @@ class CreateBrewingProcess extends React.Component {
     this.setState(state => ({
       activeStep: state.activeStep - 1
     }));
+  };
+  getStepContent = step => {
+    switch (step) {
+    case 0:
+      return (
+          <>
+            <Grid container spacing={8}>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  id="name"
+                  name="name"
+                  label="Name"
+                  value={this.state.name}
+                  onChange={this.saveToState}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  id="description"
+                  name="description"
+                  label="Description"
+                  value={this.state.description}
+                  onChange={this.saveToState}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      color="secondary"
+                      id="startNow"
+                      name="startNow"
+                      value="startNow"
+                      checked={this.state.startNow}
+                      onChange={this.saveCheckToState('startNow')}
+                    />
+                  }
+                  label="Start Now"
+                />
+              </Grid>
+            </Grid>
+          </>
+      );
+    case 1:
+      return (
+          <>
+            <Grid container spacing={8}>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  required
+                  id="mashWaterLiter"
+                  name="mashWaterLiter"
+                  label="Mash Water (l)"
+                  value={this.state.mashWaterLiter}
+                  onChange={this.saveToState}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  required
+                  id="spargingWaterLiter"
+                  name="spargingWaterLiter"
+                  label="Sparging Water (l)"
+                  value={this.state.spargingWaterLiter}
+                  onChange={this.saveToState}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  required
+                  id="yieldsLiter"
+                  name="yieldsLiter"
+                  label="Yield (l)"
+                  value={this.state.yieldsLiter}
+                  onChange={this.saveToState}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  required
+                  id="carbonizationGramPerLiter"
+                  label="Carbonization (g/l)"
+                  name="carbonizationGramPerLiter"
+                  value={this.state.carbonizationGramPerLiter}
+                  onChange={this.saveToState}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  required
+                  id="mashInTemperature"
+                  label="Mash-In Temperature"
+                  name="mashInTemperature"
+                  value={this.state.mashInTemperature}
+                  onChange={this.saveToState}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  required
+                  id="mashSteps"
+                  label="Mash Steps"
+                  name="mashSteps"
+                  value={this.state.mashSteps}
+                  onChange={this.saveToState}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  required
+                  id="spargingTemperature"
+                  label="Sparging Temperature"
+                  name="spargingTemperature"
+                  value={this.state.spargingTemperature}
+                  onChange={this.saveToState}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  required
+                  id="boilingMinutes"
+                  label="Boiling (min)"
+                  name="boilingMinutes"
+                  value={this.state.boilingMinutes}
+                  onChange={this.saveToState}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  required
+                  id="boilHopAdditions"
+                  label="Boil Hop Additions"
+                  name="boilHopAdditions"
+                  value={this.state.boilHopAdditions}
+                  onChange={this.saveToState}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  id="dryHopping"
+                  label="Dry Hopping"
+                  name="dryHopping"
+                  value={this.state.dryHopping}
+                  onChange={this.saveToState}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  required
+                  id="fermentationSteps"
+                  label="Fermentation Steps"
+                  name="fermentationSteps"
+                  value={this.state.fermentationSteps}
+                  onChange={this.saveToState}
+                  fullWidth
+                />
+              </Grid>
+            </Grid>
+          </>
+      );
+    }
   };
 
   render() {
@@ -244,7 +325,7 @@ class CreateBrewingProcess extends React.Component {
                   ))}
                 </Stepper>
                 <>
-                  {getStepContent(activeStep)}
+                  {this.getStepContent(activeStep)}
                   <div className={classes.buttons}>
                     <Button
                       onClick={this.handleClose}
