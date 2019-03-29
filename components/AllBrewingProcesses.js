@@ -73,3 +73,4 @@ AllBrewingProcesses.propTypes = {
 };
 
 export default withStyles(styles)(AllBrewingProcesses);
+export { BREWING_PROCESSES_QUERY };

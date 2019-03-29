@@ -15,6 +15,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import gql from 'graphql-tag';
+import { Mutation } from 'react-apollo';
+import Error from './Error';
+import { BREWING_PROCESSES_QUERY } from './AllBrewingProcesses';
 
 const styles = theme => ({
   layout: {
@@ -48,18 +52,41 @@ const styles = theme => ({
   }
 });
 
+const CREATE_BREWING_PROCESS_MUTATION = gql`
+  mutation CREATE_BREWING_PROCESS_MUTATION(
+    $name: String!
+    $startNow: Boolean
+    $description: String!
+    $brewingProcessDetails: DetailsInput!
+  ) {
+    createBrewingProcess(
+      name: $name
+      startNow: $startNow
+      description: $description
+      brewingProcessDetails: $brewingProcessDetails
+    ) {
+      id
+    }
+  }
+`;
+
 const steps = ['General Info', 'Add Details'];
 
 class CreateBrewingProcess extends React.Component {
   state = {
     open: false,
     activeStep: 0,
+    // BrewingProcess
     name: '',
     description: '',
     startNow: false,
+    // BrewingProcessDetails
+    malts: '',
+    yeast: '',
     mashWaterLiter: '',
     spargingWaterLiter: '',
     yieldsLiter: '',
+    carbonizationGramPerLiter: '',
     mashInTemperature: '',
     mashSteps: '',
     spargingTemperature: '',
@@ -76,7 +103,7 @@ class CreateBrewingProcess extends React.Component {
     this.setState({ [name]: event.target.checked });
   };
   handleClickOpen = () => {
-    this.setState({ open: true, });
+    this.setState({ open: true });
   };
 
   handleClose = () => {
@@ -86,6 +113,8 @@ class CreateBrewingProcess extends React.Component {
       name: '',
       description: '',
       startNow: false,
+      malts: '',
+      yeast: '',
       mashWaterLiter: '',
       spargingWaterLiter: '',
       yieldsLiter: '',
@@ -95,7 +124,8 @@ class CreateBrewingProcess extends React.Component {
       boilingMinutes: '',
       boilHopAdditions: '',
       dryHopping: '',
-      fermentationSteps: ''});
+      fermentationSteps: ''
+    });
   };
 
   handleNext = () => {
@@ -103,7 +133,7 @@ class CreateBrewingProcess extends React.Component {
       activeStep: state.activeStep + 1
     }));
     // final step
-    if (this.state.activeStep == steps.length - 1) {
+    if (this.state.activeStep >= steps.length - 1) {
       this.handleClose();
     }
   };
@@ -113,6 +143,7 @@ class CreateBrewingProcess extends React.Component {
       activeStep: state.activeStep - 1
     }));
   };
+
   getStepContent = step => {
     switch (step) {
     case 0:
@@ -210,6 +241,28 @@ class CreateBrewingProcess extends React.Component {
               <Grid item xs={12} md={6}>
                 <TextField
                   required
+                  id="malts"
+                  label="Malts"
+                  name="malts"
+                  value={this.state.malts}
+                  onChange={this.saveToState}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  required
+                  id="yeast"
+                  label="Yeast"
+                  name="yeast"
+                  value={this.state.yeast}
+                  onChange={this.saveToState}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  required
                   id="mashInTemperature"
                   label="Mash-In Temperature"
                   name="mashInTemperature"
@@ -293,6 +346,8 @@ class CreateBrewingProcess extends React.Component {
     const { classes } = this.props;
     const { activeStep } = this.state;
 
+    var createBrewingProcessVars = null;
+
     return (
       <>
         <Fab
@@ -303,61 +358,125 @@ class CreateBrewingProcess extends React.Component {
         >
           <AddIcon />
         </Fab>
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
-          disableBackdropClick
-          fullScreen
+        <Mutation
+          mutation={CREATE_BREWING_PROCESS_MUTATION}
+          refetchQueries={[{ query: BREWING_PROCESSES_QUERY }]}
         >
-          <DialogTitle id="form-dialog-title">
-            Create Brewing Process
-          </DialogTitle>
+          {(createBrewingProcess, { loading, error }) => (
+            <Dialog
+              open={this.state.open}
+              onClose={this.handleClose}
+              aria-labelledby="form-dialog-title"
+              disableBackdropClick
+              fullScreen
+            >
+              <Error error={error} />
+              <DialogTitle id="form-dialog-title">
+                Create Brewing Process
+              </DialogTitle>
 
-          <DialogContent>
-            <main className={classes.layout}>
-              <Paper className={classes.paper}>
-                <Stepper activeStep={activeStep} className={classes.stepper}>
-                  {steps.map(label => (
-                    <Step key={label}>
-                      <StepLabel>{label}</StepLabel>
-                    </Step>
-                  ))}
-                </Stepper>
-                <>
-                  {this.getStepContent(activeStep)}
-                  <div className={classes.buttons}>
-                    <Button
-                      onClick={this.handleClose}
-                      className={classes.button}
-                      color="secondary"
-                      variant="contained"
+              <DialogContent>
+                <main className={classes.layout}>
+                  <Paper className={classes.paper}>
+                    <Stepper
+                      activeStep={activeStep}
+                      className={classes.stepper}
                     >
-                      Cancel
-                    </Button>
-                    {activeStep !== 0 && (
-                      <Button
-                        onClick={this.handleBack}
-                        className={classes.button}
-                        variant="contained"
-                      >
-                        Back
-                      </Button>
-                    )}
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={this.handleNext}
-                      className={classes.button}
-                    >
-                      {activeStep === steps.length - 1 ? 'Create' : 'Next'}
-                    </Button>
-                  </div>
-                </>
-              </Paper>
-            </main>
-          </DialogContent>
-        </Dialog>
+                      {steps.map(label => (
+                        <Step key={label}>
+                          <StepLabel>{label}</StepLabel>
+                        </Step>
+                      ))}
+                    </Stepper>
+                    <>
+                      {this.getStepContent(activeStep)}
+                      <div className={classes.buttons}>
+                        <Button
+                          onClick={this.handleClose}
+                          className={classes.button}
+                          color="secondary"
+                          variant="contained"
+                        >
+                          Cancel
+                        </Button>
+                        {activeStep !== 0 && (
+                          <Button
+                            onClick={this.handleBack}
+                            className={classes.button}
+                            variant="contained"
+                          >
+                            Back
+                          </Button>
+                        )}
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={async () => {
+                            // fire mutation
+                            if (activeStep == steps.length - 1) {
+                              // prepare variables
+                              try {
+                                createBrewingProcessVars = {
+                                  name: this.state.name,
+                                  description: this.state.description,
+                                  startNow: this.state.startNow,
+                                  brewingProcessDetails: {
+                                    malts: JSON.parse(this.state.malts),
+                                    yeast: JSON.parse(this.state.yeast),
+                                    mashWaterLiter: parseFloat(
+                                      this.state.mashWaterLiter
+                                    ),
+                                    spargingWaterLiter: parseFloat(
+                                      this.state.spargingWaterLiter
+                                    ),
+                                    yieldsLiter: parseFloat(
+                                      this.state.yieldsLiter
+                                    ),
+                                    carbonizationGramPerLiter: parseFloat(
+                                      this.state.carbonizationGramPerLiter
+                                    ),
+                                    mashInTemperature: parseFloat(
+                                      this.state.mashInTemperature
+                                    ),
+                                    mashSteps: JSON.parse(this.state.mashSteps),
+                                    spargingTemperature: parseFloat(
+                                      this.state.spargingTemperature
+                                    ),
+                                    boilingMinutes: parseInt(
+                                      this.state.boilingMinutes
+                                    ),
+                                    boilHopAdditions: JSON.parse(
+                                      this.state.boilHopAdditions
+                                    ),
+                                    dryHopping: JSON.parse(
+                                      this.state.dryHopping
+                                    ),
+                                    fermentationSteps: JSON.parse(
+                                      this.state.fermentationSteps
+                                    )
+                                  }
+                                };
+                                await createBrewingProcess({variables: {...createBrewingProcessVars}}).catch(() => {});
+                              } catch (parseError) {
+                                console.log(parseError);
+                              }
+                            } else {
+                              this.handleNext();
+                            }
+                          }}
+                          className={classes.button}
+                          disabled={loading}
+                        >
+                          {activeStep === steps.length - 1 ? 'Create' : 'Next'}
+                        </Button>
+                      </div>
+                    </>
+                  </Paper>
+                </main>
+              </DialogContent>
+            </Dialog>
+          )}
+        </Mutation>
       </>
     );
   }
