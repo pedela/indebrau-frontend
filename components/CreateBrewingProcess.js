@@ -76,10 +76,14 @@ class CreateBrewingProcess extends React.Component {
   state = {
     open: false,
     activeStep: 0,
+    formatting: 'notyetdone', // check for formatting
+    queryStatus: 'notyetdone', // did query pass?
+
     // BrewingProcess
     name: '',
     description: '',
     startNow: false,
+
     // BrewingProcessDetails
     malts: '',
     yeast: '',
@@ -110,6 +114,9 @@ class CreateBrewingProcess extends React.Component {
     this.setState({
       open: false,
       activeStep: 0,
+      formatting: 'notyetdone',
+      queryStatus: 'notyetdone',
+
       name: '',
       description: '',
       startNow: false,
@@ -346,8 +353,6 @@ class CreateBrewingProcess extends React.Component {
     const { classes } = this.props;
     const { activeStep } = this.state;
 
-    var createBrewingProcessVars = null;
-
     return (
       <>
         <Fab
@@ -362,7 +367,7 @@ class CreateBrewingProcess extends React.Component {
           mutation={CREATE_BREWING_PROCESS_MUTATION}
           refetchQueries={[{ query: BREWING_PROCESSES_QUERY }]}
         >
-          {(createBrewingProcess, { loading, error }) => (
+          {(createBrewingProcess, { loading }) => (
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
@@ -370,7 +375,9 @@ class CreateBrewingProcess extends React.Component {
               disableBackdropClick
               fullScreen
             >
-              <Error error={error} />
+              <Error error={this.state.queryStatus} />
+              <Error error={this.state.formatting} />
+
               <DialogTitle id="form-dialog-title">
                 Create Brewing Process
               </DialogTitle>
@@ -416,7 +423,7 @@ class CreateBrewingProcess extends React.Component {
                             if (activeStep == steps.length - 1) {
                               // prepare variables
                               try {
-                                createBrewingProcessVars = {
+                                let createBrewingProcessVars = {
                                   name: this.state.name,
                                   description: this.state.description,
                                   startNow: this.state.startNow,
@@ -456,9 +463,25 @@ class CreateBrewingProcess extends React.Component {
                                     )
                                   }
                                 };
-                                await createBrewingProcess({variables: {...createBrewingProcessVars}}).catch(() => {});
-                              } catch (parseError) {
-                                console.log(parseError);
+                                this.setState({
+                                  formatting: 'ok'
+                                });
+                                this.setState({ queryStatus: 'ok' });
+                                await createBrewingProcess({
+                                  variables: { ...createBrewingProcessVars }
+                                }).catch(e => {
+                                  this.setState({ queryStatus: e });
+                                });
+                              } catch (exception) {
+                                this.setState({
+                                  formatting: exception
+                                });
+                              }
+                              if (
+                                this.state.formatting === 'ok' &&
+                                this.state.queryStatus === 'ok'
+                              ) {
+                                this.handleNext();
                               }
                             } else {
                               this.handleNext();
