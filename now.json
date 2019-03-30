@@ -1,6 +1,7 @@
 {
-  "name": "Frontend",
+  "name": "Indebrau Frontend",
   "version": 2,
+  "alias": "indebrau.de",
   "builds": [
     {
       "src": "package.json",

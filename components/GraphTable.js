@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteGraph from './DeleteGraph';
 
 const styles = theme => ({
   root: {
@@ -61,9 +61,7 @@ class GraphTable extends Component {
                   >
                     <EditIcon />
                   </Fab>
-                  <Fab aria-label="Delete" className={classes.fab}>
-                    <DeleteIcon />
-                  </Fab>
+                  <DeleteGraph id={n.id} />
                 </TableCell>
               </TableRow>
             ))}
