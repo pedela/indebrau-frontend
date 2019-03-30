@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start -p $PORT",
-    "heroku-postbuild": "npm run build"
+    "now-build": "next build",
+    "start": "next start"
   },
   "engines": {
     "node": "~11.9.0",
