@@ -48,13 +48,13 @@ const CREATE_GRAPH_MUTATION = gql`
   mutation CREATE_GRAPH_MUTATION(
     $name: String!
     $sensorName: String!
-    $updateInterval: Int
+    $updateFrequency: Int
     $brewingProcessId: ID!
   ) {
     createGraph(
       name: $name
       sensorName: $sensorName
-      updateInterval: $updateInterval
+      updateFrequency: $updateFrequency
       brewingProcessId: $brewingProcessId
     ) {
       id
@@ -70,7 +70,7 @@ class CreateGraph extends React.Component {
     // mutation variables
     name: '',
     sensorName: '',
-    updateInterval: 60,
+    updateFrequency: 60,
     brewingProcessId: ''
   };
 
@@ -88,7 +88,7 @@ class CreateGraph extends React.Component {
       // mutation variables
       name: '',
       sensorName: '',
-      updateInterval: '',
+      updateFrequency: '',
       brewingProcessId: ''
     });
   };
@@ -150,10 +150,10 @@ class CreateGraph extends React.Component {
                       <Grid item xs={12}>
                         <TextField
                           required
-                          id="updateInterval"
-                          name="updateInterval"
-                          label="Update Interval"
-                          value={this.state.updateInterval}
+                          id="updateFrequency"
+                          name="updateFrequency"
+                          label="Update Frequency"
+                          value={this.state.updateFrequency}
                           onChange={this.saveToState}
                           fullWidth
                         />
@@ -190,7 +190,9 @@ class CreateGraph extends React.Component {
                             variables: {
                               name: this.state.name,
                               sensorName: this.state.sensorName,
-                              updateInterval: parseInt(this.state.updateInterval),
+                              updateFrequency: parseInt(
+                                this.state.updateFrequency
+                              ),
                               brewingProcessId: this.state.brewingProcessId
                             }
                           }).catch(e => {
