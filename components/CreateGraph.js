@@ -190,7 +190,7 @@ class CreateGraph extends React.Component {
                             variables: {
                               name: this.state.name,
                               sensorName: this.state.sensorName,
-                              updateInterval: this.state.updateInterval,
+                              updateInterval: parseInt(this.state.updateInterval),
                               brewingProcessId: this.state.brewingProcessId
                             }
                           }).catch(e => {
