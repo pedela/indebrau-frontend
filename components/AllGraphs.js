@@ -5,12 +5,11 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
 import Loading from './Loading';
 import Error from './Error';
 import GraphChart from './GraphChart';
 import GraphTable from './GraphTable';
+import CreateGraph from './CreateGraph';
 
 const styles = theme => ({
   root: {
@@ -25,7 +24,7 @@ const styles = theme => ({
 });
 
 const ACTIVE_GRAPHS_QUERY = gql`
-  query ACTIVE_GRAPHS_QUERY($dataPoints: Int!) {
+  query ACTIVE_GRAPHS_QUERY($dataPoints: Int = 50) {
     graphs(dataPoints: $dataPoints, active: true) {
       id
       name
@@ -38,8 +37,8 @@ const ACTIVE_GRAPHS_QUERY = gql`
 `;
 
 const ALL_GRAPHS_QUERY = gql`
-  query ALL_GRAPHS_QUERY($dataPoints: Int!) {
-    graphs(dataPoints: $dataPoints) {
+  query ALL_GRAPHS_QUERY {
+    graphs {
       id
       name
       sensorName
@@ -59,10 +58,6 @@ class AllGraphs extends Component {
     const activeGraphsVariables = {
       dataPoints: 50,
       active: true
-    };
-
-    const allGraphsVariables = {
-      dataPoints: 50
     };
 
     return (
@@ -94,7 +89,6 @@ class AllGraphs extends Component {
         </Query>
         <Query
           query={ALL_GRAPHS_QUERY}
-          variables={allGraphsVariables}
           pollInterval={10000}
         >
           {({ data, error, loading }) => {
@@ -112,9 +106,9 @@ class AllGraphs extends Component {
             }
           }}
         </Query>
-        <Fab color="primary" aria-label="Add" className={classes.fab}>
-          <AddIcon />
-        </Fab>
+        <Paper className={classes.root}>
+          <CreateGraph className={classes.root} />
+        </Paper>
       </div>
     );
   }
@@ -125,3 +119,4 @@ AllGraphs.propTypes = {
 };
 
 export default withStyles(styles)(AllGraphs);
+export { ACTIVE_GRAPHS_QUERY, ALL_GRAPHS_QUERY };
