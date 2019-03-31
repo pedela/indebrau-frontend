@@ -10,9 +10,10 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
-const styles = () => ({
+const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    padding: theme.spacing.unit * 2
   },
   card: {
     maxWidth: 345
@@ -30,12 +31,7 @@ class Beers extends Component {
       <div className={classes.root}>
         <Grid container className={classes.root} spacing={16}>
           <Grid item xs={12}>
-            <Grid
-              container
-              className={classes.demo}
-              justify="center"
-              spacing={8}
-            >
+            <Grid container justify="center" spacing={8}>
               {[0, 1, 2].map(value => (
                 <Grid key={value} item>
                   <Card className={classes.card}>
