@@ -34,10 +34,7 @@ class Error extends Component {
     const { classes, error } = this.props;
     // no error
     if (!error || !error.message) return null;
-    let errorMessage = 'Undefined Error!';
-    if (error && error.message) {
-      errorMessage = error.message;
-    }
+    let errorMessage = error.message;
 
     return (
       <div>
@@ -79,7 +76,10 @@ Error.defaultProps = {
 };
 
 Error.propTypes = {
-  error: PropTypes.object,
+  error: PropTypes.oneOfType([
+    PropTypes.string, // default error message
+    PropTypes.object // graphql error
+  ]),
   classes: PropTypes.object.isRequired
 };
 

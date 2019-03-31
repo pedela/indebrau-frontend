@@ -108,7 +108,7 @@ class CreateGraph extends React.Component {
         </Fab>
         <Mutation
           mutation={CREATE_GRAPH_MUTATION}
-          refetchQueries={[{ query: ACTIVE_GRAPHS_QUERY, ALL_GRAPHS_QUERY }]}
+          refetchQueries={[{ query: ACTIVE_GRAPHS_QUERY }, { query: ALL_GRAPHS_QUERY }]}
         >
           {(createGraph, { loading }) => (
             <Dialog

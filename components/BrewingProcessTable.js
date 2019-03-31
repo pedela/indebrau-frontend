@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteBrewingProcess from './DeleteBrewingProcess';
 import { renderDate } from '../lib/utils.js';
 
 const styles = theme => ({
@@ -26,21 +26,6 @@ const styles = theme => ({
 class BrewingProcessTable extends Component {
   render() {
     const { classes } = this.props;
-    let adminHead = null;
-    let adminCell = null;
-    if (this.props.adminView) {
-      adminHead = <TableCell align="center">Edit</TableCell>;
-      adminCell = (
-        <TableCell align="right">
-          <Fab color="secondary" aria-label="Edit" className={classes.fab}>
-            <EditIcon />
-          </Fab>
-          <Fab aria-label="Delete" className={classes.fab}>
-            <DeleteIcon />
-          </Fab>
-        </TableCell>
-      );
-    }
     return (
       <div className={classes.root}>
         <Table>
@@ -50,7 +35,9 @@ class BrewingProcessTable extends Component {
               <TableCell align="center">Description</TableCell>
               <TableCell align="center">Start</TableCell>
               <TableCell align="center">End</TableCell>
-              {adminHead}
+              {this.props.adminView &&
+              <TableCell align="center">Edit</TableCell>
+              }
             </TableRow>
           </TableHead>
           <TableBody>
@@ -60,7 +47,14 @@ class BrewingProcessTable extends Component {
                 <TableCell align="center">{n.description}</TableCell>
                 <TableCell align="center">{renderDate(n.start)}</TableCell>
                 <TableCell align="center">{n.end}</TableCell>
-                {adminCell}
+                {this.props.adminView &&
+                <TableCell align="center">
+                  <Fab color="secondary" aria-label="Edit" className={classes.fab}>
+                    <EditIcon />
+                  </Fab>
+                  <DeleteBrewingProcess id={n.id} />
+                </TableCell>
+                }
               </TableRow>
             ))}
           </TableBody>

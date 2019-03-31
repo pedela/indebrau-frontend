@@ -89,7 +89,6 @@ class AllGraphs extends Component {
         </Query>
         <Query
           query={ALL_GRAPHS_QUERY}
-          pollInterval={10000}
         >
           {({ data, error, loading }) => {
             if (loading) return <Loading />;

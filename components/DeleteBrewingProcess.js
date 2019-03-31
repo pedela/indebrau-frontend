@@ -10,7 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import Error from './Error';
-import { ACTIVE_GRAPHS_QUERY, ALL_GRAPHS_QUERY } from './AllGraphs';
+import { BREWING_PROCESSES_QUERY } from './AllBrewingProcesses';
 
 const styles = theme => ({
   layout: {
@@ -32,9 +32,9 @@ const styles = theme => ({
   }
 });
 
-const DELETE_GRAPH_MUTATION = gql`
-  mutation DELETE_GRAPH_MUTATION($id: ID!) {
-    deleteGraph(id: $id) {
+const DELETE_BREWING_PROCESS = gql`
+  mutation DELETE_BREWING_PROCESS($id: ID!) {
+    deleteBrewingProcess(id: $id) {
       id
     }
   }
@@ -72,17 +72,19 @@ class CreateGraph extends React.Component {
           <DeleteIcon />
         </Fab>
         <Mutation
-          mutation={ DELETE_GRAPH_MUTATION }
-          refetchQueries={[{ query: ACTIVE_GRAPHS_QUERY }, { query: ALL_GRAPHS_QUERY }]}
+          mutation={DELETE_BREWING_PROCESS}
+          refetchQueries={[{ query: BREWING_PROCESSES_QUERY }]}
         >
-          {(deleteGraph, { loading }) => (
+          {(deleteBrewingProcess, { loading }) => (
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
               aria-labelledby="form-dialog-title"
             >
               <Error error={this.state.queryError} />
-              <DialogTitle id="form-dialog-title">Delete Graph</DialogTitle>
+              <DialogTitle id="form-dialog-title">
+                Delete Brewing Process
+              </DialogTitle>
               <DialogContent>
                 <main className={classes.layout}>
                   <div className={classes.buttons}>
@@ -100,7 +102,7 @@ class CreateGraph extends React.Component {
                       onClick={async () => {
                         // fire mutation (clear old error)
                         this.setState({ queryError: null });
-                        await deleteGraph({
+                        await deleteBrewingProcess({
                           variables: {
                             id: this.props.id
                           }

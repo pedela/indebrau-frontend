@@ -125,6 +125,7 @@ class CreateBrewingProcess extends React.Component {
       mashWaterLiter: '',
       spargingWaterLiter: '',
       yieldsLiter: '',
+      carbonizationGramPerLiter: '',
       mashInTemperature: '',
       mashSteps: '',
       spargingTemperature: '',
