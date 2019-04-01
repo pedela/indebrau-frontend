@@ -6,10 +6,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Fab from '@material-ui/core/Fab';
-import EditIcon from '@material-ui/icons/Edit';
+import Router from 'next/router';
 import DeleteBrewingProcess from './DeleteBrewingProcess';
-import { renderDate } from '../lib/utils.js';
 
 const styles = theme => ({
   root: {
@@ -24,6 +22,14 @@ const styles = theme => ({
 });
 
 class BrewingProcessTable extends Component {
+
+  handleClick = id => {
+    sessionStorage.setItem('brewingProcessId', id);
+    Router.push({
+      pathname: '/brewery'
+    });
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -31,30 +37,33 @@ class BrewingProcessTable extends Component {
         <Table>
           <TableHead>
             <TableRow>
+              {this.props.adminView && <TableCell align="center">ID</TableCell>}
               <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Description</TableCell>
-              <TableCell align="center">Start</TableCell>
-              <TableCell align="center">End</TableCell>
-              {this.props.adminView &&
-              <TableCell align="center">Edit</TableCell>
-              }
+              {!this.props.adminView && (
+                <TableCell align="center">Description</TableCell>
+              )}
+              {this.props.adminView && <TableCell align="center" />}
             </TableRow>
           </TableHead>
           <TableBody>
             {this.props.brewingProcesses.map(n => (
-              <TableRow key={n.id}>
+              <TableRow
+                key={n.id}
+                hover
+                onClick={() => this.handleClick(n.id)}
+              >
+                {this.props.adminView && (
+                  <TableCell align="center">{n.id}</TableCell>
+                )}
                 <TableCell align="center">{n.name}</TableCell>
-                <TableCell align="center">{n.description}</TableCell>
-                <TableCell align="center">{renderDate(n.start)}</TableCell>
-                <TableCell align="center">{n.end}</TableCell>
-                {this.props.adminView &&
-                <TableCell align="center">
-                  <Fab color="secondary" aria-label="Edit" className={classes.fab}>
-                    <EditIcon />
-                  </Fab>
-                  <DeleteBrewingProcess id={n.id} />
-                </TableCell>
-                }
+                {!this.props.adminView && (
+                  <TableCell align="center">{n.description}</TableCell>
+                )}
+                {this.props.adminView && (
+                  <TableCell align="center">
+                    <DeleteBrewingProcess id={n.id} />
+                  </TableCell>
+                )}
               </TableRow>
             ))}
           </TableBody>

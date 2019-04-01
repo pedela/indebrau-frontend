@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+
+import { CurrentUser } from './User';
+import BreweryComponent from './BreweryComponent';
 
 const styles = theme => ({
   root: {
@@ -16,270 +13,132 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2,
     flexGrow: 1
   },
-  card: {
-    maxWidth: 300
-  },
-  media: {
-    height: 300,
-    image: { objectFit: 'cover' }
-  }
+  container: {}
 });
-
 class Brewery extends Component {
+  state = {
+    brewingProcessId: ''
+  };
+
+  // might have been set in user page, fetch, set state and remove
+  componentDidMount() {
+    this.setState({
+      brewingProcessId: sessionStorage.getItem('brewingProcessId')
+    });
+    sessionStorage.removeItem('brewingProcessId');
+  }
+
   render() {
     const { classes } = this.props;
 
     return (
       <div className={classes.root}>
-        <Grid
-          container
-          className={classes.container}
-          spacing={8}
-          justify="center"
-        >
-          <Grid item>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image="../static/breweryImages/grainMill.png"
-                  title="Grain Mill"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    The Grain Mill
+        <CurrentUser>
+          {({ data }) => {
+            const me = data ? data.me : null;
+            // check for permissions here
+            // 1. logged in
+            let permission = false;
+            if (me) {
+              // 2. no admin
+              if (me.permissions.includes('ADMIN')) {
+                permission = true;
+              }
+              else {
+                // does user participate?
+                me.participatingBrewingProcesses.map(brewingProcess => {
+                  if (brewingProcess.id === this.state.brewingProcessId) {
+                    permission = true;
+                  }
+                });
+              }
+            }
+            if (!permission) {
+              this.setState({ brewingProcessId: null });
+            }
+            // clear all brewing process data and show default brewery
+            return (
+              <>
+                {this.state.brewingProcessId && (
+                  <Typography variant="h5" gutterBottom>
+                    Brewing Process: {this.state.brewingProcessId}
                   </Typography>
-                  <Typography component="p">
-                    Best beer in the world! Drink Drink Drink Drink! Drink Drink
-                    Drink Drink! Drink Drink Drink Drink! Drink Drink Drink
-                    Drink!
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  Learn More
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-
-          <Grid item>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image="../static/breweryImages/mashTun.png"
-                  title="Mash Tun"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    The Mash Tun
-                  </Typography>
-                  <Typography component="p">
-                    Best beer in the world! Drink Drink Drink Drink! Drink Drink
-                    Drink Drink! Drink Drink Drink Drink! Drink Drink Drink
-                    Drink!
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  Learn More
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-
-          <Grid item>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image="../static/breweryImages/spargingVessel.png"
-                  title="Sparging Vessel"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    The Sparging Vessel
-                  </Typography>
-                  <Typography component="p">
-                    Best beer in the world! Drink Drink Drink Drink! Drink Drink
-                    Drink Drink! Drink Drink Drink Drink! Drink Drink Drink
-                    Drink!
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  Learn More
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-
-          <Grid item>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image="../static/breweryImages/wortCopper.png"
-                  title="Wort Copper"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    The Wort Copper
-                  </Typography>
-                  <Typography component="p">
-                    Best beer in the world! Drink Drink Drink Drink! Drink Drink
-                    Drink Drink! Drink Drink Drink Drink! Drink Drink Drink
-                    Drink!
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  Learn More
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-
-          <Grid item>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image="../static/breweryImages/cooler.png"
-                  title="Wort Chiller"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    The Wort Chiller
-                  </Typography>
-                  <Typography component="p">
-                    Best beer in the world! Drink Drink Drink Drink! Drink Drink
-                    Drink Drink! Drink Drink Drink Drink! Drink Drink Drink
-                    Drink!
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  Learn More
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-
-          <Grid item>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image="../static/breweryImages/fermenter.png"
-                  title="Fermenter"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    The Fermenter
-                  </Typography>
-                  <Typography component="p">
-                    Best beer in the world! Drink Drink Drink Drink! Drink Drink
-                    Drink Drink! Drink Drink Drink Drink! Drink Drink Drink
-                    Drink!
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  Learn More
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-
-          <Grid item>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image="../static/breweryImages/electronicHydrometer.png"
-                  title="Electronic Hydrometer"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    The Electronic Hydrometer
-                  </Typography>
-                  <Typography component="p">
-                    Best beer in the world! Drink Drink Drink Drink! Drink Drink
-                    Drink Drink! Drink Drink Drink Drink! Drink Drink Drink
-                    Drink!
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  Learn More
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-
-          <Grid item>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image="../static/breweryImages/keg.png"
-                  title="Keg"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    The Keg
-                  </Typography>
-                  <Typography component="p">
-                    Best beer in the world! Drink Drink Drink Drink! Drink Drink
-                    Drink Drink! Drink Drink Drink Drink! Drink Drink Drink
-                    Drink!
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  Learn More
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-
-          <Grid item>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image="../static/breweryImages/bottle.png"
-                  title="Beer Bottle"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    ..And Finally Beer
-                  </Typography>
-                  <Typography component="p">
-                    Best beer in the world! Drink Drink Drink Drink! Drink Drink
-                    Drink Drink! Drink Drink Drink Drink! Drink Drink Drink
-                    Drink!
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  Learn More
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        </Grid>
+                )}
+                {!this.state.brewingProcessId && (
+                  <>
+                    <Typography variant="h5" gutterBottom>
+                      The Indebrau Brewery
+                    </Typography>
+                    <Typography variant="subtitle1" gutterBottom>
+                      An Overview of our Setup
+                    </Typography>
+                  </>
+                )}
+                <Grid
+                  container
+                  className={classes.container}
+                  spacing={8}
+                  justify="center"
+                >
+                  <Grid item>
+                    <BreweryComponent
+                      type="GrainMill"
+                      brewingProcessId={this.state.brewingProcessId}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <BreweryComponent
+                      type="MashTun"
+                      brewingProcessId={this.state.brewingProcessId}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <BreweryComponent
+                      type="SpargingVessel"
+                      brewingProcessId={this.state.brewingProcessId}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <BreweryComponent
+                      type="WortCopper"
+                      brewingProcessId={this.state.brewingProcessId}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <BreweryComponent
+                      type="WortChiller"
+                      brewingProcessId={this.state.brewingProcessId}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <BreweryComponent
+                      type="Fermenter"
+                      brewingProcessId={this.state.brewingProcessId}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <BreweryComponent
+                      type="ElectronicHydrometer"
+                      brewingProcessId={this.state.brewingProcessId}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <BreweryComponent
+                      type="Keg"
+                      brewingProcessId={this.state.brewingProcessId}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <BreweryComponent
+                      type="Bottle"
+                      brewingProcessId={this.state.brewingProcessId}
+                    />
+                  </Grid>
+                </Grid>
+              </>
+            );
+          }}
+        </CurrentUser>
       </div>
     );
   }

@@ -11,8 +11,8 @@ const styles = theme => ({
   },
   image: {
     float: 'center',
-    maxWidth: '60%',
-    height: 'auto'
+    width: 200,
+    maxHeight: '20'
   }
 });
 

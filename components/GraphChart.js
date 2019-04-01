@@ -19,7 +19,7 @@ class GraphChart extends Component {
     return (
       <ResponsiveContainer width="99%" height={320}>
         <LineChart data={renderData}>
-          <XAxis dataKey="time" />
+          <XAxis dataKey="time" interval="preserveStartEnd" />
           <YAxis />
           <CartesianGrid vertical={false} strokeDasharray="3 3" />
           <Tooltip />

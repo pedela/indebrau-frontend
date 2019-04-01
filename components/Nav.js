@@ -73,9 +73,7 @@ class Nav extends Component {
                   align="center"
                   noWrap
                   className={classes.toolbarTitle}
-                >
-                  Indebrau
-                </Typography>
+                />
                 <Link href="/user">
                   <a className={classes.buttonLinks}>
                     {!me && <Button>Sign In</Button>}
@@ -83,7 +81,13 @@ class Nav extends Component {
                   </a>
                 </Link>
 
-                {me && <SignOut />}
+                {me && (
+                  <Link href="/">
+                    <a className={classes.buttonLinks}>
+                      <SignOut />
+                    </a>
+                  </Link>
+                )}
                 {!me && (
                   <Link href="/signup">
                     <a className={classes.buttonLinks}>
