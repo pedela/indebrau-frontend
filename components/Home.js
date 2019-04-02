@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
@@ -22,7 +22,9 @@ class Home extends Component {
     return (
       <div className={classes.root}>
         <Typography variant="h5" gutterBottom>
-          Indebrau<br />Beer from Eschweiler
+          Indebrau
+          <br />
+          Beer from Eschweiler
         </Typography>
         <img src="../static/brewery.jpeg" className={classes.image} />
         <Typography variant="subtitle1" gutterBottom>

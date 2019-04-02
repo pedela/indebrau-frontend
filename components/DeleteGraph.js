@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
@@ -40,7 +40,7 @@ const DELETE_GRAPH_MUTATION = gql`
   }
 `;
 
-class CreateGraph extends React.Component {
+class CreateGraph extends Component {
   state = {
     open: false,
     queryError: null
@@ -72,8 +72,11 @@ class CreateGraph extends React.Component {
           <DeleteIcon />
         </Fab>
         <Mutation
-          mutation={ DELETE_GRAPH_MUTATION }
-          refetchQueries={[{ query: ACTIVE_GRAPHS_QUERY }, { query: ALL_GRAPHS_QUERY }]}
+          mutation={DELETE_GRAPH_MUTATION}
+          refetchQueries={[
+            { query: ACTIVE_GRAPHS_QUERY },
+            { query: ALL_GRAPHS_QUERY }
+          ]}
         >
           {(deleteGraph, { loading }) => (
             <Dialog

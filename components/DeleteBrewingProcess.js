@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
@@ -40,7 +40,7 @@ const DELETE_BREWING_PROCESS = gql`
   }
 `;
 
-class CreateGraph extends React.Component {
+class CreateGraph extends Component {
   state = {
     open: false,
     queryError: null

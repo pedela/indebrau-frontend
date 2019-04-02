@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper';
@@ -72,7 +72,7 @@ const CREATE_BREWING_PROCESS_MUTATION = gql`
 
 const steps = ['General Info', 'Add Details'];
 
-class CreateBrewingProcess extends React.Component {
+class CreateBrewingProcess extends Component {
   state = {
     open: false,
     activeStep: 0,

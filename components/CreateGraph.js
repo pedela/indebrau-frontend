@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper';
@@ -62,7 +62,7 @@ const CREATE_GRAPH_MUTATION = gql`
   }
 `;
 
-class CreateGraph extends React.Component {
+class CreateGraph extends Component {
   state = {
     open: false,
     queryError: null,
@@ -108,7 +108,10 @@ class CreateGraph extends React.Component {
         </Fab>
         <Mutation
           mutation={CREATE_GRAPH_MUTATION}
-          refetchQueries={[{ query: ACTIVE_GRAPHS_QUERY }, { query: ALL_GRAPHS_QUERY }]}
+          refetchQueries={[
+            { query: ACTIVE_GRAPHS_QUERY },
+            { query: ALL_GRAPHS_QUERY }
+          ]}
         >
           {(createGraph, { loading }) => (
             <Dialog

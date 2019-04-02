@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import Paper from '@material-ui/core/Paper';
@@ -16,7 +16,7 @@ const styles = theme => ({
     overflowX: 'auto',
     textAlign: 'center',
     padding: theme.spacing.unit * 2,
-    maxHeight: '100%',
+    maxHeight: '100%'
   },
   buttonLinks: {
     textDecoration: 'none'

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { CURRENT_USER_QUERY } from './User';
@@ -19,11 +19,7 @@ class Signout extends Component {
         mutation={SIGN_OUT_MUTATION}
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       >
-        {signout => (
-          <Button onClick={signout}>
-            Sign Out
-          </Button>
-        )}
+        {signout => <Button onClick={signout}>Sign Out</Button>}
       </Mutation>
     );
   }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Table from '@material-ui/core/Table';
@@ -22,12 +22,14 @@ const styles = theme => ({
 });
 
 class BrewingProcessTable extends Component {
-
   handleClick = id => {
-    sessionStorage.setItem('brewingProcessId', id);
-    Router.push({
-      pathname: '/brewery'
-    });
+    Router.push(
+      {
+        pathname: '/brewingProcess',
+        query: { brewingProcessId: id }
+      },
+      '/brewingProcess'
+    );
   };
 
   render() {
@@ -47,17 +49,14 @@ class BrewingProcessTable extends Component {
           </TableHead>
           <TableBody>
             {this.props.brewingProcesses.map(n => (
-              <TableRow
-                key={n.id}
-                hover
-                onClick={() => this.handleClick(n.id)}
-              >
+
+              <TableRow key={n.id} hover>
                 {this.props.adminView && (
                   <TableCell align="center">{n.id}</TableCell>
                 )}
-                <TableCell align="center">{n.name}</TableCell>
+                <TableCell align="center" onClick={() => this.handleClick(n.id)}>{n.name}</TableCell>
                 {!this.props.adminView && (
-                  <TableCell align="center">{n.description}</TableCell>
+                  <TableCell align="center" onClick={() => this.handleClick(n.id)}>{n.description}</TableCell>
                 )}
                 {this.props.adminView && (
                   <TableCell align="center">

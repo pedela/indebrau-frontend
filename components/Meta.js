@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
 import NProgress from 'nprogress';
@@ -13,7 +13,7 @@ Router.onRouteChangeError = () => {
   NProgress.done();
 };
 
-class Meta extends React.Component {
+class Meta extends Component {
   render() {
     return (
       <Head>

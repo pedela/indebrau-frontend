@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
@@ -87,9 +87,7 @@ class AllGraphs extends Component {
             }
           }}
         </Query>
-        <Query
-          query={ALL_GRAPHS_QUERY}
-        >
+        <Query query={ALL_GRAPHS_QUERY}>
           {({ data, error, loading }) => {
             if (loading) return <Loading />;
             if (error) return <Error error={error} />;

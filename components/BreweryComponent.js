@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -119,9 +119,11 @@ class BreweryComponent extends Component {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
-            Graph
-          </Button>
+          {brewingProcessId && (
+            <Button size="small" color="primary">
+              Graph
+            </Button>
+          )}
           <Button size="small" color="primary">
             Details
           </Button>
