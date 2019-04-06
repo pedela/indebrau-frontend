@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import gql from 'graphql-tag';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -9,6 +8,7 @@ import { Query } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
 import BrewingProcessTable from './BrewingProcessTable';
 import SignIn from './SignIn';
+import { CURRENT_USER_QUERY } from '../lib/queriesAndMutations';
 
 const styles = theme => ({
   root: {
@@ -22,24 +22,6 @@ const styles = theme => ({
     textDecoration: 'none'
   }
 });
-
-const CURRENT_USER_QUERY = gql`
-  query {
-    me {
-      id
-      email
-      name
-      permissions
-      participatingBrewingProcesses {
-        id
-        name
-        start
-        end
-        description
-      }
-    }
-  }
-`;
 
 const CurrentUser = props => (
   <Query {...props} query={CURRENT_USER_QUERY}>

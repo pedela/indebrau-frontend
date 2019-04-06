@@ -18,8 +18,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import Link from 'next/link';
 import DashboardContent from './DashboardContent';
-import Error from './Error';
-import { CurrentUser } from './User';
+import Error from '../Error';
+import { CurrentUser } from '../User';
 
 const drawerWidth = 240;
 

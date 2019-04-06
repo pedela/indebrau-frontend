@@ -1,13 +1,13 @@
 import { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Loading from './Loading';
-import Error from './Error';
-import GraphChart from './GraphChart';
+import { ALL_GRAPHS_QUERY, ACTIVE_GRAPHS_QUERY } from '../../lib/queriesAndMutations';
+import Loading from '../Loading';
+import Error from '../Error';
+import GraphChart from '../GraphChart';
 import GraphTable from './GraphTable';
 import CreateGraph from './CreateGraph';
 
@@ -22,34 +22,6 @@ const styles = theme => ({
     margin: theme.spacing.unit
   }
 });
-
-const ACTIVE_GRAPHS_QUERY = gql`
-  query ACTIVE_GRAPHS_QUERY($dataPoints: Int = 50) {
-    graphs(dataPoints: $dataPoints, active: true) {
-      id
-      name
-      graphData(orderBy: time_ASC) {
-        time
-        value
-      }
-    }
-  }
-`;
-
-const ALL_GRAPHS_QUERY = gql`
-  query ALL_GRAPHS_QUERY {
-    graphs {
-      id
-      name
-      sensorName
-      active
-      updateFrequency
-      brewingProcess {
-        id
-      }
-    }
-  }
-`;
 
 class AllGraphs extends Component {
   render() {

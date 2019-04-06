@@ -1,14 +1,13 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-
-import Loading from './Loading';
-import Error from './Error';
-import BrewingProcessTable from './BrewingProcessTable';
+import { BREWING_PROCESSES_QUERY } from '../../lib/queriesAndMutations';
+import Loading from '../Loading';
+import Error from '../Error';
+import BrewingProcessTable from '../BrewingProcessTable';
 import CreateBrewingProcess from './CreateBrewingProcess';
 
 const styles = theme => ({
@@ -23,17 +22,6 @@ const styles = theme => ({
   }
 });
 
-const BREWING_PROCESSES_QUERY = gql`
-  query BREWING_PROCESSES_QUERY {
-    brewingProcesses {
-      id
-      name
-      start
-      description
-      end
-    }
-  }
-`;
 
 class AllBrewingProcesses extends Component {
   render() {

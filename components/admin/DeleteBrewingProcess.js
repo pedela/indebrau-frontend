@@ -7,10 +7,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Fab from '@material-ui/core/Fab';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
-import Error from './Error';
-import { ACTIVE_GRAPHS_QUERY, ALL_GRAPHS_QUERY } from './AllGraphs';
+import Error from '../Error';
+import { BREWING_PROCESSES_QUERY, DELETE_BREWING_PROCESS } from '../../lib/queriesAndMutations';
 
 const styles = theme => ({
   layout: {
@@ -31,14 +30,6 @@ const styles = theme => ({
     margin: theme.spacing.unit
   }
 });
-
-const DELETE_GRAPH_MUTATION = gql`
-  mutation DELETE_GRAPH_MUTATION($id: ID!) {
-    deleteGraph(id: $id) {
-      id
-    }
-  }
-`;
 
 class CreateGraph extends Component {
   state = {
@@ -72,20 +63,19 @@ class CreateGraph extends Component {
           <DeleteIcon />
         </Fab>
         <Mutation
-          mutation={DELETE_GRAPH_MUTATION}
-          refetchQueries={[
-            { query: ACTIVE_GRAPHS_QUERY },
-            { query: ALL_GRAPHS_QUERY }
-          ]}
+          mutation={DELETE_BREWING_PROCESS}
+          refetchQueries={[{ query: BREWING_PROCESSES_QUERY }]}
         >
-          {(deleteGraph, { loading }) => (
+          {(deleteBrewingProcess, { loading }) => (
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
               aria-labelledby="form-dialog-title"
             >
               <Error error={this.state.queryError} />
-              <DialogTitle id="form-dialog-title">Delete Graph</DialogTitle>
+              <DialogTitle id="form-dialog-title">
+                Delete Brewing Process
+              </DialogTitle>
               <DialogContent>
                 <main className={classes.layout}>
                   <div className={classes.buttons}>
@@ -103,7 +93,7 @@ class CreateGraph extends Component {
                       onClick={async () => {
                         // fire mutation (clear old error)
                         this.setState({ queryError: null });
-                        await deleteGraph({
+                        await deleteBrewingProcess({
                           variables: {
                             id: this.props.id
                           }

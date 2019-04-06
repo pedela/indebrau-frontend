@@ -15,10 +15,12 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
-import Error from './Error';
-import { BREWING_PROCESSES_QUERY } from './AllBrewingProcesses';
+import Error from '../Error';
+import {
+  CREATE_BREWING_PROCESS_MUTATION,
+  BREWING_PROCESSES_QUERY
+} from '../../lib/queriesAndMutations';
 
 const styles = theme => ({
   layout: {
@@ -51,24 +53,6 @@ const styles = theme => ({
     margin: theme.spacing.unit
   }
 });
-
-const CREATE_BREWING_PROCESS_MUTATION = gql`
-  mutation CREATE_BREWING_PROCESS_MUTATION(
-    $name: String!
-    $startNow: Boolean
-    $description: String!
-    $brewingProcessDetails: DetailsInput!
-  ) {
-    createBrewingProcess(
-      name: $name
-      startNow: $startNow
-      description: $description
-      brewingProcessDetails: $brewingProcessDetails
-    ) {
-      id
-    }
-  }
-`;
 
 const steps = ['General Info', 'Add Details'];
 

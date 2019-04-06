@@ -9,10 +9,12 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import Error from './Error';
-import { CURRENT_USER_QUERY } from './User';
+import {
+  CURRENT_USER_QUERY,
+  SIGN_UP_MUTATION
+} from '../lib/queriesAndMutations';
 
 const styles = theme => ({
   main: {
@@ -47,18 +49,6 @@ const styles = theme => ({
   }
 });
 
-const SIGNUP_MUTATION = gql`
-  mutation SIGNUP_MUTATION(
-    $name: String!
-    $email: String!
-    $password: String!
-  ) {
-    signup(name: $name, email: $email, password: $password) {
-      id
-    }
-  }
-`;
-
 class SignUp extends Component {
   state = {
     name: '',
@@ -75,7 +65,7 @@ class SignUp extends Component {
 
     return (
       <Mutation
-        mutation={SIGNUP_MUTATION}
+        mutation={SIGN_UP_MUTATION}
         variables={this.state}
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       >

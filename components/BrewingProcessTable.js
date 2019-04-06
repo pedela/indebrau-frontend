@@ -7,7 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Router from 'next/router';
-import DeleteBrewingProcess from './DeleteBrewingProcess';
+import DeleteBrewingProcess from './admin/DeleteBrewingProcess';
 
 const styles = theme => ({
   root: {

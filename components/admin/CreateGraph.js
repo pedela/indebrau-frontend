@@ -12,8 +12,8 @@ import AddIcon from '@material-ui/icons/Add';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
-import Error from './Error';
-import { ACTIVE_GRAPHS_QUERY, ALL_GRAPHS_QUERY } from './AllGraphs';
+import Error from '../Error';
+import { ACTIVE_GRAPHS_QUERY, ALL_GRAPHS_QUERY } from '../../lib/queriesAndMutations';
 
 const styles = theme => ({
   layout: {

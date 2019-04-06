@@ -9,10 +9,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import Error from './Error';
-import { CURRENT_USER_QUERY } from './User';
+import { CURRENT_USER_QUERY, SIGNIN_MUTATION } from '../lib/queriesAndMutations';
 
 const styles = theme => ({
   main: {
@@ -46,14 +45,6 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3
   }
 });
-
-const SIGNIN_MUTATION = gql`
-  mutation SIGNIN_MUTATION($email: String!, $password: String!) {
-    signin(email: $email, password: $password) {
-      id
-    }
-  }
-`;
 
 class SignIn extends Component {
   state = {
