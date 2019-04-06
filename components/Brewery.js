@@ -41,6 +41,9 @@ class Brewery extends Component {
             <BreweryComponent type="SpargingVessel" />
           </Grid>
           <Grid item>
+            <BreweryComponent type="Pump" />
+          </Grid>
+          <Grid item>
             <BreweryComponent type="WortCopper" />
           </Grid>
           <Grid item>
