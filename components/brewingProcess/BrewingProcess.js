@@ -4,7 +4,15 @@ import { withStyles } from '@material-ui/core/styles';
 import { Query } from 'react-apollo';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import BreweryComponent from './BreweryComponent';
+import GrainMill from './GrainMill';
+import MashTun from './MashTun';
+import SpargingVessel from './SpargingVessel';
+import WortCopper from './WortCopper';
+import WortChiller from './WortChiller';
+import Fermenter from './Fermenter';
+import ElectronicHydrometer from './ElectronicHydrometer';
+import Keg from './Keg';
+import Bottle from './Bottle';
 import Loading from '../Loading';
 import Error from '../Error';
 import { BREWING_PROCESS_QUERY } from '../../lib/queriesAndMutations';
@@ -34,7 +42,9 @@ class BrewingProcess extends Component {
             if (loading) return <Loading />;
             if (error) return <Error error={error} />;
             if (data && data.brewingProcess) {
-              let brewingProcess = data.brewingProcess;
+              let { brewingProcess } = data;
+              let { brewingProcessDetails } = brewingProcess;
+              let { graphs } = brewingProcess;
               // return components - please mind that graph parsing
               // and data correctness checking is done inside
               // components, this is just a preselection
@@ -50,74 +60,66 @@ class BrewingProcess extends Component {
                     justify="center"
                   >
                     <Grid item>
-                      <BreweryComponent
-                        type="GrainMill"
-                        details={this.props.brewingProcessId}
+                      <GrainMill
+                        details={brewingProcessDetails}
+                        graphs={graphs}
+                        active={false}
                       />
                     </Grid>
                     <Grid item>
-                      <BreweryComponent
-                        type="MashTun"
-                        brewingProcessId={this.props.brewingProcessId}
-                        details={{
-                          mashWaterLiter: brewingProcess.mashWaterLiter,
-                          mashInTemperature: brewingProcess.mashInTemperature,
-                          mashSteps: brewingProcess.mashSteps
-                        }}
-                        graphs={brewingProcess.graphs}
+                      <MashTun
+                        details={brewingProcessDetails}
+                        graphs={graphs}
+                        active={false}
                       />
                     </Grid>
                     <Grid item>
-                      <BreweryComponent
-                        type="SpargingVessel"
-                        details={this.props.brewingProcessId}
+                      <SpargingVessel
+                        details={brewingProcessDetails}
+                        graphs={graphs}
+                        active={false}
                       />
                     </Grid>
                     <Grid item>
-                      <BreweryComponent
-                        type="WortCopper"
-                        details={this.props.brewingProcessId}
+                      <WortCopper
+                        details={brewingProcessDetails}
+                        graphs={graphs}
+                        active={false}
                       />
                     </Grid>
                     <Grid item>
-                      <BreweryComponent
-                        type="WortChiller"
-                        details={this.props.brewingProcessId}
+                      <WortChiller
+                        details={brewingProcessDetails}
+                        graphs={graphs}
+                        active={true}
                       />
                     </Grid>
                     <Grid item>
-                      <BreweryComponent
-                        type="Fermenter"
-                        details={{
-                          dryHopping: brewingProcess.dryHopAddition,
-                          fermentationSteps: brewingProcess.fermentationSteps,
-                          originalExtractPlato:
-                            brewingProcess.originalExtractPlato,
-                          pitchingTemperature:
-                            brewingProcess.pitchingTemperature,
-                          alcoholPercent: brewingProcess.alcoholPercent,
-                          conditioningDays: brewingProcess.conditioningDays
-                        }}
-                        activeBrewingProcess={true}
-                        graphs={brewingProcess.graphs}
+                      <Fermenter
+                        details={brewingProcessDetails}
+                        graphs={graphs}
+                        active={false}
                       />
                     </Grid>
                     <Grid item>
-                      <BreweryComponent
-                        type="ElectronicHydrometer"
-                        details={this.props.brewingProcessId}
+                      <ElectronicHydrometer
+                        details={brewingProcessDetails}
+                        graphs={graphs}
+                        active={false}
                       />
                     </Grid>
                     <Grid item>
-                      <BreweryComponent
-                        type="Keg"
-                        details={this.props.brewingProcessId}
+                      <Keg
+                        details={brewingProcessDetails}
+                        graphs={graphs}
+                        active={false}
                       />
                     </Grid>
                     <Grid item>
-                      <BreweryComponent
-                        type="Bottle"
-                        details={this.props.brewingProcessId}
+                      <Bottle
+                        details={brewingProcessDetails}
+                        graphs={graphs}
+                        active={false}
                       />
                     </Grid>
                   </Grid>
