@@ -4,13 +4,15 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
-import * as properties from '../lib/ComponentProperties';
+import { PumpProps } from '../../lib/ComponentProperties';
 
 const styles = theme => ({
   root: {
@@ -21,39 +23,24 @@ const styles = theme => ({
   card: {
     width: 300,
   },
+  activeCard: {
+    width: 300,
+    backgroundColor: theme.palette.primary.light,
+    animation: '3s fadeAnimation infinite',
+  },
+  '@keyframes fadeAnimation': {
+    from: { opacity: 0.6 },
+    to: { opacity: 1 },
+  },
   media: {
     height: 300
-  },
+  }
 });
 
-class BreweryComponent extends Component {
+class Pump extends Component {
   state = {
-    infoOpen: false
-  };
-
-  getProperties = type => {
-    switch (type) {
-    case 'GrainMill':
-      return properties.GrainMillProps;
-    case 'MashTun':
-      return properties.MashTunProps;
-    case 'SpargingVessel':
-      return properties.SpargingVesselProps;
-    case 'Pump':
-      return properties.PumpProps;
-    case 'WortCopper':
-      return properties.WortCopperProps;
-    case 'ElectronicHydrometer':
-      return properties.ElectronicHydrometerProps;
-    case 'Fermenter':
-      return properties.FermenterProps;
-    case 'WortChiller':
-      return properties.WortChillerProps;
-    case 'Keg':
-      return properties.KegProps;
-    case 'Bottle':
-      return properties.BottleProps;
-    }
+    infoOpen: false,
+    dataOpen: false
   };
 
   handleDialogs = () => {
@@ -64,12 +51,12 @@ class BreweryComponent extends Component {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">
-          {this.getProperties(this.props.type).title}
+          {PumpProps.title}
         </DialogTitle>
         <DialogContent>
           <Paper>
             <Typography variant="body1" gutterBottom>
-              {this.getProperties(this.props.type).description}
+              {PumpProps.description}
             </Typography>
           </Paper>
         </DialogContent>
@@ -81,48 +68,53 @@ class BreweryComponent extends Component {
     this.setState({ infoOpen: false });
   };
 
-  handleCardActionClick = () => {
+  handleInfoClick = () => {
     this.setState({ infoOpen: true });
   };
 
+  handleCardActionClick = () => {
+    this.setState({ dataOpen: true });
+  };
+
   render() {
-    const { classes, type } = this.props;
+
+    const { classes, active, details } = this.props;
     return (
       <>
         {this.handleDialogs()}
-        <Card className={classes.card}>
+        <Card className={active ? classes.activeCard : classes.card}>
           <CardActionArea onClick={this.handleCardActionClick}>
             <CardMedia
               className={classes.media}
-              image={this.getProperties(type).imageUrl}
-              title={this.getProperties(type).title}
+              image={PumpProps.imageUrl}
+              title={PumpProps.title}
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
-                {this.getProperties(type).title}
+                {PumpProps.title}
               </Typography>
             </CardContent>
           </CardActionArea>
+          <CardActions>
+            <Button
+              size="small"
+              color="primary"
+              onClick={this.handleInfoClick}
+            >
+              More Info
+            </Button>
+          </CardActions>
         </Card>
       </>
     );
   }
 }
 
-BreweryComponent.propTypes = {
+Pump.propTypes = {
   classes: PropTypes.object.isRequired,
-  type: PropTypes.oneOf([
-    'GrainMill',
-    'MashTun',
-    'SpargingVessel',
-    'Pump',
-    'WortCopper',
-    'ElectronicHydrometer',
-    'Fermenter',
-    'WortChiller',
-    'Keg',
-    'Bottle'
-  ]).isRequired
+  active: PropTypes.bool.isRequired,
+  graphs: PropTypes.array.isRequired,
+  details: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(BreweryComponent);
+export default withStyles(styles)(Pump);

@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import GrainMill from './GrainMill';
 import MashTun from './MashTun';
 import SpargingVessel from './SpargingVessel';
+import Pump from './Pump';
 import WortCopper from './WortCopper';
 import WortChiller from './WortChiller';
 import Fermenter from './Fermenter';
@@ -75,6 +76,13 @@ class BrewingProcess extends Component {
                     </Grid>
                     <Grid item>
                       <SpargingVessel
+                        details={brewingProcessDetails}
+                        graphs={graphs}
+                        active={false}
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Pump
                         details={brewingProcessDetails}
                         graphs={graphs}
                         active={false}
