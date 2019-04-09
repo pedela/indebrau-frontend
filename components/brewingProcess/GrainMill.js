@@ -21,16 +21,16 @@ const styles = theme => ({
     flexGrow: 1
   },
   card: {
-    width: 300,
+    width: 300
   },
   activeCard: {
     width: 300,
     backgroundColor: theme.palette.primary.light,
-    animation: '3s fadeAnimation infinite',
+    animation: '3s fadeAnimation infinite'
   },
   '@keyframes fadeAnimation': {
     from: { opacity: 0.6 },
-    to: { opacity: 1 },
+    to: { opacity: 1 }
   },
   media: {
     height: 300
@@ -40,7 +40,8 @@ const styles = theme => ({
 class GrainMill extends Component {
   state = {
     infoOpen: false,
-    dataOpen: false
+    dataOpen: false,
+    active: false
   };
 
   handleDialogs = () => {
@@ -50,9 +51,7 @@ class GrainMill extends Component {
         onClose={this.handleInfoClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">
-          {GrainMillProps.title}
-        </DialogTitle>
+        <DialogTitle id="form-dialog-title">{GrainMillProps.title}</DialogTitle>
         <DialogContent>
           <Paper>
             <Typography variant="body1" gutterBottom>
@@ -75,13 +74,30 @@ class GrainMill extends Component {
   handleCardActionClick = () => {
     this.setState({ dataOpen: true });
   };
-  render() {
 
-    const { classes, active, details } = this.props;
+  constructor(props) {
+    super(props);
+    if (this.props.activeSteps.includes('MALT_CRUSHING')) {
+      this.state = { active: true };
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.activeSteps !== prevProps.activeSteps) {
+      if (this.props.activeSteps.includes('MALT_CRUSHING')) {
+        this.setState({ active: true });
+      } else {
+        this.setState({ active: false });
+      }
+    }
+  }
+
+  render() {
+    const { classes, details } = this.props;
     return (
       <>
         {this.handleDialogs()}
-        <Card className={active ? classes.activeCard : classes.card}>
+        <Card className={this.state.active ? classes.activeCard : classes.card}>
           <CardActionArea onClick={this.handleCardActionClick}>
             <CardMedia
               className={classes.media}
@@ -95,11 +111,7 @@ class GrainMill extends Component {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button
-              size="small"
-              color="primary"
-              onClick={this.handleInfoClick}
-            >
+            <Button size="small" color="primary" onClick={this.handleInfoClick}>
               More Info
             </Button>
           </CardActions>
@@ -111,7 +123,7 @@ class GrainMill extends Component {
 
 GrainMill.propTypes = {
   classes: PropTypes.object.isRequired,
-  active: PropTypes.bool.isRequired,
+  activeSteps: PropTypes.array.isRequired,
   graphs: PropTypes.array.isRequired,
   details: PropTypes.object.isRequired
 };
