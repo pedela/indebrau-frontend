@@ -4,7 +4,7 @@ import { Query } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { BREWING_PROCESSES_QUERY } from '../../lib/queriesAndMutations';
+import { ALL_BREWING_PROCESSES_QUERY } from '../../lib/queriesAndMutations';
 import Loading from '../Loading';
 import Error from '../Error';
 import BrewingProcessTable from '../BrewingProcessTable';
@@ -22,13 +22,12 @@ const styles = theme => ({
   }
 });
 
-
 class AllBrewingProcesses extends Component {
   render() {
     const { classes } = this.props;
     return (
       <div>
-        <Query query={BREWING_PROCESSES_QUERY}>
+        <Query query={ALL_BREWING_PROCESSES_QUERY}>
           {({ data, error, loading }) => {
             if (loading) return <Loading />;
             if (error) return <Error error={error} />;
@@ -61,4 +60,3 @@ AllBrewingProcesses.propTypes = {
 };
 
 export default withStyles(styles)(AllBrewingProcesses);
-export { BREWING_PROCESSES_QUERY };

@@ -88,4 +88,4 @@ User.propTypes = {
 };
 
 export default withStyles(styles)(User);
-export { CURRENT_USER_QUERY, CurrentUser };
+export { CurrentUser };

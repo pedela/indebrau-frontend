@@ -10,10 +10,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import Error from '../Error';
-import { ACTIVE_GRAPHS_QUERY, ALL_GRAPHS_QUERY } from '../../lib/queriesAndMutations';
+import {
+  ACTIVE_GRAPHS_QUERY,
+  ALL_GRAPHS_QUERY,
+  CREATE_GRAPH_MUTATION
+} from '../../lib/queriesAndMutations';
 
 const styles = theme => ({
   layout: {
@@ -43,24 +46,6 @@ const styles = theme => ({
     margin: theme.spacing.unit
   }
 });
-
-const CREATE_GRAPH_MUTATION = gql`
-  mutation CREATE_GRAPH_MUTATION(
-    $name: String!
-    $sensorName: String!
-    $updateFrequency: Int
-    $brewingProcessId: ID!
-  ) {
-    createGraph(
-      name: $name
-      sensorName: $sensorName
-      updateFrequency: $updateFrequency
-      brewingProcessId: $brewingProcessId
-    ) {
-      id
-    }
-  }
-`;
 
 class CreateGraph extends Component {
   state = {

@@ -9,7 +9,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Mutation } from 'react-apollo';
 import Error from '../Error';
-import { BREWING_PROCESSES_QUERY, DELETE_BREWING_PROCESS } from '../../lib/queriesAndMutations';
+import {
+  ALL_BREWING_PROCESSES_QUERY,
+  DELETE_BREWING_PROCESS
+} from '../../lib/queriesAndMutations';
 
 const styles = theme => ({
   layout: {
@@ -64,7 +67,7 @@ class CreateGraph extends Component {
         </Fab>
         <Mutation
           mutation={DELETE_BREWING_PROCESS}
-          refetchQueries={[{ query: BREWING_PROCESSES_QUERY }]}
+          refetchQueries={[{ query: ALL_BREWING_PROCESSES_QUERY }]}
         >
           {(deleteBrewingProcess, { loading }) => (
             <Dialog

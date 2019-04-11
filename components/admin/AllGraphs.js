@@ -88,4 +88,3 @@ AllGraphs.propTypes = {
 };
 
 export default withStyles(styles)(AllGraphs);
-export { ACTIVE_GRAPHS_QUERY, ALL_GRAPHS_QUERY };

@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Router from 'next/router';
 import DeleteBrewingProcess from './admin/DeleteBrewingProcess';
+import AdvanceBrewingProcess from './admin/AdvanceBrewingProcess';
 
 const styles = theme => ({
   root: {
@@ -49,18 +50,28 @@ class BrewingProcessTable extends Component {
           </TableHead>
           <TableBody>
             {this.props.brewingProcesses.map(n => (
-
               <TableRow key={n.id} hover>
                 {this.props.adminView && (
                   <TableCell align="center">{n.id}</TableCell>
                 )}
-                <TableCell align="center" onClick={() => this.handleClick(n.id)}>{n.name}</TableCell>
+                <TableCell
+                  align="center"
+                  onClick={() => this.handleClick(n.id)}
+                >
+                  {n.name}
+                </TableCell>
                 {!this.props.adminView && (
-                  <TableCell align="center" onClick={() => this.handleClick(n.id)}>{n.description}</TableCell>
+                  <TableCell
+                    align="center"
+                    onClick={() => this.handleClick(n.id)}
+                  >
+                    {n.description}
+                  </TableCell>
                 )}
                 {this.props.adminView && (
                   <TableCell align="center">
-                    <DeleteBrewingProcess id={n.id} />
+                    <DeleteBrewingProcess  id={n.id} />
+                    <AdvanceBrewingProcess id={n.id} />
                   </TableCell>
                 )}
               </TableRow>

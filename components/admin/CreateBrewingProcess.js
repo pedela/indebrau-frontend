@@ -19,7 +19,7 @@ import { Mutation } from 'react-apollo';
 import Error from '../Error';
 import {
   CREATE_BREWING_PROCESS_MUTATION,
-  BREWING_PROCESSES_QUERY
+  ALL_BREWING_PROCESSES_QUERY
 } from '../../lib/queriesAndMutations';
 
 const styles = theme => ({
@@ -350,7 +350,7 @@ class CreateBrewingProcess extends Component {
         </Fab>
         <Mutation
           mutation={CREATE_BREWING_PROCESS_MUTATION}
-          refetchQueries={[{ query: BREWING_PROCESSES_QUERY }]}
+          refetchQueries={[{ query: ALL_BREWING_PROCESSES_QUERY }]}
         >
           {(createBrewingProcess, { loading }) => (
             <Dialog
