@@ -78,7 +78,7 @@ class Fermenter extends Component {
   constructor(props) {
     super(props);
     if (this.props.activeSteps.includes('FERMENTING')) {
-      this.state = { active: true };
+      this.state.active = true;
     }
   }
 

@@ -80,7 +80,7 @@ class WortChiller extends Component {
   constructor(props) {
     super(props);
     if (this.props.activeSteps.includes('CHILLING')) {
-      this.state = { active: true };
+      this.state.active = true;
     }
   }
 

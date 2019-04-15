@@ -12,13 +12,23 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
+import { Query } from 'react-apollo';
+import { GRAPH_QUERY } from '../../lib/queriesAndMutations';
 import { MashTunProps } from '../../lib/ComponentProperties';
+import Loading from '../Loading';
+import Error from '../Error';
+import GraphChart from '../GraphChart';
 
 const styles = theme => ({
   root: {
     textAlign: 'center',
     padding: theme.spacing.unit * 2,
     flexGrow: 1
+  },
+  graph: {
+    width: '50%',
+    marginLeft: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit * 2
   },
   card: {
     width: 300
@@ -46,31 +56,74 @@ class MashTun extends Component {
 
   handleDialogs = () => {
     return (
+      <>
       <Dialog
         open={this.state.infoOpen}
-        onClose={this.handleInfoClose}
+        onClose={this.handleClose}
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">{MashTunProps.title}</DialogTitle>
         <DialogContent>
-          <Paper>
-            <Typography variant="body1" gutterBottom>
-              {MashTunProps.description}
-            </Typography>
-          </Paper>
+          <main className={this.props.classes.layout}>
+            <Paper>
+              <Typography variant="body1" gutterBottom>
+                {MashTunProps.description}
+              </Typography>
+            </Paper>
+          </main>
         </DialogContent>
       </Dialog>
+
+      <Dialog
+        open={this.state.dataOpen}
+        onClose={this.handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">{MashTunProps.title}</DialogTitle>
+        <DialogContent>
+          <Query
+            query={GRAPH_QUERY}
+            variables={{
+              id: 'cjua7nf000atu0753thz4m36g',
+              dataPoints: 50
+            }}
+            pollInterval={10000}
+          >
+            {({ data, error, loading }) => {
+              if (loading) return <Loading />;
+              if (error) return <Error error={error} />;
+              if (data) {
+                const graph =
+                  <GraphChart
+                    data={data.graph.graphData}
+                    key={data.graph.id}
+                    name={data.graph.name}
+                  />;
+                return (
+
+                  <Paper>
+                    <Typography variant="h5">
+                      Here is some Graph Chart of the Mash Tun
+                    </Typography>
+                    {graph}
+                  </Paper>
+                );
+              }
+            }}
+          </Query>
+        </DialogContent>
+      </Dialog>
+      </>
     );
   };
 
-  handleInfoClose = () => {
-    this.setState({ infoOpen: false });
+  handleClose = () => {
+    this.setState({ dataOpen: false, infoOpen: false });
   };
 
   handleInfoClick = () => {
     this.setState({ infoOpen: true });
   };
-
   handleCardActionClick = () => {
     this.setState({ dataOpen: true });
   };
@@ -85,7 +138,7 @@ class MashTun extends Component {
           ) >= 0
       )
     ) {
-      this.state = { active: true };
+      this.state.active = true;
     }
   }
 
@@ -123,7 +176,7 @@ class MashTun extends Component {
               title={MashTunProps.title}
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
+              <Typography gutterBottom variant="h5">
                 {MashTunProps.title}
               </Typography>
             </CardContent>
@@ -132,6 +185,12 @@ class MashTun extends Component {
             <Button size="small" color="primary" onClick={this.handleInfoClick}>
               More Info
             </Button>
+            {this.state.active && (
+              <Typography gutterBottom variant="body2">
+                Mash In: {details.mashInTemperature}°C
+                Water: {details.mashWaterLiter}L
+              </Typography>
+            )}
           </CardActions>
         </Card>
       </>

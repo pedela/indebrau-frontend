@@ -67,9 +67,7 @@ class AllGraphs extends Component {
               return (
                 <Paper className={classes.root}>
                   <Typography variant="h5">All Graphs</Typography>
-                  <>
-                    <GraphTable graphs={data.graphs} />
-                  </>
+                  <GraphTable graphs={data.graphs} />
                 </Paper>
               );
             }

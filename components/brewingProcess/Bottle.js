@@ -78,7 +78,7 @@ class Bottle extends Component {
   constructor(props) {
     super(props);
     if (this.props.activeSteps.includes('BOTTLED')) {
-      this.state = { active: true };
+      this.state.active = true;
     }
   }
 

@@ -84,7 +84,7 @@ class SpargingVessel extends Component {
         r => ['HEATING_SPARGE', 'SPARGING'].indexOf(r) >= 0
       )
     ) {
-      this.state = { active: true };
+      this.state.active = true;
     }
   }
 

@@ -84,7 +84,7 @@ class WortCopper extends Component {
         r => ['BOILING', 'CHILLING', 'LAUTERING'].indexOf(r) >= 0
       )
     ) {
-      this.state = { active: true };
+      this.state.active = true;
     }
   }
 

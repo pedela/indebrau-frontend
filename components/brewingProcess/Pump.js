@@ -78,7 +78,7 @@ class Pump extends Component {
   constructor(props) {
     super(props);
     if (this.props.activeSteps.includes('LAUTERING')) {
-      this.state = { active: true };
+      this.state.active = true;
     }
   }
 

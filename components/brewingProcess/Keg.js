@@ -78,7 +78,7 @@ class Keg extends Component {
   constructor(props) {
     super(props);
     if (this.props.activeSteps.includes('CONDITIONING')) {
-      this.state = { active: true };
+      this.state.active = true;
     }
   }
 
