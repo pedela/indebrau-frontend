@@ -55,64 +55,73 @@ class MashTun extends Component {
   };
 
   handleDialogs = () => {
+    let id;
+    this.props.graphs.map(graph => {
+      if (graph.sensorName == 'mashing/mashTun/temperature') {
+        id = graph.id;
+      }
+    });
+
     return (
       <>
-      <Dialog
-        open={this.state.infoOpen}
-        onClose={this.handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">{MashTunProps.title}</DialogTitle>
-        <DialogContent>
-          <main className={this.props.classes.layout}>
-            <Paper>
-              <Typography variant="body1" gutterBottom>
-                {MashTunProps.description}
-              </Typography>
-            </Paper>
-          </main>
-        </DialogContent>
-      </Dialog>
+        <Dialog
+          open={this.state.infoOpen}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">{MashTunProps.title}</DialogTitle>
+          <DialogContent>
+            <main className={this.props.classes.layout}>
+              <Paper>
+                <Typography variant="body1" gutterBottom>
+                  {MashTunProps.description}
+                </Typography>
+              </Paper>
+            </main>
+          </DialogContent>
+        </Dialog>
 
-      <Dialog
-        open={this.state.dataOpen}
-        onClose={this.handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">{MashTunProps.title}</DialogTitle>
-        <DialogContent>
-          <Query
-            query={GRAPH_QUERY}
-            variables={{
-              id: 'cjua7nf000atu0753thz4m36g',
-              dataPoints: 50
-            }}
-            pollInterval={10000}
-          >
-            {({ data, error, loading }) => {
-              if (loading) return <Loading />;
-              if (error) return <Error error={error} />;
-              if (data) {
-                const graph =
-                  <GraphChart
-                    data={data.graph.graphData}
-                    key={data.graph.id}
-                    name={data.graph.name}
-                  />;
-                return (
-
-                  <Paper>
-                    <Typography variant="h5">
-                      Here is some Graph Chart of the Mash Tun
-                    </Typography>
-                    {graph}
-                  </Paper>
-                );
-              }
-            }}
-          </Query>
-        </DialogContent>
-      </Dialog>
+        <Dialog
+          open={this.state.dataOpen}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">{MashTunProps.title}</DialogTitle>
+          <DialogContent>
+            {id &&
+            <Query
+              query={GRAPH_QUERY}
+              variables={{
+                id: id,
+                dataPoints: 50
+              }}
+              pollInterval={10000}
+            >
+              {({ data, error, loading }) => {
+                if (loading) return <Loading />;
+                if (error) return <Error error={error} />;
+                if (data) {
+                  const graph = (
+                    <GraphChart
+                      data={data.graph.graphData}
+                      key={data.graph.id}
+                      name={data.graph.name}
+                    />
+                  );
+                  return (
+                    <Paper>
+                      <Typography variant="h5">
+                        Mash Tun Temperature
+                      </Typography>
+                      {graph}
+                    </Paper>
+                  );
+                }
+              }}
+            </Query>
+            }
+          </DialogContent>
+        </Dialog>
       </>
     );
   };
@@ -124,8 +133,9 @@ class MashTun extends Component {
   handleInfoClick = () => {
     this.setState({ infoOpen: true });
   };
+
   handleCardActionClick = () => {
-    this.setState({ dataOpen: true });
+    if (this.state.active) this.setState({ dataOpen: true });
   };
 
   constructor(props) {
@@ -187,8 +197,8 @@ class MashTun extends Component {
             </Button>
             {this.state.active && (
               <Typography gutterBottom variant="body2">
-                Mash In: {details.mashInTemperature}°C
-                Water: {details.mashWaterLiter}L
+                Mash In: {details.mashInTemperature}°C Water:{' '}
+                {details.mashWaterLiter}L
               </Typography>
             )}
           </CardActions>
