@@ -88,38 +88,36 @@ class MashTun extends Component {
         >
           <DialogTitle id="form-dialog-title">{MashTunProps.title}</DialogTitle>
           <DialogContent>
-            {id &&
-            <Query
-              query={GRAPH_QUERY}
-              variables={{
-                id: id,
-                dataPoints: 50
-              }}
-              pollInterval={10000}
-            >
-              {({ data, error, loading }) => {
-                if (loading) return <Loading />;
-                if (error) return <Error error={error} />;
-                if (data) {
-                  const graph = (
-                    <GraphChart
-                      data={data.graph.graphData}
-                      key={data.graph.id}
-                      name={data.graph.name}
-                    />
-                  );
-                  return (
-                    <Paper>
-                      <Typography variant="h5">
-                        Mash Tun Temperature
-                      </Typography>
-                      {graph}
-                    </Paper>
-                  );
-                }
-              }}
-            </Query>
-            }
+            {id && (
+              <Query
+                query={GRAPH_QUERY}
+                variables={{
+                  id: id,
+                  dataPoints: 50
+                }}
+                pollInterval={10000}
+              >
+                {({ data, error, loading }) => {
+                  if (loading) return <Loading />;
+                  if (error) return <Error error={error} />;
+                  if (data) {
+                    const graph = (
+                      <GraphChart
+                        data={data.graph.graphData}
+                        key={data.graph.id}
+                        name={data.graph.name}
+                      />
+                    );
+                    return (
+                      <Paper>
+                        <Typography variant="h5">{data.graph.name}</Typography>
+                        {graph}
+                      </Paper>
+                    );
+                  }
+                }}
+              </Query>
+            )}
           </DialogContent>
         </Dialog>
       </>

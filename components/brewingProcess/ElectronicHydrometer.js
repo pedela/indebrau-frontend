@@ -12,6 +12,11 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
+import { Query } from 'react-apollo';
+import { GRAPH_QUERY } from '../../lib/queriesAndMutations';
+import Loading from '../Loading';
+import Error from '../Error';
+import GraphChart from '../GraphChart';
 import { ElectronicHydrometerProps } from '../../lib/ComponentProperties';
 
 const styles = theme => ({
@@ -45,28 +50,118 @@ class ElectronicHydrometer extends Component {
   };
 
   handleDialogs = () => {
+    let id_tilt;
+    let id_temperature;
+    this.props.graphs.map(graph => {
+      if (
+        graph.sensorName == 'ispindel/iSpindel1/tilt' ||
+        graph.sensorName == 'ispindel/iSpindel2/tilt'
+      ) {
+        id_tilt = graph.id;
+      }
+      if (
+        graph.sensorName == 'ispindel/iSpindel1/temperature' ||
+        graph.sensorName == 'ispindel/iSpindel2/temperature'
+      ) {
+        id_temperature = graph.id;
+      }
+    });
     return (
-      <Dialog
-        open={this.state.infoOpen}
-        onClose={this.handleInfoClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">
-          {ElectronicHydrometerProps.title}
-        </DialogTitle>
-        <DialogContent>
-          <Paper>
-            <Typography variant="body1" gutterBottom>
-              {ElectronicHydrometerProps.description}
-            </Typography>
-          </Paper>
-        </DialogContent>
-      </Dialog>
+      <>
+        <Dialog
+          open={this.state.infoOpen}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">
+            {ElectronicHydrometerProps.title}
+          </DialogTitle>
+          <DialogContent>
+            <Paper>
+              <Typography variant="body1" gutterBottom>
+                {ElectronicHydrometerProps.description}
+              </Typography>
+            </Paper>
+          </DialogContent>
+        </Dialog>
+
+        <Dialog
+          open={this.state.dataOpen}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">
+            {ElectronicHydrometerProps.title}
+          </DialogTitle>
+          <DialogContent>
+            {id_tilt && (
+              <Query
+                query={GRAPH_QUERY}
+                variables={{
+                  id: id_tilt,
+                  dataPoints: 50
+                }}
+                pollInterval={10000}
+              >
+                {({ data, error, loading }) => {
+                  if (loading) return <Loading />;
+                  if (error) return <Error error={error} />;
+                  if (data) {
+                    const graph = (
+                      <GraphChart
+                        data={data.graph.graphData}
+                        key={data.graph.id}
+                        name={data.graph.name}
+                      />
+                    );
+                    return (
+                      <Paper>
+                        <Typography variant="h5">{data.graph.name}</Typography>
+                        {graph}
+                      </Paper>
+                    );
+                  }
+                }}
+              </Query>
+            )}
+            {id_temperature && (
+              <Query
+                query={GRAPH_QUERY}
+                variables={{
+                  id: id_temperature,
+                  dataPoints: 50
+                }}
+                pollInterval={10000}
+              >
+                {({ data, error, loading }) => {
+                  if (loading) return <Loading />;
+                  if (error) return <Error error={error} />;
+                  if (data) {
+                    const graph = (
+                      <GraphChart
+                        data={data.graph.graphData}
+                        key={data.graph.id}
+                        name={data.graph.name}
+                      />
+                    );
+                    return (
+                      <Paper>
+                        <Typography variant="h5">{data.graph.name}</Typography>
+                        {graph}
+                      </Paper>
+                    );
+                  }
+                }}
+              </Query>
+            )}
+          </DialogContent>
+        </Dialog>
+      </>
     );
   };
 
-  handleInfoClose = () => {
-    this.setState({ infoOpen: false });
+  handleClose = () => {
+    this.setState({ dataOpen: false, infoOpen: false });
   };
 
   handleInfoClick = () => {
@@ -74,7 +169,7 @@ class ElectronicHydrometer extends Component {
   };
 
   handleCardActionClick = () => {
-    this.setState({ dataOpen: true });
+    if (this.state.active) this.setState({ dataOpen: true });
   };
 
   constructor(props) {
@@ -95,7 +190,7 @@ class ElectronicHydrometer extends Component {
   }
 
   render() {
-    const { classes, details } = this.props;
+    const { classes } = this.props;
     return (
       <>
         {this.handleDialogs()}
