@@ -71,7 +71,7 @@ class BrewingProcessTable extends Component {
                 {this.props.adminView && (
                   <TableCell align="center">
                     <DeleteBrewingProcess  id={n.id} />
-                    <AdvanceBrewingProcess id={n.id} />
+                    <AdvanceBrewingProcess id={n.id} activeSteps={n.activeSteps} />
                   </TableCell>
                 )}
               </TableRow>

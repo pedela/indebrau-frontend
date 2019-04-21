@@ -97,31 +97,25 @@ class AdvanceBrewingProcess extends Component {
   state = {
     open: false,
     queryError: null,
-
-    newActiveSteps: [],
-    finishedSteps: []
+    newActiveSteps: this.props.activeSteps
   };
 
   handleClickOpen = () => {
-    this.setState({ open: true });
+    this.setState({
+      open: true,
+      newActiveSteps: this.props.activeSteps
+    });
   };
 
   handleClose = () => {
     this.setState({
       open: false,
-      queryError: null,
-
-      newActiveSteps: [],
-      finishedSteps: []
+      queryError: null
     });
   };
 
-  handleActiveSteps = event => {
+  handleNewActiveSteps = event => {
     this.setState({ newActiveSteps: event.target.value });
-  };
-
-  handleFinishedSteps = event => {
-    this.setState({ finishedSteps: event.target.value });
   };
 
   render() {
@@ -159,12 +153,12 @@ class AdvanceBrewingProcess extends Component {
                     <Grid container spacing={8}>
                       <FormControl className={classes.formControl}>
                         <InputLabel htmlFor="select-multiple-chip">
-                          Next Steps
+                          Steps
                         </InputLabel>
                         <Select
                           multiple
                           value={this.state.newActiveSteps}
-                          onChange={this.handleActiveSteps}
+                          onChange={this.handleNewActiveSteps}
                           input={<Input id="select-multiple-chip" />}
                           renderValue={selected => (
                             <div className={classes.chips}>
@@ -187,37 +181,7 @@ class AdvanceBrewingProcess extends Component {
                         </Select>
                       </FormControl>
                     </Grid>
-                    <Grid container spacing={8}>
-                      <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="select-multiple-chip">
-                          Finished Steps
-                        </InputLabel>
-                        <Select
-                          multiple
-                          value={this.state.finishedSteps}
-                          onChange={this.handleFinishedSteps}
-                          input={<Input id="select-multiple-chip" />}
-                          renderValue={selected => (
-                            <div className={classes.chips}>
-                              {selected.map(value => (
-                                <Chip
-                                  key={value}
-                                  label={value}
-                                  className={classes.chip}
-                                />
-                              ))}
-                            </div>
-                          )}
-                          MenuProps={MenuProps}
-                        >
-                          {STEPS.map(step => (
-                            <MenuItem key={step} value={step}>
-                              {step}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </Grid>
+
                     <div className={classes.buttons}>
                       <Button
                         onClick={this.handleClose}
@@ -236,8 +200,7 @@ class AdvanceBrewingProcess extends Component {
                           await advanceBrewingProcess({
                             variables: {
                               id: this.props.id,
-                              newActiveSteps: this.state.newActiveSteps,
-                              finishedSteps: this.state.finishedSteps
+                              newActiveSteps: this.state.newActiveSteps
                             }
                           }).catch(e => {
                             this.setState({ queryError: e });
@@ -265,7 +228,8 @@ class AdvanceBrewingProcess extends Component {
 
 AdvanceBrewingProcess.propTypes = {
   classes: PropTypes.object.isRequired,
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
+  activeSteps: PropTypes.array.isRequired
 };
 
 export default withStyles(styles)(AdvanceBrewingProcess);
