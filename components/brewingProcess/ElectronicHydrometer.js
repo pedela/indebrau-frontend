@@ -86,6 +86,8 @@ class ElectronicHydrometer extends Component {
         </Dialog>
 
         <Dialog
+          fullWidth={true}
+          maxWidth="lg"
           open={this.state.dataOpen}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
@@ -107,18 +109,12 @@ class ElectronicHydrometer extends Component {
                   if (loading) return <Loading />;
                   if (error) return <Error error={error} />;
                   if (data) {
-                    const graph = (
+                    return (
                       <GraphChart
                         data={data.graph.graphData}
                         key={data.graph.id}
                         name={data.graph.name}
                       />
-                    );
-                    return (
-                      <Paper>
-                        <Typography variant="h5">{data.graph.name}</Typography>
-                        {graph}
-                      </Paper>
                     );
                   }
                 }}
@@ -137,18 +133,12 @@ class ElectronicHydrometer extends Component {
                   if (loading) return <Loading />;
                   if (error) return <Error error={error} />;
                   if (data) {
-                    const graph = (
+                    return (
                       <GraphChart
                         data={data.graph.graphData}
                         key={data.graph.id}
                         name={data.graph.name}
                       />
-                    );
-                    return (
-                      <Paper>
-                        <Typography variant="h5">{data.graph.name}</Typography>
-                        {graph}
-                      </Paper>
                     );
                   }
                 }}

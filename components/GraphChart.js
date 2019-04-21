@@ -17,12 +17,15 @@ class GraphChart extends Component {
       value: dataPoint.value
     }));
     return (
-      <ResponsiveContainer width="99%" height={320}>
-        <LineChart data={renderData}>
+      <ResponsiveContainer width="99%" height={180}>
+        <LineChart
+          data={renderData}
+          margin={{ top: 5, right: 5, left: -15, bottom: 5 }}
+        >
           <XAxis dataKey="time" interval="preserveStartEnd" />
           <YAxis />
           <CartesianGrid vertical={false} strokeDasharray="3 3" />
-          <Tooltip />
+          <Tooltip isAnimationActive={false}/>
           <Legend />
           <Line
             type="monotone"
