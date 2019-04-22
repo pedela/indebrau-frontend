@@ -13,7 +13,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
 import { Query } from 'react-apollo';
-import { GRAPH_QUERY } from '../../lib/queriesAndMutations';
+import { GRAPH_QUERY, LATEST_GRAPH_DATA_QUERY } from '../../lib/queriesAndMutations';
 import Loading from '../Loading';
 import Error from '../Error';
 import GraphChart from '../GraphChart';
@@ -46,26 +46,12 @@ class ElectronicHydrometer extends Component {
   state = {
     infoOpen: false,
     dataOpen: false,
-    active: false
+    active: false,
+    id_tilt: null,
+    id_temperature: null
   };
 
   handleDialogs = () => {
-    let id_tilt;
-    let id_temperature;
-    this.props.graphs.map(graph => {
-      if (
-        graph.sensorName == 'ispindel/iSpindel1/tilt' ||
-        graph.sensorName == 'ispindel/iSpindel2/tilt'
-      ) {
-        id_tilt = graph.id;
-      }
-      if (
-        graph.sensorName == 'ispindel/iSpindel1/temperature' ||
-        graph.sensorName == 'ispindel/iSpindel2/temperature'
-      ) {
-        id_temperature = graph.id;
-      }
-    });
     return (
       <>
         <Dialog
@@ -96,11 +82,11 @@ class ElectronicHydrometer extends Component {
             {ElectronicHydrometerProps.title}
           </DialogTitle>
           <DialogContent>
-            {id_tilt && (
+            {this.state.id_tilt && (
               <Query
                 query={GRAPH_QUERY}
                 variables={{
-                  id: id_tilt,
+                  id: this.state.id_tilt,
                   dataPoints: 50
                 }}
                 pollInterval={10000}
@@ -120,11 +106,11 @@ class ElectronicHydrometer extends Component {
                 }}
               </Query>
             )}
-            {id_temperature && (
+            {this.state.id_temperature && (
               <Query
                 query={GRAPH_QUERY}
                 variables={{
-                  id: id_temperature,
+                  id: this.state.id_temperature,
                   dataPoints: 50
                 }}
                 pollInterval={10000}
@@ -167,6 +153,20 @@ class ElectronicHydrometer extends Component {
     if (this.props.activeSteps.includes('FERMENTING')) {
       this.state.active = true;
     }
+    this.props.graphs.map(graph => {
+      if (
+        graph.sensorName == 'ispindel/iSpindel1/tilt' ||
+        graph.sensorName == 'ispindel/iSpindel2/tilt'
+      ) {
+        this.state.id_tilt = graph.id;
+      }
+      if (
+        graph.sensorName == 'ispindel/iSpindel1/temperature' ||
+        graph.sensorName == 'ispindel/iSpindel2/temperature'
+      ) {
+        this.state.id_temperature = graph.id;
+      }
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -176,6 +176,22 @@ class ElectronicHydrometer extends Component {
       } else {
         this.setState({ active: false });
       }
+    }
+    if(this.props.graphs !== prevProps.graphs){
+      this.props.graphs.map(graph => {
+        if (
+          graph.sensorName == 'ispindel/iSpindel1/tilt' ||
+          graph.sensorName == 'ispindel/iSpindel2/tilt'
+        ) {
+          this.setState({ id_tilt: graph.id });
+        }
+        if (
+          graph.sensorName == 'ispindel/iSpindel1/temperature' ||
+          graph.sensorName == 'ispindel/iSpindel2/temperature'
+        ) {
+          this.setState({ id_temperature: graph.id });
+        }
+      });
     }
   }
 
@@ -201,6 +217,49 @@ class ElectronicHydrometer extends Component {
             <Button size="small" color="primary" onClick={this.handleInfoClick}>
               More Info
             </Button>
+            {this.state.id_temperature && (
+              <Typography gutterBottom variant="body2">
+                <Query
+                  query={LATEST_GRAPH_DATA_QUERY}
+                  variables={{
+                    id: this.state.id_temperature
+                  }}
+                  pollInterval={10000}
+                >
+                  {({ data, error, loading }) => {
+                    if (loading) return <Loading />;
+                    if (error) return <Error error={error} />;
+                    if (data) {
+
+                      return (<>
+                        {data.graph.graphData[0].value.substring(0, 5)}°C{' '}
+                    </>
+                      );
+                    }
+                  }}
+                </Query>
+                <Query
+                  query={LATEST_GRAPH_DATA_QUERY}
+                  variables={{
+                    id: this.state.id_tilt
+                  }}
+                  pollInterval={10000}
+                >
+                  {({ data, error, loading }) => {
+                    if (loading) return <Loading />;
+                    if (error) return <Error error={error} />;
+                    if (data) {
+
+                      return (
+                      <>
+                          {data.graph.graphData[0].value.substring(0, 5)} Tilt
+                      </>
+                      );
+                    }
+                  }}
+                </Query>
+              </Typography>
+            )}
           </CardActions>
         </Card>
       </>

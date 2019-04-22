@@ -109,10 +109,7 @@ class MashTun extends Component {
                       />
                     );
                     return (
-                      <Paper>
-                        <Typography variant="h5">{data.graph.name}</Typography>
-                        {graph}
-                      </Paper>
+                      {graph}
                     );
                   }
                 }}
