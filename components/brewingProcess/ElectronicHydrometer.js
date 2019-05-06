@@ -13,7 +13,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
 import { Query } from 'react-apollo';
-import { GRAPH_QUERY, LATEST_GRAPH_DATA_QUERY } from '../../lib/queriesAndMutations';
+import {
+  GRAPH_QUERY,
+  LATEST_GRAPH_DATA_QUERY
+} from '../../lib/queriesAndMutations';
 import Loading from '../Loading';
 import Error from '../Error';
 import GraphChart from '../GraphChart';
@@ -158,12 +161,14 @@ class ElectronicHydrometer extends Component {
         graph.sensorName == 'ispindel/iSpindel1/tilt' ||
         graph.sensorName == 'ispindel/iSpindel2/tilt'
       ) {
+        // eslint-disable-next-line react/no-direct-mutation-state
         this.state.id_tilt = graph.id;
       }
       if (
         graph.sensorName == 'ispindel/iSpindel1/temperature' ||
         graph.sensorName == 'ispindel/iSpindel2/temperature'
       ) {
+        // eslint-disable-next-line react/no-direct-mutation-state
         this.state.id_temperature = graph.id;
       }
     });
@@ -177,7 +182,7 @@ class ElectronicHydrometer extends Component {
         this.setState({ active: false });
       }
     }
-    if(this.props.graphs !== prevProps.graphs){
+    if (this.props.graphs !== prevProps.graphs) {
       this.props.graphs.map(graph => {
         if (
           graph.sensorName == 'ispindel/iSpindel1/tilt' ||
@@ -217,8 +222,8 @@ class ElectronicHydrometer extends Component {
             <Button size="small" color="primary" onClick={this.handleInfoClick}>
               More Info
             </Button>
-            {this.state.id_temperature && (
-              <Typography gutterBottom variant="body2">
+            <Typography gutterBottom variant="body2">
+              {this.state.id_temperature && (
                 <Query
                   query={LATEST_GRAPH_DATA_QUERY}
                   variables={{
@@ -230,14 +235,14 @@ class ElectronicHydrometer extends Component {
                     if (loading) return <Loading />;
                     if (error) return <Error error={error} />;
                     if (data) {
-
-                      return (<>
-                        {data.graph.graphData[0].value.substring(0, 5)}°C{' '}
-                    </>
+                      return (
+                        <>{data.graph.graphData[0].value.substring(0, 5)}°C </>
                       );
                     }
                   }}
                 </Query>
+              )}
+              {this.state.id_tilt && (
                 <Query
                   query={LATEST_GRAPH_DATA_QUERY}
                   variables={{
@@ -249,17 +254,16 @@ class ElectronicHydrometer extends Component {
                     if (loading) return <Loading />;
                     if (error) return <Error error={error} />;
                     if (data) {
-
                       return (
-                      <>
+                        <>
                           {data.graph.graphData[0].value.substring(0, 5)} Tilt
-                      </>
+                        </>
                       );
                     }
                   }}
                 </Query>
-              </Typography>
-            )}
+              )}
+            </Typography>
           </CardActions>
         </Card>
       </>
