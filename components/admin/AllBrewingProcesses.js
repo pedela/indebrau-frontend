@@ -14,7 +14,7 @@ const styles = theme => ({
   root: {
     width: '100%',
     overflowX: 'auto',
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing.unit,
     maxHeight: '100%'
   },
   fab: {
@@ -26,7 +26,7 @@ class AllBrewingProcesses extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
+      <div className={classes.root}>
         <Query query={ALL_BREWING_PROCESSES_QUERY}>
           {({ data, error, loading }) => {
             if (loading) return <Loading />;

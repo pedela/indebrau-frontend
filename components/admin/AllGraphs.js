@@ -15,7 +15,7 @@ const styles = theme => ({
   root: {
     width: '100%',
     overflowX: 'auto',
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing.unit,
     maxHeight: '100%'
   },
   fab: {

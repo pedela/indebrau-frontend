@@ -226,6 +226,15 @@ class AdminDashboard extends Component {
                       <ListItemIcon>
                         <AssignmentIcon />
                       </ListItemIcon>
+                      <ListItemText primary="Media Streams" />
+                    </ListItem>
+                    <ListItem
+                      button
+                      onClick={() => this.setActiveWindow('AllMediaStreams')}
+                    >
+                      <ListItemIcon>
+                        <AssignmentIcon />
+                      </ListItemIcon>
                       <ListItemText primary="Graphs" />
                     </ListItem>
                   </List>

@@ -10,7 +10,9 @@ const styles = theme => ({
     maxHeight: '100%'
   },
   image: {
-    float: 'center',
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     width: 270
   }
 });
