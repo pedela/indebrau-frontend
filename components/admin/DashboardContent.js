@@ -16,6 +16,10 @@ const styles = theme => ({
     textAlign: 'center',
     padding: theme.spacing.unit * 2,
     maxHeight: '100%'
+  },
+  image: {
+    float: 'center',
+    width: 250
   }
 });
 
@@ -52,14 +56,12 @@ class DashboardContent extends Component {
                     return (
                       <Image
                         publicId={data.mediaStream.mediaFiles[0].publicId}
-                        width="500"
                         secure="true"
+                        className={this.props.classes.image}
                       />
                     );
                   } else {
-                    return (
-                      <p>No Image</p>
-                    );
+                    return <p>No Image</p>;
                   }
                 }
               }}
