@@ -48,13 +48,19 @@ class DashboardContent extends Component {
                 if (loading) return <Loading />;
                 if (error) return <Error error={error} />;
                 if (data) {
-                  return (
-                    <Image
-                      publicId={data.mediaStream.mediaFiles[0].publicId}
-                      width="500"
-                      secure="true"
-                    />
-                  );
+                  if (data.mediaStream.mediaFiles[0]) {
+                    return (
+                      <Image
+                        publicId={data.mediaStream.mediaFiles[0].publicId}
+                        width="500"
+                        secure="true"
+                      />
+                    );
+                  } else {
+                    return (
+                      <p>No Image</p>
+                    );
+                  }
                 }
               }}
             </Query>
