@@ -5,6 +5,11 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import AllGraphs from './AllGraphs';
 import AllBrewingProcesses from './AllBrewingProcesses';
+import { Image, CloudinaryContext } from 'cloudinary-react';
+import { Query } from 'react-apollo';
+import { LATEST_MEDIA_STREAM_FILE_QUERY } from '../../lib/queriesAndMutations';
+import Loading from '../Loading';
+import Error from '../Error';
 
 const styles = theme => ({
   root: {
@@ -30,6 +35,31 @@ class DashboardContent extends Component {
         <Typography variant="subtitle1" gutterBottom>
           please choose your view
         </Typography>
+        <CloudinaryContext cloudName="indebrau">
+          <div>
+            <Query
+              query={LATEST_MEDIA_STREAM_FILE_QUERY}
+              variables={{
+                id: 'cjvo5ox5s0ofn0734el8hke0b' // currently hardcoded..
+              }}
+              pollInterval={1000}
+            >
+              {({ data, error, loading }) => {
+                if (loading) return <Loading />;
+                if (error) return <Error error={error} />;
+                if (data) {
+                  return (
+                    <Image
+                      publicId={data.mediaStream.mediaFiles[0].publicId}
+                      width="500"
+                      secure="true"
+                    />
+                  );
+                }
+              }}
+            </Query>
+          </div>
+        </CloudinaryContext>
       </Paper>
     );
   };
