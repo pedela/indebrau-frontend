@@ -13,12 +13,12 @@ import AdvanceBrewingProcess from './admin/AdvanceBrewingProcess';
 const styles = theme => ({
   root: {
     textAlign: 'center',
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing(2),
     maxHeight: '100%',
     overflowX: 'auto'
   },
   fab: {
-    margin: theme.spacing.unit
+    margin: theme.spacing(1)
   }
 });
 

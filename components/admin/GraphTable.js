@@ -13,15 +13,15 @@ import DeleteGraph from './DeleteGraph';
 const styles = theme => ({
   root: {
     textAlign: 'center',
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing(2),
     maxHeight: '100%',
     overflowX: 'auto'
   },
   fab: {
-    margin: theme.spacing.unit
+    margin: theme.spacing(1)
   },
   extendedIcon: {
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing(1)
   }
 });
 

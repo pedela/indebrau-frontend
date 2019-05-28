@@ -14,11 +14,11 @@ const styles = theme => ({
   root: {
     width: '100%',
     overflowX: 'auto',
-    padding: theme.spacing.unit,
+    padding: theme.spacing(1),
     maxHeight: '100%'
   },
   fab: {
-    margin: theme.spacing.unit
+    margin: theme.spacing(1)
   }
 });
 

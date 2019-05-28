@@ -15,14 +15,14 @@ const styles = theme => ({
   root: {
     width: '100%',
     overflowX: 'auto',
-    padding: theme.spacing.unit,
+    padding: theme.spacing(1),
     maxHeight: '100%'
   },
   image: {
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
-    padding: theme.spacing.unit,
+    padding: theme.spacing(1),
     width: 270
   }
 });

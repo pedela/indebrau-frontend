@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 2
+    padding: theme.spacing(2)
   },
   card: {
     maxWidth: 300

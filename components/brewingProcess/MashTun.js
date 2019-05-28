@@ -22,13 +22,13 @@ import GraphChart from '../GraphChart';
 const styles = theme => ({
   root: {
     textAlign: 'center',
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing(2),
     flexGrow: 1
   },
   graph: {
     width: '50%',
-    marginLeft: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit * 2
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2)
   },
   card: {
     width: 300

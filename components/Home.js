@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = theme => ({
   root: {
     textAlign: 'center',
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing(2),
     maxHeight: '100%'
   },
   image: {

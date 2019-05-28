@@ -15,7 +15,7 @@ const styles = theme => ({
     width: '100%',
     overflowX: 'auto',
     textAlign: 'center',
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing(2),
     maxHeight: '100%'
   },
   buttonLinks: {

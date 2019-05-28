@@ -17,7 +17,7 @@ import { PumpProps } from '../../lib/ComponentProperties';
 const styles = theme => ({
   root: {
     textAlign: 'center',
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing(2),
     flexGrow: 1
   },
   card: {
