@@ -28,7 +28,7 @@ class Brewery extends Component {
         <Grid
           container
           className={classes.container}
-          spacing={8}
+          spacing={1}
           justify="center"
         >
           <Grid item>

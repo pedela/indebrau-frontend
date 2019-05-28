@@ -24,10 +24,8 @@ class MyApp extends App {
         <ThemeProvider theme={theme}>
           <ApolloProvider client={apollo}>
             <CssBaseline />
-            {/* Pass pageContext to the _document though the renderPage enhancer
-              to render collected styles on server-side. */}
             <Page>
-              <Component pageContext={this.pageContext} {...pageProps} />
+              <Component {...pageProps} />
             </Page>
           </ApolloProvider>
         </ThemeProvider>
