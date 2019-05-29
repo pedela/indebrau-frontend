@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Link from 'next/link';
+import Link from './Link';
 import { Query } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
 import BrewingProcessTable from './BrewingProcessTable';
@@ -66,9 +66,7 @@ class User extends Component {
                     <Paper className={classes.root}>
                       {me && me.permissions.includes('ADMIN') && (
                         <Link href="/adminDashboard">
-                          <a className={classes.buttonLinks}>
-                            <Button>Go to Admin Area</Button>
-                          </a>
+                          <Button>Go to Admin Area</Button>
                         </Link>
                       )}
                     </Paper>

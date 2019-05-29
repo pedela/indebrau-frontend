@@ -4,7 +4,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import Link from 'next/link';
+import Link from './Link';
+
 
 import SignOut from './SignOut';
 import { CurrentUser } from './User';
@@ -18,7 +19,7 @@ const styles = theme => ({
       width: 1100,
       marginLeft: 'auto',
       marginRight: 'auto'
-    }
+    },
   },
   toolbarMain: {
     borderBottom: `1px solid ${theme.palette.grey[300]}`
@@ -52,19 +53,13 @@ class Nav extends Component {
             return (
               <Toolbar className={classes.toolbarMain}>
                 <Link href="/">
-                  <a className={classes.buttonLinks}>
-                    <Button>Home</Button>
-                  </a>
+                  <Button >Home</Button>
                 </Link>
                 <Link href="/beers">
-                  <a className={classes.buttonLinks}>
-                    <Button>Our Beer</Button>
-                  </a>
+                  <Button>Our Beer</Button>
                 </Link>
                 <Link href="/brewery">
-                  <a className={classes.buttonLinks}>
-                    <Button>The Brewery</Button>
-                  </a>
+                  <Button>The Brewery</Button>
                 </Link>
                 <Typography
                   component="h2"
@@ -75,24 +70,18 @@ class Nav extends Component {
                   className={classes.toolbarTitle}
                 />
                 <Link href="/user">
-                  <a className={classes.buttonLinks}>
-                    {!me && <Button>Sign In</Button>}
-                    {me && <Button>{me.name}</Button>}
-                  </a>
+                  {!me && <Button>Sign In</Button>}
+                  {me && <Button>{me.name}</Button>}
                 </Link>
 
                 {me && (
                   <Link href="/">
-                    <a className={classes.buttonLinks}>
-                      <SignOut />
-                    </a>
+                    <SignOut />
                   </Link>
                 )}
                 {!me && (
                   <Link href="/signup">
-                    <a className={classes.buttonLinks}>
-                      <Button>Sign Up</Button>
-                    </a>
+                    <Button>Sign Up</Button>
                   </Link>
                 )}
               </Toolbar>

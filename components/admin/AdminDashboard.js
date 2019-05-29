@@ -16,7 +16,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import Link from 'next/link';
+import Link from '../Link';
 import DashboardContent from './DashboardContent';
 import Error from '../Error';
 import { CurrentUser } from '../User';
@@ -133,14 +133,12 @@ class AdminDashboard extends Component {
                       error={{ message: 'You are no admin, please go back' }}
                     />
                     <Link href="/">
-                      <a className={classes.buttonLinks}>
-                        <ListItem button>
-                          <ListItemIcon>
-                            <HomeIcon />
-                          </ListItemIcon>
-                          <ListItemText primary="Home" />
-                        </ListItem>
-                      </a>
+                      <ListItem button>
+                        <ListItemIcon>
+                          <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Home" />
+                      </ListItem>
                     </Link>
                   </main>
                 </div>
@@ -199,14 +197,12 @@ class AdminDashboard extends Component {
                   <Divider />
                   <List>
                     <Link href="/">
-                      <a className={classes.buttonLinks}>
-                        <ListItem button>
-                          <ListItemIcon>
-                            <HomeIcon />
-                          </ListItemIcon>
-                          <ListItemText primary="Home" />
-                        </ListItem>
-                      </a>
+                      <ListItem button>
+                        <ListItemIcon>
+                          <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Home" />
+                      </ListItem>
                     </Link>
                     <ListItem
                       button

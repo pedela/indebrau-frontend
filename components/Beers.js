@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function  Beers() {
+export default function Beers() {
   const classes = useStyles();
 
   return (
@@ -27,25 +27,40 @@ export default function  Beers() {
       <Grid container className={classes.root} spacing={2}>
         <Grid item xs={12}>
           <Grid container justify="center" spacing={1}>
-            {[0, 1, 2].map(value => (
-              <Grid key={value} item>
-                <Card className={classes.card}>
-                  <CardActionArea>
-                    <CardMedia
-                      className={classes.media}
-                      image="../static/drunken-deer.jpg"
-                      title="The Drunken Deer"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        Karnevals Kölsch
-                      </Typography>
-                      <Typography component="p">Delicious!</Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </Grid>
-            ))}
+            <Grid item>
+              <Card className={classes.card}>
+                <CardActionArea>
+                  <CardMedia
+                    className={classes.media}
+                    image="../static/karnevalsKoelsch.jpg"
+                    title="Karnevals Kölsch"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      Karnevals Kölsch
+                    </Typography>
+                    <Typography component="p">Delicious!</Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
+            <Grid item>
+              <Card className={classes.card}>
+                <CardActionArea>
+                  <CardMedia
+                    className={classes.media}
+                    image="../static/epa.jpg"
+                    title="Eschweiler Pale Ale"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      Eschweiler Pale Ale
+                    </Typography>
+                    <Typography component="p">Delicious!</Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
