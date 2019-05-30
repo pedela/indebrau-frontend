@@ -1,12 +1,10 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Paper, withStyles } from '@material-ui/core';
-import { Image, CloudinaryContext } from 'cloudinary-react';
+import { withStyles, Paper, Typography } from '@material-ui/core';
 import { Query } from 'react-apollo';
-import {
-  ALL_MEDIA_STREAMS_QUERY,
-  LATEST_MEDIA_STREAM_FILE_QUERY
-} from '../../lib/queriesAndMutations';
+import { ALL_MEDIA_STREAMS_QUERY } from '../../lib/queriesAndMutations';
+import MediaStreamTable from './MediaStreamTable';
+import MediaStream from '../MediaStream';
 import Loading from '../Loading';
 import Error from '../Error';
 
@@ -15,7 +13,7 @@ const styles = theme => ({
     width: '100%',
     overflowX: 'auto',
     padding: theme.spacing(1),
-    maxHeight: '100%'
+    maxHeight: '1withStyles(styles)00%'
   },
   image: {
     display: 'block',
@@ -26,7 +24,7 @@ const styles = theme => ({
   }
 });
 
-class AllGraphs extends Component {
+class AllMediaStreams extends Component {
   render() {
     const { classes } = this.props;
 
@@ -37,38 +35,16 @@ class AllGraphs extends Component {
             if (loading) return <Loading />;
             if (error) return <Error error={error} />;
             if (data) {
+              const activeMediaStreams = data.mediaStreams.map(mediaStream => (
+                <MediaStream key={mediaStream.id} id={mediaStream.id} />
+              ));
               return (
-                <CloudinaryContext cloudName="indebrau">
-                  <Paper>
-                    <Query
-                      query={LATEST_MEDIA_STREAM_FILE_QUERY}
-                      variables={{
-                        id: data.mediaStreams[0].id
-                      }}
-                      pollInterval={1000}
-                    >
-                      {({ data, error, loading }) => {
-                        if (loading) return <Loading />;
-                        if (error) return <Error error={error} />;
-                        if (data) {
-                          if (data.mediaStream.mediaFiles[0]) {
-                            return (
-                              <Image
-                                publicId={
-                                  data.mediaStream.mediaFiles[0].publicId
-                                }
-                                secure="true"
-                                className={this.props.classes.image}
-                              />
-                            );
-                          } else {
-                            return <p>No Image</p>;
-                          }
-                        }
-                      }}
-                    </Query>
-                  </Paper>
-                </CloudinaryContext>
+                <Paper className={classes.root}>
+                  <Typography variant="h5">All Media Streams</Typography>
+                  <MediaStreamTable mediaStreams={data.mediaStreams} />
+                  <Typography variant="h5">Active Media Streams</Typography>
+                  {activeMediaStreams}
+                </Paper>
               );
             }
           }}
@@ -78,8 +54,8 @@ class AllGraphs extends Component {
   }
 }
 
-AllGraphs.propTypes = {
+AllMediaStreams.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(AllGraphs);
+export default withStyles(styles)(AllMediaStreams);
