@@ -1,21 +1,23 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import Chip from '@material-ui/core/Chip';
-import MenuItem from '@material-ui/core/MenuItem';
-import Input from '@material-ui/core/Input';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Grid from '@material-ui/core/Grid';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import Fab from '@material-ui/core/Fab';
-import PlayIcon from '@material-ui/icons/PlayArrowOutlined';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import { Mutation } from 'react-apollo';
+import PlayIcon from '@material-ui/icons/PlayArrowOutlined';
+import {
+  Paper,
+  Button,
+  Chip,
+  MenuItem,
+  Input,
+  Select,
+  FormControl,
+  InputLabel,
+  Grid,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Fab,
+  withStyles
+} from '@material-ui/core';
 import Error from '../Error';
 import {
   ALL_BREWING_PROCESSES_QUERY,

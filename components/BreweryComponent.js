@@ -1,15 +1,17 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Paper from '@material-ui/core/Paper';
+import {
+  CardMedia,
+  CardContent,
+  CardActionArea,
+  Card,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Typography,
+  Paper,
+  withStyles
+} from '@material-ui/core';
 import * as properties from '../lib/ComponentProperties';
 
 const styles = theme => ({
@@ -19,11 +21,11 @@ const styles = theme => ({
     flexGrow: 1
   },
   card: {
-    width: 300,
+    width: 300
   },
   media: {
     height: 300
-  },
+  }
 });
 
 class BreweryComponent extends Component {

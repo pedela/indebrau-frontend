@@ -1,7 +1,6 @@
 import { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import Paper from '@material-ui/core/Paper';
+import { Paper, withStyles } from '@material-ui/core';
 import { Image, CloudinaryContext } from 'cloudinary-react';
 import { Query } from 'react-apollo';
 import {

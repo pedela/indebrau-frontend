@@ -1,12 +1,14 @@
 import { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Router from 'next/router';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  withStyles
+} from '@material-ui/core';
 import DeleteBrewingProcess from './admin/DeleteBrewingProcess';
 import AdvanceBrewingProcess from './admin/AdvanceBrewingProcess';
 
@@ -70,8 +72,11 @@ class BrewingProcessTable extends Component {
                 )}
                 {this.props.adminView && (
                   <TableCell align="center">
-                    <DeleteBrewingProcess  id={n.id} />
-                    <AdvanceBrewingProcess id={n.id} activeSteps={n.activeSteps} />
+                    <DeleteBrewingProcess id={n.id} />
+                    <AdvanceBrewingProcess
+                      id={n.id}
+                      activeSteps={n.activeSteps}
+                    />
                   </TableCell>
                 )}
               </TableRow>

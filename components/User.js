@@ -1,11 +1,8 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Link from './Link';
 import { Query } from 'react-apollo';
-import { withStyles } from '@material-ui/core/styles';
+import { Paper, Button, Typography, withStyles } from '@material-ui/core';
+import Link from './Link';
 import BrewingProcessTable from './BrewingProcessTable';
 import SignIn from './SignIn';
 import { CURRENT_USER_QUERY } from '../lib/queriesAndMutations';

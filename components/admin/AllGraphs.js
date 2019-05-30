@@ -1,10 +1,11 @@
 import { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import { ALL_GRAPHS_QUERY, ACTIVE_GRAPHS_QUERY } from '../../lib/queriesAndMutations';
+import { Paper, Typography, withStyles } from '@material-ui/core';
+import {
+  ALL_GRAPHS_QUERY,
+  ACTIVE_GRAPHS_QUERY
+} from '../../lib/queriesAndMutations';
 import Loading from '../Loading';
 import Error from '../Error';
 import GraphChart from '../GraphChart';

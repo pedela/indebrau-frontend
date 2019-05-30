@@ -1,15 +1,17 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import withStyles from '@material-ui/core/styles/withStyles';
 import { Mutation } from 'react-apollo';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import {
+  Avatar,
+  Button,
+  FormControl,
+  Input,
+  InputLabel,
+  Paper,
+  Typography,
+  withStyles
+} from '@material-ui/core';
 import Error from './Error';
 import {
   CURRENT_USER_QUERY,
@@ -33,8 +35,8 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme
-      .spacing.unit * 3}px`
+    padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing.unit *
+      3}px`
   },
   avatar: {
     margin: theme.spacing(1),

@@ -1,15 +1,17 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import Fab from '@material-ui/core/Fab';
+import {
+  Paper,
+  Button,
+  TextField,
+  Grid,
+  Dialog,
+  DialogContent,
+  Fab,
+  DialogTitle,
+  withStyles
+} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import { Mutation } from 'react-apollo';
 import Error from '../Error';
 import {

@@ -1,10 +1,10 @@
 import { Component } from 'react';
 import { Mutation } from 'react-apollo';
+import { Button } from '@material-ui/core';
 import {
   CURRENT_USER_QUERY,
   SIGN_OUT_MUTATION
 } from '../lib/queriesAndMutations';
-import Button from '@material-ui/core/Button';
 
 class Signout extends Component {
   render() {

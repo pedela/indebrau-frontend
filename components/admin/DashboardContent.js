@@ -1,12 +1,9 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import { Paper, Typography, withStyles } from '@material-ui/core';
 import AllGraphs from './AllGraphs';
 import AllBrewingProcesses from './AllBrewingProcesses';
 import AllMediaStreams from './AllMediaStreams';
-
 
 const styles = theme => ({
   root: {

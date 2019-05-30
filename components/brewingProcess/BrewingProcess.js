@@ -1,9 +1,11 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import { Query } from 'react-apollo';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import {
+  Grid,
+  Typography,
+  withStyles
+} from '@material-ui/core';
 import GrainMill from './GrainMill';
 import MashTun from './MashTun';
 import SpargingVessel from './SpargingVessel';

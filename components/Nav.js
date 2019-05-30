@@ -1,11 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { Toolbar, Button, Typography, withStyles } from '@material-ui/core';
 import Link from './Link';
-
 
 import SignOut from './SignOut';
 import { CurrentUser } from './User';
@@ -19,7 +15,7 @@ const styles = theme => ({
       width: 1100,
       marginLeft: 'auto',
       marginRight: 'auto'
-    },
+    }
   },
   toolbarMain: {
     borderBottom: `1px solid ${theme.palette.grey[300]}`
@@ -53,7 +49,7 @@ class Nav extends Component {
             return (
               <Toolbar className={classes.toolbarMain}>
                 <Link href="/">
-                  <Button >Home</Button>
+                  <Button>Home</Button>
                 </Link>
                 <Link href="/beers">
                   <Button>Our Beer</Button>
