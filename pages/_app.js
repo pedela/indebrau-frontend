@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ApolloProvider } from 'react-apollo';
 import Page from '../components/Page';
 import withData from '../lib/withData';
-import { theme } from '../lib/getPageContext';
+import theme from '../lib/theme';
 
 class MyApp extends App {
 
