@@ -12,9 +12,8 @@ import {
 } from '@material-ui/core';
 import Error from '../Error';
 import {
-  ACTIVE_GRAPHS_QUERY,
-  ALL_GRAPHS_QUERY,
-  DELETE_GRAPH_MUTATION
+  ALL_MEDIA_STREAMS_QUERY,
+  DELETE_MEDIA_STREAM_MUTATION
 } from '../../lib/queriesAndMutations';
 
 const styles = theme => ({
@@ -37,7 +36,7 @@ const styles = theme => ({
   }
 });
 
-class DeleteGraph extends Component {
+class DeleteMediaStream extends Component {
   state = {
     open: false,
     queryError: null
@@ -69,20 +68,19 @@ class DeleteGraph extends Component {
           <DeleteIcon />
         </Fab>
         <Mutation
-          mutation={DELETE_GRAPH_MUTATION}
+          mutation={DELETE_MEDIA_STREAM_MUTATION}
           refetchQueries={[
-            { query: ACTIVE_GRAPHS_QUERY },
-            { query: ALL_GRAPHS_QUERY }
+            { query: ALL_MEDIA_STREAMS_QUERY }
           ]}
         >
-          {(deleteGraph, { loading }) => (
+          {(deleteMediaStream, { loading }) => (
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
               aria-labelledby="form-dialog-title"
             >
               <Error error={this.state.queryError} />
-              <DialogTitle id="form-dialog-title">Delete Graph</DialogTitle>
+              <DialogTitle id="form-dialog-title">Delete Media Stream</DialogTitle>
               <DialogContent>
                 <main className={classes.layout}>
                   <div className={classes.buttons}>
@@ -100,7 +98,7 @@ class DeleteGraph extends Component {
                       onClick={async () => {
                         // fire mutation (clear old error)
                         this.setState({ queryError: null });
-                        await deleteGraph({
+                        await deleteMediaStream({
                           variables: {
                             id: this.props.id
                           }
@@ -127,9 +125,9 @@ class DeleteGraph extends Component {
   }
 }
 
-DeleteGraph.propTypes = {
+DeleteMediaStream.propTypes = {
   classes: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(DeleteGraph);
+export default withStyles(styles)(DeleteMediaStream);

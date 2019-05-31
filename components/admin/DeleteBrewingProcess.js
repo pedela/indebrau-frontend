@@ -1,12 +1,19 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Dialog, DialogContent, DialogTitle, Fab, withStyles } from '@material-ui/core';
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Fab,
+  withStyles
+} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Mutation } from 'react-apollo';
 import Error from '../Error';
 import {
   ALL_BREWING_PROCESSES_QUERY,
-  DELETE_BREWING_PROCESS
+  DELETE_BREWING_PROCESS_MUTATION
 } from '../../lib/queriesAndMutations';
 
 const styles = theme => ({
@@ -29,7 +36,7 @@ const styles = theme => ({
   }
 });
 
-class CreateGraph extends Component {
+class DeleteBrewingProcess extends Component {
   state = {
     open: false,
     queryError: null
@@ -61,7 +68,7 @@ class CreateGraph extends Component {
           <DeleteIcon />
         </Fab>
         <Mutation
-          mutation={DELETE_BREWING_PROCESS}
+          mutation={DELETE_BREWING_PROCESS_MUTATION}
           refetchQueries={[{ query: ALL_BREWING_PROCESSES_QUERY }]}
         >
           {(deleteBrewingProcess, { loading }) => (
@@ -118,9 +125,9 @@ class CreateGraph extends Component {
   }
 }
 
-CreateGraph.propTypes = {
+DeleteBrewingProcess.propTypes = {
   classes: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(CreateGraph);
+export default withStyles(styles)(DeleteBrewingProcess);

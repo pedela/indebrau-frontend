@@ -10,7 +10,7 @@ import {
   Fab,
   withStyles
 } from '@material-ui/core';
-import DeleteGraph from './DeleteGraph';
+import DeleteMediaStream from './DeleteMediaStream';
 
 const styles = theme => ({
   root: {
@@ -61,7 +61,7 @@ class MediaStreamTable extends Component {
                   >
                     <EditIcon />
                   </Fab>
-                  <DeleteGraph id={n.id} />
+                  <DeleteMediaStream id={n.id} />
                 </TableCell>
               </TableRow>
             ))}
