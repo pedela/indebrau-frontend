@@ -1,25 +1,27 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Paper, withStyles } from '@material-ui/core';
+import { Paper, withStyles, Typography } from '@material-ui/core';
 import { Image, CloudinaryContext } from 'cloudinary-react';
 import { Query } from 'react-apollo';
 import { LATEST_MEDIA_STREAM_FILE_QUERY } from '../lib/queriesAndMutations';
 import Loading from './Loading';
 import Error from './Error';
+import { renderDate } from '../lib/utils.js';
 
 const styles = theme => ({
   root: {
     width: '100%',
     overflowX: 'auto',
     padding: theme.spacing(1),
-    maxHeight: '100%'
+    maxHeight: '100%',
+    textAlign: 'center'
   },
   image: {
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
     padding: theme.spacing(1),
-    width: 270
+    width: 260
   }
 });
 
@@ -29,13 +31,13 @@ class MediaStream extends Component {
 
     return (
       <CloudinaryContext cloudName="indebrau">
-        <Paper>
+        <Paper className={classes.root}>
           <Query
             query={LATEST_MEDIA_STREAM_FILE_QUERY}
             variables={{
               id: this.props.id
             }}
-            pollInterval={1000}
+            pollInterval={this.props.updateFrequency * 1000}
           >
             {({ data, error, loading }) => {
               if (loading) return <Loading />;
@@ -43,11 +45,17 @@ class MediaStream extends Component {
               if (data) {
                 if (data.mediaStream.mediaFiles[0]) {
                   return (
-                    <Image
-                      publicId={data.mediaStream.mediaFiles[0].publicId}
-                      secure="true"
-                      className={classes.image}
-                    />
+                    <>
+                      <Image
+                        publicId={data.mediaStream.mediaFiles[0].publicId}
+                        secure="true"
+                        className={classes.image}
+                      />
+                      <Typography body1="h5">
+                        Last Updated:
+                        {' ' + renderDate(data.mediaStream.mediaFiles[0].time)}
+                      </Typography>
+                    </>
                   );
                 } else {
                   return <p>No Image</p>;
@@ -63,6 +71,7 @@ class MediaStream extends Component {
 
 MediaStream.propTypes = {
   id: PropTypes.string.isRequired,
+  updateFrequency: PropTypes.number.isRequired,
   classes: PropTypes.object.isRequired
 };
 

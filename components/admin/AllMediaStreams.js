@@ -36,7 +36,11 @@ class AllMediaStreams extends Component {
             if (error) return <Error error={error} />;
             if (data) {
               const activeMediaStreams = data.mediaStreams.map(mediaStream => (
-                <MediaStream key={mediaStream.id} id={mediaStream.id} />
+                <MediaStream
+                  key={mediaStream.id}
+                  id={mediaStream.id}
+                  updateFrequency={mediaStream.updateFrequency}
+                />
               ));
               return (
                 <Paper className={classes.root}>
