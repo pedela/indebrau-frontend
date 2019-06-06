@@ -27,11 +27,6 @@ const styles = theme => ({
     padding: theme.spacing(2),
     flexGrow: 1
   },
-  graph: {
-    width: '50%',
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2)
-  },
   card: {
     width: 300
   },
@@ -84,6 +79,8 @@ class MashTun extends Component {
         </Dialog>
 
         <Dialog
+          fullWidth={true}
+          maxWidth="lg"
           open={this.state.dataOpen}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
@@ -103,14 +100,13 @@ class MashTun extends Component {
                   if (loading) return <Loading />;
                   if (error) return <Error error={error} />;
                   if (data) {
-                    const graph = (
+                    return (
                       <GraphChart
                         data={data.graph.graphData}
                         key={data.graph.id}
                         name={data.graph.name}
                       />
                     );
-                    return { graph };
                   }
                 }}
               </Query>
