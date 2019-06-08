@@ -15,9 +15,8 @@ import AddIcon from '@material-ui/icons/Add';
 import { Mutation } from 'react-apollo';
 import Error from '../Error';
 import {
-  ACTIVE_GRAPHS_QUERY,
-  ALL_GRAPHS_QUERY,
-  CREATE_GRAPH_MUTATION
+  ALL_MEDIA_STREAMS_QUERY,
+  CREATE_MEDIA_STREAM_MUTATION
 } from '../../lib/queriesAndMutations';
 
 const styles = theme => ({
@@ -49,15 +48,14 @@ const styles = theme => ({
   }
 });
 
-class CreateGraph extends Component {
+class CreateMediaStream extends Component {
   state = {
     open: false,
     queryError: null,
 
     // mutation variables
     name: '',
-    sensorName: '',
-    updateFrequency: '',
+    updateFrequency: 60,
     brewingProcessId: ''
   };
 
@@ -94,13 +92,10 @@ class CreateGraph extends Component {
           <AddIcon />
         </Fab>
         <Mutation
-          mutation={CREATE_GRAPH_MUTATION}
-          refetchQueries={[
-            { query: ACTIVE_GRAPHS_QUERY },
-            { query: ALL_GRAPHS_QUERY }
-          ]}
+          mutation={CREATE_MEDIA_STREAM_MUTATION}
+          refetchQueries={[{ query: ALL_MEDIA_STREAMS_QUERY }]}
         >
-          {(createGraph, { loading }) => (
+          {(createMediaStream, { loading }) => (
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
@@ -109,7 +104,9 @@ class CreateGraph extends Component {
               fullScreen
             >
               <Error error={this.state.queryError} />
-              <DialogTitle id="form-dialog-title">Create Graph</DialogTitle>
+              <DialogTitle id="form-dialog-title">
+                Create Media Stream
+              </DialogTitle>
 
               <DialogContent>
                 <main className={classes.layout}>
@@ -122,17 +119,6 @@ class CreateGraph extends Component {
                           name="name"
                           label="Name"
                           value={this.state.name}
-                          onChange={this.saveToState}
-                          fullWidth
-                        />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <TextField
-                          required
-                          id="sensorName"
-                          name="sensorName"
-                          label="Sensor Name"
-                          value={this.state.sensorName}
                           onChange={this.saveToState}
                           fullWidth
                         />
@@ -176,10 +162,9 @@ class CreateGraph extends Component {
                         onClick={async () => {
                           // fire mutation (clear old error)
                           this.setState({ queryError: null });
-                          await createGraph({
+                          await createMediaStream({
                             variables: {
                               name: this.state.name,
-                              sensorName: this.state.sensorName,
                               updateFrequency: parseInt(
                                 this.state.updateFrequency
                               ),
@@ -209,8 +194,8 @@ class CreateGraph extends Component {
   }
 }
 
-CreateGraph.propTypes = {
+CreateMediaStream.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(CreateGraph);
+export default withStyles(styles)(CreateMediaStream);

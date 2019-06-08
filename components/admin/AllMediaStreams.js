@@ -5,6 +5,7 @@ import { Query } from 'react-apollo';
 import { ALL_MEDIA_STREAMS_QUERY } from '../../lib/queriesAndMutations';
 import MediaStreamTable from './MediaStreamTable';
 import MediaStream from '../MediaStream';
+import CreateMediaStream from './CreateMediaStream';
 import Loading from '../Loading';
 import Error from '../Error';
 
@@ -53,6 +54,9 @@ class AllMediaStreams extends Component {
             }
           }}
         </Query>
+        <Paper className={classes.root}>
+          <CreateMediaStream className={classes.root} />
+        </Paper>
       </div>
     );
   }
