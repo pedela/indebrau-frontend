@@ -11,6 +11,8 @@ import {
   withStyles
 } from '@material-ui/core';
 import DeleteGraph from './DeleteGraph';
+import { renderDate } from '../../lib/utils.js';
+
 
 const styles = theme => ({
   root: {
@@ -35,11 +37,13 @@ class GraphTable extends Component {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align="center">ID</TableCell>
               <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Sensor Name</TableCell>
+              <TableCell align="center">Last Update</TableCell>
+              <TableCell align="center">Last Value</TableCell>
               <TableCell align="center">Active</TableCell>
-              <TableCell align="center">Update Frequency</TableCell>
+              <TableCell align="center">Frequency</TableCell>
+              <TableCell align="center">Sensor Name</TableCell>
+              <TableCell align="center">ID</TableCell>
               <TableCell align="center">Linked Brewing Process</TableCell>
               <TableCell align="center" />
             </TableRow>
@@ -47,13 +51,13 @@ class GraphTable extends Component {
           <TableBody>
             {this.props.graphs.map(n => (
               <TableRow key={n.id}>
-                <TableCell component="th" scope="row">
-                  {n.id}
-                </TableCell>
                 <TableCell align="right">{n.name}</TableCell>
-                <TableCell align="right">{n.sensorName}</TableCell>
+                <TableCell align="right">{n.graphData[0] && renderDate(n.graphData[0].time)}</TableCell>
+                <TableCell align="right">{n.graphData[0] && parseFloat(n.graphData[0].value).toFixed(2)}</TableCell>
                 <TableCell align="right">{n.active.toString()}</TableCell>
-                <TableCell align="right">{n.updateFrequency}</TableCell>
+                <TableCell align="right">{n.updateFrequency} Sec</TableCell>
+                <TableCell align="right">{n.sensorName}</TableCell>
+                <TableCell align="right">{n.id}</TableCell>
                 <TableCell align="right">{n.brewingProcess.id}</TableCell>
                 <TableCell align="right">
                   <Fab
