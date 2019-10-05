@@ -1,30 +1,32 @@
-/* eslint-disable jsx-a11y/anchor-has-content */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withRouter } from 'next/router';
 import NextLink from 'next/link';
 import MuiLink from '@material-ui/core/Link';
+import {forwardRef} from 'react';
 
-function NextComposed(props) {
+const NextComposed = forwardRef((props, ref) => {
   const { as, href, prefetch, ...other } = props;
 
   return (
-    <NextLink href={href} prefetch={prefetch} as={as}>
+    <NextLink href={href} prefetch={prefetch} as={as} ref={ref} >
       <a {...other} />
     </NextLink>
   );
-}
+});
 
 NextComposed.propTypes = {
   as: PropTypes.string,
   href: PropTypes.string,
   prefetch: PropTypes.bool,
 };
+NextComposed.displayName = 'NextComposed'; // ESLint Cries otherwise
 
 // A styled version of the Next.js Link component:
 // https://nextjs.org/docs/#with-link
-function Link(props) {
+const Link = forwardRef((props, ref) => {
   const { activeClassName, router, className: classNameProps, naked, ...other } = props;
 
   const className = clsx(classNameProps, {
@@ -32,11 +34,11 @@ function Link(props) {
   });
 
   if (naked) {
-    return <NextComposed className={className} {...other} />;
+    return <NextComposed className={className} ref={ref} {...other} />;
   }
 
-  return <MuiLink component={NextComposed} className={className} {...other} />;
-}
+  return <MuiLink component={NextComposed} className={className} ref={ref} {...other} />;
+});
 
 Link.propTypes = {
   activeClassName: PropTypes.string,
