@@ -12,7 +12,7 @@ class Loading extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <Typography component="h1" variant="h5" className={classes.root}>
+      <Typography variant="overline" className={classes.root}>
         Loading...
       </Typography>
     );
