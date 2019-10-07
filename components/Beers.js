@@ -34,7 +34,7 @@ export default function Beers() {
                 <CardActionArea>
                   <CardMedia
                     className={classes.media}
-                    image="../static/karnevalsKoelsch.jpg"
+                    image="../karnevalsKoelsch.jpg"
                     title="Karnevals Kölsch"
                   />
                   <CardContent>
@@ -51,7 +51,7 @@ export default function Beers() {
                 <CardActionArea>
                   <CardMedia
                     className={classes.media}
-                    image="../static/epa.jpg"
+                    image="../epa.jpg"
                     title="Eschweiler Pale Ale"
                   />
                   <CardContent>

@@ -22,7 +22,7 @@
     "apollo-client": "^2.6.4",
     "cloudinary-react": "^1.2.1",
     "graphql": "^14.5.8",
-    "next": "^9.0.7",
+    "next": "^9.1.0",
     "next-with-apollo": "^4.3.0",
     "nprogress": "^0.2.0",
     "prop-types": "15.7.2",

@@ -22,8 +22,8 @@ class Meta extends Component {
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
         />
         <meta charSet="utf-8" />
-        <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
-        <link rel="shortcut icon" href="/static/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="/nprogress.css" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <title>Indebrau</title>
       </Head>
     );
