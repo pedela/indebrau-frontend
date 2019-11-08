@@ -10,10 +10,10 @@ const SignUpPage = () => (
       {({ data }) => {
         const me = data ? data.me : null;
         return (
-        <>
-          {!me && <SignUp />}
+          <>
+            {!me && <SignUp />}
             {me &&  <Home/>}
-        </>
+          </>
         );
       }}
     </CurrentUser>
