@@ -17,3 +17,7 @@ Build latest docker image:
 docker build -t indebrau/indebrau-frontend .
 ```
 Then, use docker-compose scripts from main repository.
+
+
+## Current Issues
+    "react-apollo" has to be at version "3.1.2"
