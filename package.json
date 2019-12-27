@@ -5,9 +5,9 @@
   "description": "The frontend of indebrau",
   "repository": "https://github.com/PedeLa/indebrau-frontend",
   "scripts": {
+    "deploy": "npm run build && npm run start",
     "dev": "next",
     "build": "next build",
-    "now-build": "next build",
     "start": "next start"
   },
   "engines": {
@@ -29,7 +29,8 @@
     "react": "16.11.0",
     "react-apollo": "3.1.2",
     "react-dom": "16.11.0",
-    "recharts": "1.8.5"
+    "recharts": "1.8.5",
+    "dotenv": "8.2.0"
   },
   "devDependencies": {
     "babel-eslint": "10.0.3",
