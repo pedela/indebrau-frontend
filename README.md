@@ -20,4 +20,4 @@ Then, use docker-compose scripts from main repository.
 
 
 ## Current Issues
-"react-apollo" has to be at version "2.5.2"
+"react-apollo" has to be at version "2.5.6"
