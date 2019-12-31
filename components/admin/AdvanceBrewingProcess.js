@@ -79,7 +79,7 @@ const MenuProps = {
   }
 };
 
-// TODO: Read steps (and currently active steps) from backend!
+// TODO: Read steps from backend!
 const STEPS = [
   'MALT_CRUSHING',
   'HEATING_UP',

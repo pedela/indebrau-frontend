@@ -7,16 +7,23 @@ import {
   Grid,
   Dialog,
   DialogContent,
+  FormControl,
+  InputLabel,
+  Input,
   Fab,
+  MenuItem,
   DialogTitle,
+  Select,
   withStyles
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import { Mutation } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
+
 import Error from '../Error';
 import {
   ACTIVE_GRAPHS_QUERY,
   ALL_GRAPHS_QUERY,
+  ALL_BREWING_PROCESSES_QUERY,
   CREATE_GRAPH_MUTATION
 } from '../../lib/queriesAndMutations';
 
@@ -52,31 +59,48 @@ const styles = theme => ({
 class CreateGraph extends Component {
   state = {
     open: false,
+    brewingProcessOpen: false,
     queryError: null,
 
     // mutation variables
     name: '',
     sensorName: '',
     updateFrequency: '',
-    brewingProcessId: ''
+    brewingProcessId: 'Select..'
   };
 
   saveToState = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  handleNewBrewingProcessId = event => {
+    console.log(event);
+    this.setState({ brewingProcessId: event.target.value });
+  };
+
+  handleBrewingProcessClose = () => {
+    this.setState({ brewingProcessOpen: false });
+  };
+
+  handleBrewingProcessOpen = () => {
+    this.setState({ brewingProcessOpen: true });
+  };
+
   handleClickOpen = () => {
     this.setState({ open: true });
   };
+
   handleClose = () => {
     this.setState({
       open: false,
+      brewingProcessOpen: false,
       queryError: null,
 
       // mutation variables
       name: '',
       sensorName: '',
       updateFrequency: '',
-      brewingProcessId: ''
+      brewingProcessId: 'Select..'
     });
   };
 
@@ -149,15 +173,41 @@ class CreateGraph extends Component {
                         />
                       </Grid>
                       <Grid item xs={12}>
-                        <TextField
-                          required
-                          id="brewingProcessId"
-                          name="brewingProcessId"
-                          label=" Brewing Process Id"
-                          value={this.state.brewingProcessId}
-                          onChange={this.saveToState}
-                          fullWidth
-                        />
+                        <Query query={ALL_BREWING_PROCESSES_QUERY}>
+                          {({ data }) => {
+                            var processIds = [];
+                            if(data.brewingProcesses){
+                              data.brewingProcesses.map(n => (
+                                processIds.push(n.id)
+                              ));
+                            }
+                            return (
+                              <FormControl className={classes.formControl}>
+                                <InputLabel htmlFor="select-chip">
+                              Brewing Process Id
+                                </InputLabel>
+                                <Select
+                                  open={this.state.brewingProcessOpen}
+                                  onClose={this.handleBrewingProcessClose}
+                                  onOpen={this.handleBrewingProcessOpen}
+                                  onChange={this.handleNewBrewingProcessId}
+                                  value={this.state.brewingProcessId}
+                                  input={<Input id="select-chip" />}
+                                >
+                                  <MenuItem key="Select.." value="Select..">
+                                      Select..
+                                  </MenuItem>
+                                  {processIds.map(id => (
+                                    <MenuItem key={id} value={id}>
+                                      {id}
+                                    </MenuItem>
+                                  ))}
+                                </Select>
+                              </FormControl>
+                            );
+                          }}
+                        </Query>
+
                       </Grid>
                     </Grid>
 
