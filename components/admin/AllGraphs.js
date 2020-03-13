@@ -29,7 +29,7 @@ class AllGraphs extends Component {
     const { classes } = this.props;
 
     const activeGraphsVariables = {
-      dataPoints: 50,
+      dataPoints: 500,
       active: true
     };
 
