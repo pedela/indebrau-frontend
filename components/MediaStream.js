@@ -44,7 +44,7 @@ class MediaStream extends Component {
               if (data.mediaStream.mediaFiles[0]) {
                 return (
                   <>
-                    <p>image to come here..</p>
+                    <p>{data.mediaStream.mediaFiles[0].publicIdentifier}</p>
                     <Typography body1="h5">
                         Last Updated:
                       {' ' + renderDate(data.mediaStream.mediaFiles[0].time)}

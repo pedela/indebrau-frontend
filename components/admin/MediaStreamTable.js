@@ -36,7 +36,7 @@ class MediaStreamTable extends Component {
           <TableHead>
             <TableRow>
               <TableCell align="center">ID</TableCell>
-              <TableCell align="center">Name</TableCell>
+              <TableCell align="center">Media File Name</TableCell>
               <TableCell align="center">Active</TableCell>
               <TableCell align="center">Update Frequency</TableCell>
               <TableCell align="center">Linked Brewing Process</TableCell>
@@ -49,7 +49,7 @@ class MediaStreamTable extends Component {
                 <TableCell component="th" scope="row">
                   {n.id}
                 </TableCell>
-                <TableCell align="right">{n.name}</TableCell>
+                <TableCell align="right">{n.mediaFilesName}</TableCell>
                 <TableCell align="right">{n.active.toString()}</TableCell>
                 <TableCell align="right">{n.updateFrequency}</TableCell>
                 <TableCell align="right">{n.brewingProcess.id}</TableCell>
