@@ -44,7 +44,11 @@ class MediaStream extends Component {
               if (data.mediaStream.mediaFiles[0]) {
                 return (
                   <>
-                    <p>{data.mediaStream.mediaFiles[0].publicIdentifier}</p>
+                    <img src={
+                      // eslint-disable-next-line no-undef
+                      process.env.BACKEND_ENDPOINT + '/media/' + this.props.brewingProcessId + '/' + this.props.id + '/' + data.mediaStream.mediaFiles[0].publicIdentifier
+                    } className={classes.image} />
+                    <img></img>
                     <Typography body1="h5">
                         Last Updated:
                       {' ' + renderDate(data.mediaStream.mediaFiles[0].time)}
@@ -65,6 +69,7 @@ class MediaStream extends Component {
 MediaStream.propTypes = {
   id: PropTypes.string.isRequired,
   updateFrequency: PropTypes.number.isRequired,
+  brewingProcessId: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired
 };
 

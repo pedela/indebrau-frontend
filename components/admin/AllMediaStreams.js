@@ -40,6 +40,7 @@ class AllMediaStreams extends Component {
                 <MediaStream
                   key={mediaStream.id}
                   id={mediaStream.id}
+                  brewingProcessId={mediaStream.brewingProcess.id}
                   updateFrequency={mediaStream.updateFrequency}
                 />
               ));
