@@ -26,7 +26,7 @@ class Home extends Component {
           <br />
           Beer from Eschweiler
         </Typography>
-        <img src="../brewery.jpeg" className={classes.image} />
+        <img src="../logo.png" className={classes.image} />
         <Typography variant="subtitle1" gutterBottom>
           A beer as smooth as its river!
         </Typography>
