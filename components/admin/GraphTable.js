@@ -11,7 +11,7 @@ import {
   withStyles
 } from '@material-ui/core';
 import DeleteGraph from './DeleteGraph';
-import { renderDate } from '../../lib/utils.js';
+import { renderDate, parseSensorValue } from '../../lib/utils.js';
 
 
 const styles = theme => ({
@@ -53,7 +53,7 @@ class GraphTable extends Component {
               <TableRow key={n.id}>
                 <TableCell align="right">{n.name}</TableCell>
                 <TableCell align="right">{n.graphData[0] && renderDate(n.graphData[0].time)}</TableCell>
-                <TableCell align="right">{n.graphData[0] && parseFloat(n.graphData[0].value).toFixed(2)}</TableCell>
+                <TableCell align="right">{n.graphData[0] && parseSensorValue(n.graphData[0].value)}</TableCell>
                 <TableCell align="right">{n.active.toString()}</TableCell>
                 <TableCell align="right">{n.updateFrequency} Sec</TableCell>
                 <TableCell align="right">{n.sensorName}</TableCell>

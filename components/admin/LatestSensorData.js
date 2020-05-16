@@ -9,7 +9,7 @@ import { Paper, Typography,   Table,
 import {
   LATEST_SENSOR_DATA_QUERY
 } from '../../lib/queriesAndMutations';
-import { renderDate } from '../../lib/utils.js';
+import { renderDate, parseSensorValue } from '../../lib/utils.js';
 import Error from '../Error';
 
 const styles = theme => ({
@@ -50,7 +50,7 @@ class LatestSensorValues extends Component {
                   <TableRow key={sensorData.sensorName}>
                     <TableCell align="center">{sensorData.sensorName.replace(/[/]/g, ' ')}</TableCell>
                     <TableCell align="center">{renderDate(sensorData.sensorTimeStamp)}</TableCell>
-                    <TableCell align="center">{parseFloat(sensorData.sensorValue).toFixed(2)}</TableCell>
+                    <TableCell align="center">{parseSensorValue(sensorData.sensorValue)}</TableCell>
                   </TableRow>
                 ));
                 return (
