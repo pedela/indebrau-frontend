@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Paper, Typography, withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import AllGraphs from './AllGraphs';
 import AllBrewingProcesses from './AllBrewingProcesses';
 import AllMediaStreams from './AllMediaStreams';
@@ -27,12 +27,7 @@ class DashboardContent extends Component {
     }
     if (this.props.activeWindow == 'AdminHome') {
       return(
-        <Paper className={this.props.classes.root}>
-          <Typography variant="h5" gutterBottom>
-          Admin Area
-          </Typography>
-          <LatestSensorData />
-        </Paper>
+        <LatestSensorData />
       );
     }
   };
