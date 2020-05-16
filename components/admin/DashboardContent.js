@@ -4,6 +4,7 @@ import { Paper, Typography, withStyles } from '@material-ui/core';
 import AllGraphs from './AllGraphs';
 import AllBrewingProcesses from './AllBrewingProcesses';
 import AllMediaStreams from './AllMediaStreams';
+import LatestSensorData from './LatestSensorData';
 
 const styles = theme => ({
   root: {
@@ -24,16 +25,16 @@ class DashboardContent extends Component {
     if (this.props.activeWindow == 'AllMediaStreams') {
       return <AllMediaStreams />;
     }
-    return (
-      <Paper className={this.props.classes.root}>
-        <Typography variant="h5" gutterBottom>
+    if (this.props.activeWindow == 'AdminHome') {
+      return(
+        <Paper className={this.props.classes.root}>
+          <Typography variant="h5" gutterBottom>
           Admin Area
-        </Typography>
-        <Typography variant="subtitle1" gutterBottom>
-          please choose your view
-        </Typography>
-      </Paper>
-    );
+          </Typography>
+          <LatestSensorData />
+        </Paper>
+      );
+    }
   };
 
   render() {

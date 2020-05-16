@@ -34,7 +34,7 @@ class GraphTable extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Table>
+        <Table size="small">
           <TableHead>
             <TableRow>
               <TableCell align="center">Name</TableCell>

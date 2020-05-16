@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import LaptopIcon from '@material-ui/icons/Laptop';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
@@ -103,7 +104,7 @@ const styles = theme => ({
 class AdminDashboard extends Component {
   state = {
     open: false,
-    activeWindow: 'none'
+    activeWindow: 'AdminHome'
   };
 
   setActiveWindow = activeWindow => {
@@ -207,6 +208,15 @@ class AdminDashboard extends Component {
                         <ListItemText primary="Home" />
                       </ListItem>
                     </Link>
+                    <ListItem
+                      button
+                      onClick={() => this.setActiveWindow('AdminHome')}
+                    >
+                      <ListItemIcon>
+                        <LaptopIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Admin Home" />
+                    </ListItem>
                     <ListItem
                       button
                       onClick={() =>
