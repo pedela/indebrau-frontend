@@ -51,7 +51,7 @@ class MediaStream extends Component {
                     <img></img>
                     <Typography body1="h5">
                         Last Updated:
-                      {' ' + renderDate(data.mediaStream.mediaFiles[0].time)}
+                      {' ' + renderDate(data.mediaStream.mediaFiles[0].time, true)}
                     </Typography>
                   </>
                 );
