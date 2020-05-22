@@ -15,6 +15,7 @@ import Error from '../Error';
 const styles = theme => ({
   root: {
     width: '100%',
+    textAlign: 'center',
     overflowX: 'auto',
     padding: theme.spacing(1),
     maxHeight: '100%'
