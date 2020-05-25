@@ -5,6 +5,11 @@ import {
   Button,
   TextField,
   Grid,
+  FormControl,
+  InputLabel,
+  Select,
+  Input,
+  MenuItem,
   Dialog,
   DialogContent,
   Fab,
@@ -12,9 +17,10 @@ import {
   withStyles
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import { Mutation } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import Error from '../Error';
 import {
+  ALL_BREWING_PROCESSES_QUERY,
   ALL_MEDIA_STREAMS_QUERY,
   CREATE_MEDIA_STREAM_MUTATION
 } from '../../lib/queriesAndMutations';
@@ -54,27 +60,36 @@ class CreateMediaStream extends Component {
     queryError: null,
 
     // mutation variables
-    name: '',
+    mediaFilesName: '',
+    overwrite: true,
+    brewingSteps:[],
     updateFrequency: 60,
-    brewingProcessId: ''
+    brewingProcessId: 'Select..'
   };
 
   saveToState = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  handleNewBrewingProcessId = event => {
+    this.setState({ brewingProcessId: event.target.value });
+  };
+
   handleClickOpen = () => {
     this.setState({ open: true });
   };
+
   handleClose = () => {
     this.setState({
       open: false,
       queryError: null,
 
       // mutation variables
-      name: '',
-      sensorName: '',
-      updateFrequency: '',
-      brewingProcessId: ''
+      mediaFilesName: '',
+      overwrite: true,
+      brewingSteps:[],
+      updateFrequency: 60,
+      brewingProcessId: 'Select..'
     });
   };
 
@@ -115,10 +130,10 @@ class CreateMediaStream extends Component {
                       <Grid item xs={12}>
                         <TextField
                           required
-                          id="name"
-                          name="name"
-                          label="Name"
-                          value={this.state.name}
+                          id="mediaFilesName"
+                          name="mediaFilesName"
+                          label="Media Files Name"
+                          value={this.state.mediaFilesName}
                           onChange={this.saveToState}
                           fullWidth
                         />
@@ -135,15 +150,40 @@ class CreateMediaStream extends Component {
                         />
                       </Grid>
                       <Grid item xs={12}>
-                        <TextField
-                          required
-                          id="brewingProcessId"
-                          name="brewingProcessId"
-                          label=" Brewing Process Id"
-                          value={this.state.brewingProcessId}
-                          onChange={this.saveToState}
-                          fullWidth
-                        />
+                        <Query query={ALL_BREWING_PROCESSES_QUERY}>
+                          {({ data }) => {
+                            var processIds = [];
+                            if(data.brewingProcesses){
+                              data.brewingProcesses.map(n => (
+                                processIds.push(n.id)
+                              ));
+                            }
+                            return (
+                              <FormControl className={classes.formControl}>
+                                <InputLabel htmlFor="select-chip">
+                              Brewing Process Id
+                                </InputLabel>
+                                <Select
+                                  open={this.state.brewingProcessOpen}
+                                  onClose={this.handleBrewingProcessClose}
+                                  onOpen={this.handleBrewingProcessOpen}
+                                  onChange={this.handleNewBrewingProcessId}
+                                  value={this.state.brewingProcessId}
+                                  input={<Input id="select-chip" />}
+                                >
+                                  <MenuItem key="Select.." value="Select..">
+                                      Select..
+                                  </MenuItem>
+                                  {processIds.map(id => (
+                                    <MenuItem key={id} value={id}>
+                                      {id}
+                                    </MenuItem>
+                                  ))}
+                                </Select>
+                              </FormControl>
+                            );
+                          }}
+                        </Query>
                       </Grid>
                     </Grid>
 
@@ -161,10 +201,13 @@ class CreateMediaStream extends Component {
                         color="primary"
                         onClick={async () => {
                           // fire mutation (clear old error)
+                          // TODO brewing steps and updateFrequency
                           this.setState({ queryError: null });
                           await createMediaStream({
                             variables: {
-                              name: this.state.name,
+                              mediaFilesName: this.state.mediaFilesName,
+                              overwrite: this.state.overwrite,
+                              brewingSteps:this.state.brewingSteps,
                               updateFrequency: parseInt(
                                 this.state.updateFrequency
                               ),

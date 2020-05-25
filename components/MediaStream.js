@@ -20,7 +20,7 @@ const styles = theme => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     padding: theme.spacing(1),
-    width: 260
+    maxWidth: '100%'
   }
 });
 
@@ -49,14 +49,17 @@ class MediaStream extends Component {
                       process.env.BACKEND_ENDPOINT + '/media/' + this.props.brewingProcessId + '/' + this.props.id + '/' + data.mediaStream.mediaFiles[0].publicIdentifier
                     } className={classes.image} />
                     <img></img>
-                    <Typography body1="h5">
-                        Last Updated:
+                    <Typography variant="subtitle1">
+                      {data.mediaStream.mediaFilesName}
+                    </Typography>
+                    <Typography variant="subtitle2">
+                      Last Update:
                       {' ' + renderDate(data.mediaStream.mediaFiles[0].time, true)}
                     </Typography>
                   </>
                 );
               } else {
-                return <p>No Image</p>;
+                return <Typography variant="subtitle1">No Image</Typography>;
               }
             }
           }}

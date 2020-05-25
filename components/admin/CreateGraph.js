@@ -74,7 +74,6 @@ class CreateGraph extends Component {
   };
 
   handleNewBrewingProcessId = event => {
-    console.log(event);
     this.setState({ brewingProcessId: event.target.value });
   };
 
@@ -207,7 +206,6 @@ class CreateGraph extends Component {
                             );
                           }}
                         </Query>
-
                       </Grid>
                     </Grid>
 
