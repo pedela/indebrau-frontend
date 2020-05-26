@@ -17,7 +17,7 @@ class GraphChart extends Component {
       value: parseSensorValue(dataPoint.value)
     }));
     return (
-      <ResponsiveContainer width='99%' height={180}>
+      <ResponsiveContainer width='99%' height={250}>
         <LineChart
           data={renderData}
           margin={{ top: 5, right: 5, left: -15, bottom: 5 }}
