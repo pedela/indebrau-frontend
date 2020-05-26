@@ -12,7 +12,7 @@ import {
 import DeleteBrewingProcess from './admin/DeleteBrewingProcess';
 import AdvanceBrewingProcess from './admin/AdvanceBrewingProcess';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     textAlign: 'center',
     padding: theme.spacing(2),
@@ -25,7 +25,7 @@ const styles = theme => ({
 });
 
 class BrewingProcessTable extends Component {
-  handleClick = id => {
+  handleClick = (id) => {
     Router.push(
       {
         pathname: '/brewingProcess',
@@ -39,39 +39,39 @@ class BrewingProcessTable extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Table size="small">
+        <Table size='small'>
           <TableHead>
             <TableRow>
-              {this.props.adminView && <TableCell align="center">ID</TableCell>}
-              <TableCell align="center">Name</TableCell>
+              {this.props.adminView && <TableCell align='center'>ID</TableCell>}
+              <TableCell align='center'>Name</TableCell>
               {!this.props.adminView && (
-                <TableCell align="center">Description</TableCell>
+                <TableCell align='center'>Description</TableCell>
               )}
-              {this.props.adminView && <TableCell align="center" />}
+              {this.props.adminView && <TableCell align='center' />}
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.brewingProcesses.map(n => (
+            {this.props.brewingProcesses.map((n) => (
               <TableRow key={n.id} hover>
                 {this.props.adminView && (
-                  <TableCell align="center">{n.id}</TableCell>
+                  <TableCell align='center'>{n.id}</TableCell>
                 )}
                 <TableCell
-                  align="center"
+                  align='center'
                   onClick={() => this.handleClick(n.id)}
                 >
                   {n.name}
                 </TableCell>
                 {!this.props.adminView && (
                   <TableCell
-                    align="center"
+                    align='center'
                     onClick={() => this.handleClick(n.id)}
                   >
                     {n.description}
                   </TableCell>
                 )}
                 {this.props.adminView && (
-                  <TableCell align="center">
+                  <TableCell align='center'>
                     <DeleteBrewingProcess id={n.id} />
                     <AdvanceBrewingProcess
                       id={n.id}

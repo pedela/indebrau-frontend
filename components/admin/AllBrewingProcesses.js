@@ -8,7 +8,7 @@ import Error from '../Error';
 import BrewingProcessTable from '../BrewingProcessTable';
 import CreateBrewingProcess from './CreateBrewingProcess';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     width: '100%',
     overflowX: 'auto',
@@ -32,7 +32,7 @@ class AllBrewingProcesses extends Component {
             // success!
             return (
               <Paper>
-                <Typography variant="h5" className={classes.root}>
+                <Typography variant='h5' className={classes.root}>
                   All Brewing Processes
                 </Typography>
                 <Paper className={classes.root}>

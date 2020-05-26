@@ -24,7 +24,7 @@ import Error from '../Error';
 import GraphChart from '../GraphChart';
 import { BottleProps } from '../../lib/ComponentProperties';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     textAlign: 'center',
     padding: theme.spacing(2),
@@ -68,12 +68,12 @@ class Bottle extends Component {
         <Dialog
           open={this.state.infoOpen}
           onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
+          aria-labelledby='form-dialog-title'
         >
-          <DialogTitle id="form-dialog-title">{BottleProps.title}</DialogTitle>
+          <DialogTitle id='form-dialog-title'>{BottleProps.title}</DialogTitle>
           <DialogContent>
             <Paper>
-              <Typography variant="body1" gutterBottom>
+              <Typography variant='body1' gutterBottom>
                 {BottleProps.description}
               </Typography>
             </Paper>
@@ -81,12 +81,12 @@ class Bottle extends Component {
         </Dialog>
         <Dialog
           fullWidth={true}
-          maxWidth="lg"
+          maxWidth='lg'
           open={this.state.dataOpen}
           onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
+          aria-labelledby='form-dialog-title'
         >
-          <DialogTitle id="form-dialog-title">{BottleProps.title}</DialogTitle>
+          <DialogTitle id='form-dialog-title'>{BottleProps.title}</DialogTitle>
           <DialogContent>
             {this.state.id_fridge && (
               <Query
@@ -159,7 +159,7 @@ class Bottle extends Component {
     if (this.props.activeSteps.includes('BOTTLED')) {
       this.state.active = true;
     }
-    this.props.graphs.map(graph => {
+    this.props.graphs.map((graph) => {
       if (graph.sensorName == 'fermentation/fridge/temperature') {
         // eslint-disable-next-line react/no-direct-mutation-state
         this.state.id_fridge = graph.id;
@@ -179,7 +179,7 @@ class Bottle extends Component {
         this.setState({ active: false });
       }
       if (this.props.graphs !== prevProps.graphs) {
-        this.props.graphs.map(graph => {
+        this.props.graphs.map((graph) => {
           if (graph.sensorName == 'fermenting/fridge/temperature') {
             this.setState({ id_fridge: graph.id });
           }
@@ -205,16 +205,16 @@ class Bottle extends Component {
               title={BottleProps.title}
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
+              <Typography gutterBottom variant='h5' component='h2'>
                 {BottleProps.title}
               </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size="small" color="primary" onClick={this.handleInfoClick}>
+            <Button size='small' color='primary' onClick={this.handleInfoClick}>
               More Info
             </Button>
-            <Typography gutterBottom variant="body2">
+            <Typography gutterBottom variant='body2'>
               {this.state.id_fridge && (
                 <Query
                   query={LATEST_GRAPH_DATA_QUERY}

@@ -7,7 +7,7 @@ import BrewingProcessTable from './BrewingProcessTable';
 import SignIn from './SignIn';
 import { CURRENT_USER_QUERY } from '../lib/queriesAndMutations';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     width: '100%',
     overflowX: 'auto',
@@ -20,9 +20,9 @@ const styles = theme => ({
   }
 });
 
-const CurrentUser = props => (
+const CurrentUser = (props) => (
   <Query {...props} query={CURRENT_USER_QUERY}>
-    {payload => props.children(payload)}
+    {(payload) => props.children(payload)}
   </Query>
 );
 
@@ -45,10 +45,10 @@ class User extends Component {
                 {me && (
                   <>
                     <Paper className={classes.root}>
-                      <Typography variant="h5" gutterBottom>
+                      <Typography variant='h5' gutterBottom>
                         Hello {me.name}
                       </Typography>
-                      <Typography variant="subtitle1" gutterBottom>
+                      <Typography variant='subtitle1' gutterBottom>
                         Your Brewing Processes
                       </Typography>
                       <Paper className={classes.root}>
@@ -62,7 +62,7 @@ class User extends Component {
                     </Paper>
                     <Paper className={classes.root}>
                       {me && me.permissions.includes('ADMIN') && (
-                        <Link href="/adminDashboard">
+                        <Link href='/adminDashboard'>
                           <Button>Go to Admin Area</Button>
                         </Link>
                       )}

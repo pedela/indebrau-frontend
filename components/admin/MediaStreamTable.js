@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import DeleteMediaStream from './DeleteMediaStream';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     textAlign: 'center',
     padding: theme.spacing(2),
@@ -32,31 +32,31 @@ class MediaStreamTable extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Table size="small">
+        <Table size='small'>
           <TableHead>
             <TableRow>
-              <TableCell align="center">ID</TableCell>
-              <TableCell align="center">Media File Name</TableCell>
-              <TableCell align="center">Active</TableCell>
-              <TableCell align="center">Update Frequency</TableCell>
-              <TableCell align="center">Linked Brewing Process</TableCell>
-              <TableCell align="center" />
+              <TableCell align='center'>ID</TableCell>
+              <TableCell align='center'>Media File Name</TableCell>
+              <TableCell align='center'>Active</TableCell>
+              <TableCell align='center'>Update Frequency</TableCell>
+              <TableCell align='center'>Linked Brewing Process</TableCell>
+              <TableCell align='center' />
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.mediaStreams.map(n => (
+            {this.props.mediaStreams.map((n) => (
               <TableRow key={n.id}>
-                <TableCell component="th" scope="row">
+                <TableCell component='th' scope='row'>
                   {n.id}
                 </TableCell>
-                <TableCell align="center">{n.mediaFilesName}</TableCell>
-                <TableCell align="center">{n.active.toString()}</TableCell>
-                <TableCell align="center">{n.updateFrequency}</TableCell>
-                <TableCell align="center">{n.brewingProcess.id}</TableCell>
-                <TableCell align="center">
+                <TableCell align='center'>{n.mediaFilesName}</TableCell>
+                <TableCell align='center'>{n.active.toString()}</TableCell>
+                <TableCell align='center'>{n.updateFrequency}</TableCell>
+                <TableCell align='center'>{n.brewingProcess.id}</TableCell>
+                <TableCell align='center'>
                   <Fab
-                    color="secondary"
-                    aria-label="Edit"
+                    color='secondary'
+                    aria-label='Edit'
                     className={classes.fab}
                   >
                     <EditIcon />

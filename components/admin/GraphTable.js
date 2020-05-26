@@ -13,8 +13,7 @@ import {
 import DeleteGraph from './DeleteGraph';
 import { renderDate, parseSensorValue } from '../../lib/utils.js';
 
-
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     textAlign: 'center',
     padding: theme.spacing(2),
@@ -34,35 +33,39 @@ class GraphTable extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Table size="small">
+        <Table size='small'>
           <TableHead>
             <TableRow>
-              <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Last Update</TableCell>
-              <TableCell align="center">Last Value</TableCell>
-              <TableCell align="center">Active</TableCell>
-              <TableCell align="center">Frequency</TableCell>
-              <TableCell align="center">Sensor Name</TableCell>
-              <TableCell align="center">ID</TableCell>
-              <TableCell align="center">Linked Brewing Process</TableCell>
-              <TableCell align="center" />
+              <TableCell align='center'>Name</TableCell>
+              <TableCell align='center'>Last Update</TableCell>
+              <TableCell align='center'>Last Value</TableCell>
+              <TableCell align='center'>Active</TableCell>
+              <TableCell align='center'>Frequency</TableCell>
+              <TableCell align='center'>Sensor Name</TableCell>
+              <TableCell align='center'>ID</TableCell>
+              <TableCell align='center'>Linked Brewing Process</TableCell>
+              <TableCell align='center' />
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.graphs.map(n => (
+            {this.props.graphs.map((n) => (
               <TableRow key={n.id}>
-                <TableCell align="center">{n.name}</TableCell>
-                <TableCell align="center">{n.graphData[0] && renderDate(n.graphData[0].time)}</TableCell>
-                <TableCell align="center">{n.graphData[0] && parseSensorValue(n.graphData[0].value)}</TableCell>
-                <TableCell align="center">{n.active.toString()}</TableCell>
-                <TableCell align="center">{n.updateFrequency} Sec</TableCell>
-                <TableCell align="center">{n.sensorName}</TableCell>
-                <TableCell align="center">{n.id}</TableCell>
-                <TableCell align="center">{n.brewingProcess.id}</TableCell>
-                <TableCell align="center">
+                <TableCell align='center'>{n.name}</TableCell>
+                <TableCell align='center'>
+                  {n.graphData[0] && renderDate(n.graphData[0].time)}
+                </TableCell>
+                <TableCell align='center'>
+                  {n.graphData[0] && parseSensorValue(n.graphData[0].value)}
+                </TableCell>
+                <TableCell align='center'>{n.active.toString()}</TableCell>
+                <TableCell align='center'>{n.updateFrequency} Sec</TableCell>
+                <TableCell align='center'>{n.sensorName}</TableCell>
+                <TableCell align='center'>{n.id}</TableCell>
+                <TableCell align='center'>{n.brewingProcess.id}</TableCell>
+                <TableCell align='center'>
                   <Fab
-                    color="secondary"
-                    aria-label="Edit"
+                    color='secondary'
+                    aria-label='Edit'
                     className={classes.fab}
                   >
                     <EditIcon />

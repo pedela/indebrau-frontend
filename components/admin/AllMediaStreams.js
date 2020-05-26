@@ -9,7 +9,7 @@ import CreateMediaStream from './CreateMediaStream';
 import Loading from '../Loading';
 import Error from '../Error';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     width: '100%',
     overflowX: 'auto',
@@ -36,19 +36,21 @@ class AllMediaStreams extends Component {
             if (loading) return <Loading />;
             if (error) return <Error error={error} />;
             if (data) {
-              const activeMediaStreams = data.mediaStreams.map(mediaStream => (
-                <MediaStream
-                  key={mediaStream.id}
-                  id={mediaStream.id}
-                  brewingProcessId={mediaStream.brewingProcess.id}
-                  updateFrequency={mediaStream.updateFrequency}
-                />
-              ));
+              const activeMediaStreams = data.mediaStreams.map(
+                (mediaStream) => (
+                  <MediaStream
+                    key={mediaStream.id}
+                    id={mediaStream.id}
+                    brewingProcessId={mediaStream.brewingProcess.id}
+                    updateFrequency={mediaStream.updateFrequency}
+                  />
+                )
+              );
               return (
                 <Paper className={classes.root}>
-                  <Typography variant="h5">All Media Streams</Typography>
+                  <Typography variant='h5'>All Media Streams</Typography>
                   <MediaStreamTable mediaStreams={data.mediaStreams} />
-                  <Typography variant="h5">Active Media Streams</Typography>
+                  <Typography variant='h5'>Active Media Streams</Typography>
                   {activeMediaStreams}
                 </Paper>
               );

@@ -7,7 +7,7 @@ import Loading from './Loading';
 import Error from './Error';
 import { renderDate } from '../lib/utils.js';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     width: '100%',
     overflowX: 'auto',
@@ -44,22 +44,32 @@ class MediaStream extends Component {
               if (data.mediaStream.mediaFiles[0]) {
                 return (
                   <>
-                    <img src={
-                      // eslint-disable-next-line no-undef
-                      process.env.BACKEND_ENDPOINT + '/media/' + this.props.brewingProcessId + '/' + this.props.id + '/' + data.mediaStream.mediaFiles[0].publicIdentifier
-                    } className={classes.image} />
+                    <img
+                      src={
+                        // eslint-disable-next-line no-undef
+                        process.env.BACKEND_ENDPOINT +
+                        '/media/' +
+                        this.props.brewingProcessId +
+                        '/' +
+                        this.props.id +
+                        '/' +
+                        data.mediaStream.mediaFiles[0].publicIdentifier
+                      }
+                      className={classes.image}
+                    />
                     <img></img>
-                    <Typography variant="subtitle1">
+                    <Typography variant='subtitle1'>
                       {data.mediaStream.mediaFilesName}
                     </Typography>
-                    <Typography variant="subtitle2">
+                    <Typography variant='subtitle2'>
                       Last Update:
-                      {' ' + renderDate(data.mediaStream.mediaFiles[0].time, true)}
+                      {' ' +
+                        renderDate(data.mediaStream.mediaFiles[0].time, true)}
                     </Typography>
                   </>
                 );
               } else {
-                return <Typography variant="subtitle1">No Image</Typography>;
+                return <Typography variant='subtitle1'>No Image</Typography>;
               }
             }
           }}

@@ -1,17 +1,16 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withRouter } from 'next/router';
 import NextLink from 'next/link';
 import MuiLink from '@material-ui/core/Link';
-import {forwardRef} from 'react';
+import { forwardRef } from 'react';
 
 const NextComposed = forwardRef((props, ref) => {
   const { as, href, prefetch, ...other } = props;
 
   return (
-    <NextLink href={href} prefetch={prefetch} as={as} ref={ref} >
+    <NextLink href={href} prefetch={prefetch} as={as} ref={ref}>
       <a {...other} />
     </NextLink>
   );
@@ -20,24 +19,37 @@ const NextComposed = forwardRef((props, ref) => {
 NextComposed.propTypes = {
   as: PropTypes.string,
   href: PropTypes.string,
-  prefetch: PropTypes.bool,
+  prefetch: PropTypes.bool
 };
 NextComposed.displayName = 'NextComposed'; // ESLint Cries otherwise
 
 // A styled version of the Next.js Link component:
 // https://nextjs.org/docs/#with-link
 const Link = forwardRef((props, ref) => {
-  const { activeClassName, router, className: classNameProps, naked, ...other } = props;
+  const {
+    activeClassName,
+    router,
+    className: classNameProps,
+    naked,
+    ...other
+  } = props;
 
   const className = clsx(classNameProps, {
-    [activeClassName]: router.pathname === props.href && activeClassName,
+    [activeClassName]: router.pathname === props.href && activeClassName
   });
 
   if (naked) {
     return <NextComposed className={className} ref={ref} {...other} />;
   }
 
-  return <MuiLink component={NextComposed} className={className} ref={ref} {...other} />;
+  return (
+    <MuiLink
+      component={NextComposed}
+      className={className}
+      ref={ref}
+      {...other}
+    />
+  );
 });
 
 Link.propTypes = {
@@ -49,12 +61,12 @@ Link.propTypes = {
   onClick: PropTypes.func,
   prefetch: PropTypes.bool,
   router: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-  }).isRequired,
+    pathname: PropTypes.string.isRequired
+  }).isRequired
 };
 
 Link.defaultProps = {
-  activeClassName: 'active',
+  activeClassName: 'active'
 };
 
 export default withRouter(Link);

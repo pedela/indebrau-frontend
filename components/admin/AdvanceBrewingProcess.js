@@ -24,7 +24,7 @@ import {
   ADVANCE_BREWING_PROCESS_MUTATION
 } from '../../lib/queriesAndMutations';
 
-const styles = theme => ({
+const styles = (theme) => ({
   layout: {
     width: 'auto',
     marginLeft: theme.spacing(2),
@@ -116,7 +116,7 @@ class AdvanceBrewingProcess extends Component {
     });
   };
 
-  handleNewActiveSteps = event => {
+  handleNewActiveSteps = (event) => {
     this.setState({ newActiveSteps: event.target.value });
   };
 
@@ -126,8 +126,8 @@ class AdvanceBrewingProcess extends Component {
     return (
       <>
         <Fab
-          color="primary"
-          aria-label="Add"
+          color='primary'
+          aria-label='Add'
           className={classes.fab}
           onClick={this.handleClickOpen}
         >
@@ -141,11 +141,11 @@ class AdvanceBrewingProcess extends Component {
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
-              aria-labelledby="form-dialog-title"
+              aria-labelledby='form-dialog-title'
               disableBackdropClick
             >
               <Error error={this.state.queryError} />
-              <DialogTitle id="form-dialog-title">
+              <DialogTitle id='form-dialog-title'>
                 Advance Brewing Process
               </DialogTitle>
 
@@ -154,17 +154,17 @@ class AdvanceBrewingProcess extends Component {
                   <Paper className={classes.paper}>
                     <Grid container spacing={8}>
                       <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="select-multiple-chip">
+                        <InputLabel htmlFor='select-multiple-chip'>
                           Steps
                         </InputLabel>
                         <Select
                           multiple
                           value={this.state.newActiveSteps}
                           onChange={this.handleNewActiveSteps}
-                          input={<Input id="select-multiple-chip" />}
-                          renderValue={selected => (
+                          input={<Input id='select-multiple-chip' />}
+                          renderValue={(selected) => (
                             <div className={classes.chips}>
-                              {selected.map(value => (
+                              {selected.map((value) => (
                                 <Chip
                                   key={value}
                                   label={value}
@@ -175,7 +175,7 @@ class AdvanceBrewingProcess extends Component {
                           )}
                           MenuProps={MenuProps}
                         >
-                          {STEPS.map(step => (
+                          {STEPS.map((step) => (
                             <MenuItem key={step} value={step}>
                               {step}
                             </MenuItem>
@@ -188,14 +188,14 @@ class AdvanceBrewingProcess extends Component {
                       <Button
                         onClick={this.handleClose}
                         className={classes.button}
-                        color="secondary"
-                        variant="contained"
+                        color='secondary'
+                        variant='contained'
                       >
                         Cancel
                       </Button>
                       <Button
-                        variant="contained"
-                        color="primary"
+                        variant='contained'
+                        color='primary'
                         onClick={async () => {
                           // fire mutation (clear old error)
                           this.setState({ queryError: null });
@@ -204,7 +204,7 @@ class AdvanceBrewingProcess extends Component {
                               id: this.props.id,
                               newActiveSteps: this.state.newActiveSteps
                             }
-                          }).catch(e => {
+                          }).catch((e) => {
                             this.setState({ queryError: e });
                           });
                           if (this.state.queryError == null) {

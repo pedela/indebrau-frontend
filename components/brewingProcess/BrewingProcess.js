@@ -1,11 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
-import {
-  Grid,
-  Typography,
-  withStyles
-} from '@material-ui/core';
+import { Grid, Typography, withStyles } from '@material-ui/core';
 import GrainMill from './GrainMill';
 import MashTun from './MashTun';
 import SpargingVessel from './SpargingVessel';
@@ -20,7 +16,7 @@ import Loading from '../Loading';
 import Error from '../Error';
 import { BREWING_PROCESS_QUERY } from '../../lib/queriesAndMutations';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     textAlign: 'center',
     padding: theme.spacing(2),
@@ -56,14 +52,14 @@ class BrewingProcess extends Component {
               // components, this is just a preselection
               return (
                 <>
-                  <Typography variant="h5" gutterBottom>
+                  <Typography variant='h5' gutterBottom>
                     {brewingProcess.name}
                   </Typography>
                   <Grid
                     container
                     className={classes.container}
                     spacing={1}
-                    justify="center"
+                    justify='center'
                   >
                     <Grid item>
                       <GrainMill

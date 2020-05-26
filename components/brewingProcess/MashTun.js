@@ -21,7 +21,7 @@ import Loading from '../Loading';
 import Error from '../Error';
 import GraphChart from '../GraphChart';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     textAlign: 'center',
     padding: theme.spacing(2),
@@ -53,7 +53,7 @@ class MashTun extends Component {
 
   handleDialogs = () => {
     let id;
-    this.props.graphs.map(graph => {
+    this.props.graphs.map((graph) => {
       if (graph.sensorName == 'mashing/mashTun/temperature') {
         id = graph.id;
       }
@@ -64,13 +64,13 @@ class MashTun extends Component {
         <Dialog
           open={this.state.infoOpen}
           onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
+          aria-labelledby='form-dialog-title'
         >
-          <DialogTitle id="form-dialog-title">{MashTunProps.title}</DialogTitle>
+          <DialogTitle id='form-dialog-title'>{MashTunProps.title}</DialogTitle>
           <DialogContent>
             <main className={this.props.classes.layout}>
               <Paper>
-                <Typography variant="body1" gutterBottom>
+                <Typography variant='body1' gutterBottom>
                   {MashTunProps.description}
                 </Typography>
               </Paper>
@@ -80,12 +80,12 @@ class MashTun extends Component {
 
         <Dialog
           fullWidth={true}
-          maxWidth="lg"
+          maxWidth='lg'
           open={this.state.dataOpen}
           onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
+          aria-labelledby='form-dialog-title'
         >
-          <DialogTitle id="form-dialog-title">{MashTunProps.title}</DialogTitle>
+          <DialogTitle id='form-dialog-title'>{MashTunProps.title}</DialogTitle>
           <DialogContent>
             {id && (
               <Query
@@ -133,7 +133,7 @@ class MashTun extends Component {
     super(props);
     if (
       this.props.activeSteps.some(
-        r =>
+        (r) =>
           ['HEATING_UP', 'MASH_IN', 'MASHING', 'LAUTERING', 'SPARGING'].indexOf(
             r
           ) >= 0
@@ -147,7 +147,7 @@ class MashTun extends Component {
     if (this.props.activeSteps !== prevProps.activeSteps) {
       if (
         this.props.activeSteps.some(
-          r =>
+          (r) =>
             [
               'HEATING_UP',
               'MASH_IN',
@@ -177,17 +177,17 @@ class MashTun extends Component {
               title={MashTunProps.title}
             />
             <CardContent>
-              <Typography gutterBottom variant="h5">
+              <Typography gutterBottom variant='h5'>
                 {MashTunProps.title}
               </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size="small" color="primary" onClick={this.handleInfoClick}>
+            <Button size='small' color='primary' onClick={this.handleInfoClick}>
               More Info
             </Button>
             {this.state.active && (
-              <Typography gutterBottom variant="body2">
+              <Typography gutterBottom variant='body2'>
                 Mash In: {details.mashInTemperature}°C Water:{' '}
                 {details.mashWaterLiter}L
               </Typography>

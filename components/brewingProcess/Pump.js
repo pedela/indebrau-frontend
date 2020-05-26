@@ -16,7 +16,7 @@ import {
 } from '@material-ui/core';
 import { PumpProps } from '../../lib/ComponentProperties';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     textAlign: 'center',
     padding: theme.spacing(2),
@@ -51,12 +51,12 @@ class Pump extends Component {
       <Dialog
         open={this.state.infoOpen}
         onClose={this.handleInfoClose}
-        aria-labelledby="form-dialog-title"
+        aria-labelledby='form-dialog-title'
       >
-        <DialogTitle id="form-dialog-title">{PumpProps.title}</DialogTitle>
+        <DialogTitle id='form-dialog-title'>{PumpProps.title}</DialogTitle>
         <DialogContent>
           <Paper>
-            <Typography variant="body1" gutterBottom>
+            <Typography variant='body1' gutterBottom>
               {PumpProps.description}
             </Typography>
           </Paper>
@@ -107,13 +107,13 @@ class Pump extends Component {
               title={PumpProps.title}
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
+              <Typography gutterBottom variant='h5' component='h2'>
                 {PumpProps.title}
               </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size="small" color="primary" onClick={this.handleInfoClick}>
+            <Button size='small' color='primary' onClick={this.handleInfoClick}>
               More Info
             </Button>
           </CardActions>

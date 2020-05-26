@@ -17,7 +17,7 @@ import {
   DELETE_GRAPH_MUTATION
 } from '../../lib/queriesAndMutations';
 
-const styles = theme => ({
+const styles = (theme) => ({
   layout: {
     width: 'auto',
     textAlign: 'center',
@@ -43,7 +43,7 @@ class DeleteGraph extends Component {
     queryError: null
   };
 
-  saveToState = e => {
+  saveToState = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
   handleClickOpen = () => {
@@ -62,7 +62,7 @@ class DeleteGraph extends Component {
     return (
       <>
         <Fab
-          aria-label="Delete"
+          aria-label='Delete'
           className={classes.fab}
           onClick={this.handleClickOpen}
         >
@@ -79,24 +79,24 @@ class DeleteGraph extends Component {
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
-              aria-labelledby="form-dialog-title"
+              aria-labelledby='form-dialog-title'
             >
               <Error error={this.state.queryError} />
-              <DialogTitle id="form-dialog-title">Delete Graph</DialogTitle>
+              <DialogTitle id='form-dialog-title'>Delete Graph</DialogTitle>
               <DialogContent>
                 <main className={classes.layout}>
                   <div className={classes.buttons}>
                     <Button
                       onClick={this.handleClose}
                       className={classes.button}
-                      color="secondary"
-                      variant="contained"
+                      color='secondary'
+                      variant='contained'
                     >
                       Cancel
                     </Button>
                     <Button
-                      variant="contained"
-                      color="primary"
+                      variant='contained'
+                      color='primary'
                       onClick={async () => {
                         // fire mutation (clear old error)
                         this.setState({ queryError: null });
@@ -104,7 +104,7 @@ class DeleteGraph extends Component {
                           variables: {
                             id: this.props.id
                           }
-                        }).catch(e => {
+                        }).catch((e) => {
                           this.setState({ queryError: e });
                         });
                         if (this.state.queryError == null) {

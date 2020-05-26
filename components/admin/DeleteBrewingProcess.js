@@ -16,7 +16,7 @@ import {
   DELETE_BREWING_PROCESS_MUTATION
 } from '../../lib/queriesAndMutations';
 
-const styles = theme => ({
+const styles = (theme) => ({
   layout: {
     width: 'auto',
     textAlign: 'center',
@@ -42,7 +42,7 @@ class DeleteBrewingProcess extends Component {
     queryError: null
   };
 
-  saveToState = e => {
+  saveToState = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
   handleClickOpen = () => {
@@ -61,7 +61,7 @@ class DeleteBrewingProcess extends Component {
     return (
       <>
         <Fab
-          aria-label="Delete"
+          aria-label='Delete'
           className={classes.fab}
           onClick={this.handleClickOpen}
         >
@@ -75,10 +75,10 @@ class DeleteBrewingProcess extends Component {
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
-              aria-labelledby="form-dialog-title"
+              aria-labelledby='form-dialog-title'
             >
               <Error error={this.state.queryError} />
-              <DialogTitle id="form-dialog-title">
+              <DialogTitle id='form-dialog-title'>
                 Delete Brewing Process
               </DialogTitle>
               <DialogContent>
@@ -87,14 +87,14 @@ class DeleteBrewingProcess extends Component {
                     <Button
                       onClick={this.handleClose}
                       className={classes.button}
-                      color="secondary"
-                      variant="contained"
+                      color='secondary'
+                      variant='contained'
                     >
                       Cancel
                     </Button>
                     <Button
-                      variant="contained"
-                      color="primary"
+                      variant='contained'
+                      color='primary'
                       onClick={async () => {
                         // fire mutation (clear old error)
                         this.setState({ queryError: null });
@@ -102,7 +102,7 @@ class DeleteBrewingProcess extends Component {
                           variables: {
                             id: this.props.id
                           }
-                        }).catch(e => {
+                        }).catch((e) => {
                           this.setState({ queryError: e });
                         });
                         if (this.state.queryError == null) {

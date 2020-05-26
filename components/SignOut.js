@@ -13,7 +13,7 @@ class Signout extends Component {
         mutation={SIGN_OUT_MUTATION}
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       >
-        {signout => <Button onClick={signout}>Sign Out</Button>}
+        {(signout) => <Button onClick={signout}>Sign Out</Button>}
       </Mutation>
     );
   }

@@ -16,7 +16,7 @@ import {
   DELETE_MEDIA_STREAM_MUTATION
 } from '../../lib/queriesAndMutations';
 
-const styles = theme => ({
+const styles = (theme) => ({
   layout: {
     width: 'auto',
     textAlign: 'center',
@@ -42,7 +42,7 @@ class DeleteMediaStream extends Component {
     queryError: null
   };
 
-  saveToState = e => {
+  saveToState = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
   handleClickOpen = () => {
@@ -61,7 +61,7 @@ class DeleteMediaStream extends Component {
     return (
       <>
         <Fab
-          aria-label="Delete"
+          aria-label='Delete'
           className={classes.fab}
           onClick={this.handleClickOpen}
         >
@@ -69,32 +69,32 @@ class DeleteMediaStream extends Component {
         </Fab>
         <Mutation
           mutation={DELETE_MEDIA_STREAM_MUTATION}
-          refetchQueries={[
-            { query: ALL_MEDIA_STREAMS_QUERY }
-          ]}
+          refetchQueries={[{ query: ALL_MEDIA_STREAMS_QUERY }]}
         >
           {(deleteMediaStream, { loading }) => (
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
-              aria-labelledby="form-dialog-title"
+              aria-labelledby='form-dialog-title'
             >
               <Error error={this.state.queryError} />
-              <DialogTitle id="form-dialog-title">Delete Media Stream</DialogTitle>
+              <DialogTitle id='form-dialog-title'>
+                Delete Media Stream
+              </DialogTitle>
               <DialogContent>
                 <main className={classes.layout}>
                   <div className={classes.buttons}>
                     <Button
                       onClick={this.handleClose}
                       className={classes.button}
-                      color="secondary"
-                      variant="contained"
+                      color='secondary'
+                      variant='contained'
                     >
                       Cancel
                     </Button>
                     <Button
-                      variant="contained"
-                      color="primary"
+                      variant='contained'
+                      color='primary'
                       onClick={async () => {
                         // fire mutation (clear old error)
                         this.setState({ queryError: null });
@@ -102,7 +102,7 @@ class DeleteMediaStream extends Component {
                           variables: {
                             id: this.props.id
                           }
-                        }).catch(e => {
+                        }).catch((e) => {
                           this.setState({ queryError: e });
                         });
                         if (this.state.queryError == null) {

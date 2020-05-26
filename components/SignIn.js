@@ -18,7 +18,7 @@ import {
   SIGNIN_MUTATION
 } from '../lib/queriesAndMutations';
 
-const styles = theme => ({
+const styles = (theme) => ({
   main: {
     width: 'auto',
     display: 'block', // Fix IE 11 issue.
@@ -55,7 +55,7 @@ class SignIn extends Component {
     password: '',
     email: ''
   };
-  saveToState = e => {
+  saveToState = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -75,45 +75,45 @@ class SignIn extends Component {
               <Avatar className={classes.avatar}>
                 <LockOutlinedIcon />
               </Avatar>
-              <Typography component="h1" variant="h5">
+              <Typography component='h1' variant='h5'>
                 Sign in
               </Typography>
               <form
                 className={classes.form}
-                method="post"
-                onSubmit={async e => {
+                method='post'
+                onSubmit={async (e) => {
                   e.preventDefault();
                   await signin().catch(() => {});
                   this.setState({ email: '', password: '' });
                 }}
               >
-                <FormControl margin="normal" required fullWidth>
-                  <InputLabel htmlFor="email">Email Address</InputLabel>
+                <FormControl margin='normal' required fullWidth>
+                  <InputLabel htmlFor='email'>Email Address</InputLabel>
                   <Input
-                    id="email"
-                    name="email"
-                    autoComplete="email"
+                    id='email'
+                    name='email'
+                    autoComplete='email'
                     value={this.state.email}
                     onChange={this.saveToState}
                     autoFocus
                   />
                 </FormControl>
-                <FormControl margin="normal" required fullWidth>
-                  <InputLabel htmlFor="password">Password</InputLabel>
+                <FormControl margin='normal' required fullWidth>
+                  <InputLabel htmlFor='password'>Password</InputLabel>
                   <Input
-                    name="password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
+                    name='password'
+                    type='password'
+                    id='password'
+                    autoComplete='current-password'
                     value={this.state.password}
                     onChange={this.saveToState}
                   />
                 </FormControl>
                 <Button
-                  type="submit"
+                  type='submit'
                   fullWidth
-                  variant="contained"
-                  color="primary"
+                  variant='contained'
+                  color='primary'
                   disabled={loading}
                   className={classes.submit}
                 >

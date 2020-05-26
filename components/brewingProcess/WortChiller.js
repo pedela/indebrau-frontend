@@ -16,7 +16,7 @@ import {
 } from '@material-ui/core';
 import { WortChillerProps } from '../../lib/ComponentProperties';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     textAlign: 'center',
     padding: theme.spacing(2),
@@ -51,14 +51,14 @@ class WortChiller extends Component {
       <Dialog
         open={this.state.infoOpen}
         onClose={this.handleInfoClose}
-        aria-labelledby="form-dialog-title"
+        aria-labelledby='form-dialog-title'
       >
-        <DialogTitle id="form-dialog-title">
+        <DialogTitle id='form-dialog-title'>
           {WortChillerProps.title}
         </DialogTitle>
         <DialogContent>
           <Paper>
-            <Typography variant="body1" gutterBottom>
+            <Typography variant='body1' gutterBottom>
               {WortChillerProps.description}
             </Typography>
           </Paper>
@@ -109,13 +109,13 @@ class WortChiller extends Component {
               title={WortChillerProps.title}
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
+              <Typography gutterBottom variant='h5' component='h2'>
                 {WortChillerProps.title}
               </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size="small" color="primary" onClick={this.handleInfoClick}>
+            <Button size='small' color='primary' onClick={this.handleInfoClick}>
               More Info
             </Button>
           </CardActions>

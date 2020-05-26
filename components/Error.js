@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Snackbar, withStyles, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
-const styles = theme => ({
+const styles = (theme) => ({
   close: {
     padding: theme.spacing(1) / 2
   }
@@ -48,15 +48,15 @@ class Error extends Component {
             'aria-describedby': 'message-id'
           }}
           message={
-            <span id="message-id">
+            <span id='message-id'>
               {errorMessage.replace('GraphQL error: ', '')}
             </span>
           }
           action={[
             <IconButton
-              key="close"
-              aria-label="Close"
-              color="inherit"
+              key='close'
+              aria-label='Close'
+              color='inherit'
               className={classes.close}
               onClick={this.handleClose}
             >

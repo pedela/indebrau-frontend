@@ -27,7 +27,7 @@ import {
   CREATE_GRAPH_MUTATION
 } from '../../lib/queriesAndMutations';
 
-const styles = theme => ({
+const styles = (theme) => ({
   layout: {
     width: 'auto',
     marginLeft: theme.spacing(2),
@@ -69,11 +69,11 @@ class CreateGraph extends Component {
     brewingProcessId: 'Select..'
   };
 
-  saveToState = e => {
+  saveToState = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleNewBrewingProcessId = event => {
+  handleNewBrewingProcessId = (event) => {
     this.setState({ brewingProcessId: event.target.value });
   };
 
@@ -109,8 +109,8 @@ class CreateGraph extends Component {
     return (
       <>
         <Fab
-          color="primary"
-          aria-label="Add"
+          color='primary'
+          aria-label='Add'
           className={classes.fab}
           onClick={this.handleClickOpen}
         >
@@ -127,12 +127,12 @@ class CreateGraph extends Component {
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
-              aria-labelledby="form-dialog-title"
+              aria-labelledby='form-dialog-title'
               disableBackdropClick
               fullScreen
             >
               <Error error={this.state.queryError} />
-              <DialogTitle id="form-dialog-title">Create Graph</DialogTitle>
+              <DialogTitle id='form-dialog-title'>Create Graph</DialogTitle>
 
               <DialogContent>
                 <main className={classes.layout}>
@@ -141,9 +141,9 @@ class CreateGraph extends Component {
                       <Grid item xs={12}>
                         <TextField
                           required
-                          id="name"
-                          name="name"
-                          label="Name"
+                          id='name'
+                          name='name'
+                          label='Name'
                           value={this.state.name}
                           onChange={this.saveToState}
                           fullWidth
@@ -152,9 +152,9 @@ class CreateGraph extends Component {
                       <Grid item xs={12}>
                         <TextField
                           required
-                          id="sensorName"
-                          name="sensorName"
-                          label="Sensor Name"
+                          id='sensorName'
+                          name='sensorName'
+                          label='Sensor Name'
                           value={this.state.sensorName}
                           onChange={this.saveToState}
                           fullWidth
@@ -163,9 +163,9 @@ class CreateGraph extends Component {
                       <Grid item xs={12}>
                         <TextField
                           required
-                          id="updateFrequency"
-                          name="updateFrequency"
-                          label="Update Frequency"
+                          id='updateFrequency'
+                          name='updateFrequency'
+                          label='Update Frequency'
                           value={this.state.updateFrequency}
                           onChange={this.saveToState}
                           fullWidth
@@ -175,15 +175,15 @@ class CreateGraph extends Component {
                         <Query query={ALL_BREWING_PROCESSES_QUERY}>
                           {({ data }) => {
                             var processIds = [];
-                            if(data.brewingProcesses){
-                              data.brewingProcesses.map(n => (
+                            if (data.brewingProcesses) {
+                              data.brewingProcesses.map((n) =>
                                 processIds.push(n.id)
-                              ));
+                              );
                             }
                             return (
                               <FormControl className={classes.formControl}>
-                                <InputLabel htmlFor="select-chip">
-                              Brewing Process Id
+                                <InputLabel htmlFor='select-chip'>
+                                  Brewing Process Id
                                 </InputLabel>
                                 <Select
                                   open={this.state.brewingProcessOpen}
@@ -191,12 +191,12 @@ class CreateGraph extends Component {
                                   onOpen={this.handleBrewingProcessOpen}
                                   onChange={this.handleNewBrewingProcessId}
                                   value={this.state.brewingProcessId}
-                                  input={<Input id="select-chip" />}
+                                  input={<Input id='select-chip' />}
                                 >
-                                  <MenuItem key="Select.." value="Select..">
-                                      Select..
+                                  <MenuItem key='Select..' value='Select..'>
+                                    Select..
                                   </MenuItem>
-                                  {processIds.map(id => (
+                                  {processIds.map((id) => (
                                     <MenuItem key={id} value={id}>
                                       {id}
                                     </MenuItem>
@@ -213,14 +213,14 @@ class CreateGraph extends Component {
                       <Button
                         onClick={this.handleClose}
                         className={classes.button}
-                        color="secondary"
-                        variant="contained"
+                        color='secondary'
+                        variant='contained'
                       >
                         Cancel
                       </Button>
                       <Button
-                        variant="contained"
-                        color="primary"
+                        variant='contained'
+                        color='primary'
                         onClick={async () => {
                           // fire mutation (clear old error)
                           this.setState({ queryError: null });
@@ -233,7 +233,7 @@ class CreateGraph extends Component {
                               ),
                               brewingProcessId: this.state.brewingProcessId
                             }
-                          }).catch(e => {
+                          }).catch((e) => {
                             this.setState({ queryError: e });
                           });
                           if (this.state.queryError == null) {

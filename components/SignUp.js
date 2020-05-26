@@ -18,7 +18,7 @@ import {
   SIGN_UP_MUTATION
 } from '../lib/queriesAndMutations';
 
-const styles = theme => ({
+const styles = (theme) => ({
   main: {
     width: 'auto',
     display: 'block', // Fix IE 11 issue.
@@ -57,7 +57,7 @@ class SignUp extends Component {
     password: ''
   };
 
-  saveToState = e => {
+  saveToState = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -77,57 +77,57 @@ class SignUp extends Component {
               <Avatar className={classes.avatar}>
                 <ThumbUpIcon />
               </Avatar>
-              <Typography component="h1" variant="h5">
+              <Typography component='h1' variant='h5'>
                 Sign Up
               </Typography>
 
               <form
                 className={classes.form}
-                method="post"
-                onSubmit={async e => {
+                method='post'
+                onSubmit={async (e) => {
                   e.preventDefault();
                   await signup().catch(() => {});
                   this.setState({ name: '', email: '', password: '' });
                 }}
               >
-                <FormControl margin="normal" required fullWidth>
-                  <InputLabel htmlFor="name">User Name</InputLabel>
+                <FormControl margin='normal' required fullWidth>
+                  <InputLabel htmlFor='name'>User Name</InputLabel>
                   <Input
-                    id="name"
-                    name="name"
-                    autoComplete="name"
+                    id='name'
+                    name='name'
+                    autoComplete='name'
                     value={this.state.name}
                     onChange={this.saveToState}
                     autoFocus
                   />
                 </FormControl>
-                <FormControl margin="normal" required fullWidth>
-                  <InputLabel htmlFor="email">Email Address</InputLabel>
+                <FormControl margin='normal' required fullWidth>
+                  <InputLabel htmlFor='email'>Email Address</InputLabel>
                   <Input
-                    id="email"
-                    name="email"
-                    autoComplete="email"
+                    id='email'
+                    name='email'
+                    autoComplete='email'
                     value={this.state.email}
                     onChange={this.saveToState}
                     autoFocus
                   />
                 </FormControl>
-                <FormControl margin="normal" required fullWidth>
-                  <InputLabel htmlFor="password">Password</InputLabel>
+                <FormControl margin='normal' required fullWidth>
+                  <InputLabel htmlFor='password'>Password</InputLabel>
                   <Input
-                    name="password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
+                    name='password'
+                    type='password'
+                    id='password'
+                    autoComplete='current-password'
                     value={this.state.password}
                     onChange={this.saveToState}
                   />
                 </FormControl>
                 <Button
-                  type="submit"
+                  type='submit'
                   fullWidth
-                  variant="contained"
-                  color="primary"
+                  variant='contained'
+                  color='primary'
                   disabled={loading}
                   className={classes.submit}
                 >

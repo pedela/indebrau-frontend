@@ -16,7 +16,7 @@ import {
 } from '@material-ui/core';
 import { FermenterProps } from '../../lib/ComponentProperties';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     textAlign: 'center',
     padding: theme.spacing(2),
@@ -51,12 +51,12 @@ class Fermenter extends Component {
       <Dialog
         open={this.state.infoOpen}
         onClose={this.handleInfoClose}
-        aria-labelledby="form-dialog-title"
+        aria-labelledby='form-dialog-title'
       >
-        <DialogTitle id="form-dialog-title">{FermenterProps.title}</DialogTitle>
+        <DialogTitle id='form-dialog-title'>{FermenterProps.title}</DialogTitle>
         <DialogContent>
           <Paper>
-            <Typography variant="body1" gutterBottom>
+            <Typography variant='body1' gutterBottom>
               {FermenterProps.description}
             </Typography>
           </Paper>
@@ -107,13 +107,13 @@ class Fermenter extends Component {
               title={FermenterProps.title}
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
+              <Typography gutterBottom variant='h5' component='h2'>
                 {FermenterProps.title}
               </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size="small" color="primary" onClick={this.handleInfoClick}>
+            <Button size='small' color='primary' onClick={this.handleInfoClick}>
               More Info
             </Button>
           </CardActions>

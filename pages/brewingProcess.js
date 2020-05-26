@@ -26,7 +26,7 @@ class BrewingProcessPage extends Component {
                 hasRights = true;
               } else {
                 // does user participate?
-                me.participatingBrewingProcesses.map(brewingProcess => {
+                me.participatingBrewingProcesses.map((brewingProcess) => {
                   if (brewingProcess.id === this.props.brewingProcessId) {
                     hasRights = true;
                   }
@@ -34,9 +34,8 @@ class BrewingProcessPage extends Component {
               }
             }
             if (!hasRights) {
-              return (<Home />);
-            }
-            else{
+              return <Home />;
+            } else {
               return (
                 <BrewingProcess
                   brewingProcessId={this.props.brewingProcessId}

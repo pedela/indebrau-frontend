@@ -24,7 +24,7 @@ import Error from '../Error';
 import GraphChart from '../GraphChart';
 import { ElectronicHydrometerProps } from '../../lib/ComponentProperties';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     textAlign: 'center',
     padding: theme.spacing(2),
@@ -62,14 +62,14 @@ class ElectronicHydrometer extends Component {
         <Dialog
           open={this.state.infoOpen}
           onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
+          aria-labelledby='form-dialog-title'
         >
-          <DialogTitle id="form-dialog-title">
+          <DialogTitle id='form-dialog-title'>
             {ElectronicHydrometerProps.title}
           </DialogTitle>
           <DialogContent>
             <Paper>
-              <Typography variant="body1" gutterBottom>
+              <Typography variant='body1' gutterBottom>
                 {ElectronicHydrometerProps.description}
               </Typography>
             </Paper>
@@ -78,12 +78,12 @@ class ElectronicHydrometer extends Component {
 
         <Dialog
           fullWidth={true}
-          maxWidth="lg"
+          maxWidth='lg'
           open={this.state.dataOpen}
           onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
+          aria-labelledby='form-dialog-title'
         >
-          <DialogTitle id="form-dialog-title">
+          <DialogTitle id='form-dialog-title'>
             {ElectronicHydrometerProps.title}
           </DialogTitle>
           <DialogContent>
@@ -158,7 +158,7 @@ class ElectronicHydrometer extends Component {
     if (this.props.activeSteps.includes('FERMENTING')) {
       this.state.active = true;
     }
-    this.props.graphs.map(graph => {
+    this.props.graphs.map((graph) => {
       if (
         graph.sensorName == 'ispindel/iSpindel1/tilt' ||
         graph.sensorName == 'ispindel/iSpindel2/tilt'
@@ -185,7 +185,7 @@ class ElectronicHydrometer extends Component {
       }
     }
     if (this.props.graphs !== prevProps.graphs) {
-      this.props.graphs.map(graph => {
+      this.props.graphs.map((graph) => {
         if (
           graph.sensorName == 'ispindel/iSpindel1/tilt' ||
           graph.sensorName == 'ispindel/iSpindel2/tilt'
@@ -215,16 +215,16 @@ class ElectronicHydrometer extends Component {
               title={ElectronicHydrometerProps.title}
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
+              <Typography gutterBottom variant='h5' component='h2'>
                 {ElectronicHydrometerProps.title}
               </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size="small" color="primary" onClick={this.handleInfoClick}>
+            <Button size='small' color='primary' onClick={this.handleInfoClick}>
               More Info
             </Button>
-            <Typography gutterBottom variant="body2">
+            <Typography gutterBottom variant='body2'>
               {this.state.id_temperature && (
                 <Query
                   query={LATEST_GRAPH_DATA_QUERY}

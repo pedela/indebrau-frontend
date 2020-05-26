@@ -6,7 +6,7 @@ import Link from './Link';
 import SignOut from './SignOut';
 import { CurrentUser } from './User';
 
-const styles = theme => ({
+const styles = (theme) => ({
   main: {
     width: 'auto',
     [theme.breakpoints.up(1100 + theme.spacing(2))]: {
@@ -46,35 +46,35 @@ class Nav extends Component {
             const me = data ? data.me : null;
             return (
               <Toolbar className={classes.toolbarMain}>
-                <Link href="/">
+                <Link href='/'>
                   <Button>Home</Button>
                 </Link>
-                <Link href="/beers">
+                <Link href='/beers'>
                   <Button>Our Beer</Button>
                 </Link>
-                <Link href="/brewery">
+                <Link href='/brewery'>
                   <Button>The Brewery</Button>
                 </Link>
                 <Typography
-                  component="h2"
-                  variant="h5"
-                  color="inherit"
-                  align="center"
+                  component='h2'
+                  variant='h5'
+                  color='inherit'
+                  align='center'
                   noWrap
                   className={classes.toolbarTitle}
                 />
-                <Link href="/user">
+                <Link href='/user'>
                   {!me && <Button>Sign In</Button>}
                   {me && <Button>{me.name}</Button>}
                 </Link>
 
                 {me && (
-                  <Link href="/">
+                  <Link href='/'>
                     <SignOut />
                   </Link>
                 )}
                 {!me && (
-                  <Link href="/signup">
+                  <Link href='/signup'>
                     <Button>Sign Up</Button>
                   </Link>
                 )}

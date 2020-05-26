@@ -16,7 +16,7 @@ import {
 } from '@material-ui/core';
 import { SpargingVesselProps } from '../../lib/ComponentProperties';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     textAlign: 'center',
     padding: theme.spacing(2),
@@ -51,14 +51,14 @@ class SpargingVessel extends Component {
       <Dialog
         open={this.state.infoOpen}
         onClose={this.handleInfoClose}
-        aria-labelledby="form-dialog-title"
+        aria-labelledby='form-dialog-title'
       >
-        <DialogTitle id="form-dialog-title">
+        <DialogTitle id='form-dialog-title'>
           {SpargingVesselProps.title}
         </DialogTitle>
         <DialogContent>
           <Paper>
-            <Typography variant="body1" gutterBottom>
+            <Typography variant='body1' gutterBottom>
               {SpargingVesselProps.description}
             </Typography>
           </Paper>
@@ -83,7 +83,7 @@ class SpargingVessel extends Component {
     super(props);
     if (
       this.props.activeSteps.some(
-        r => ['HEATING_SPARGE', 'SPARGING'].indexOf(r) >= 0
+        (r) => ['HEATING_SPARGE', 'SPARGING'].indexOf(r) >= 0
       )
     ) {
       this.state.active = true;
@@ -94,7 +94,7 @@ class SpargingVessel extends Component {
     if (this.props.activeSteps !== prevProps.activeSteps) {
       if (
         this.props.activeSteps.some(
-          r => ['HEATING_SPARGE', 'SPARGING'].indexOf(r) >= 0
+          (r) => ['HEATING_SPARGE', 'SPARGING'].indexOf(r) >= 0
         )
       ) {
         this.setState({ active: true });
@@ -117,13 +117,13 @@ class SpargingVessel extends Component {
               title={SpargingVesselProps.title}
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
+              <Typography gutterBottom variant='h5' component='h2'>
                 {SpargingVesselProps.title}
               </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size="small" color="primary" onClick={this.handleInfoClick}>
+            <Button size='small' color='primary' onClick={this.handleInfoClick}>
               More Info
             </Button>
           </CardActions>

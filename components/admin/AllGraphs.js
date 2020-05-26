@@ -12,7 +12,7 @@ import GraphChart from '../GraphChart';
 import GraphTable from './GraphTable';
 import CreateGraph from './CreateGraph';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     width: '100%',
     overflowX: 'auto',
@@ -44,7 +44,7 @@ class AllGraphs extends Component {
             if (loading) return <Loading />;
             if (error) return <Error error={error} />;
             if (data) {
-              const activeGraphs = data.graphs.map(activeGraph => (
+              const activeGraphs = data.graphs.map((activeGraph) => (
                 <GraphChart
                   data={activeGraph.graphData}
                   key={activeGraph.id}
@@ -53,7 +53,7 @@ class AllGraphs extends Component {
               ));
               return (
                 <Paper className={classes.root}>
-                  <Typography variant="h5">Active Graphs</Typography>
+                  <Typography variant='h5'>Active Graphs</Typography>
                   {activeGraphs}
                 </Paper>
               );
@@ -67,7 +67,7 @@ class AllGraphs extends Component {
             if (data) {
               return (
                 <Paper className={classes.root}>
-                  <Typography variant="h5">All Graphs</Typography>
+                  <Typography variant='h5'>All Graphs</Typography>
                   <GraphTable graphs={data.graphs} />
                 </Paper>
               );

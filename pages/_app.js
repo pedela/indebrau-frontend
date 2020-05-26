@@ -8,7 +8,6 @@ import withData from '../lib/withData';
 import theme from '../lib/theme';
 
 class MyApp extends App {
-
   componentDidMount() {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');

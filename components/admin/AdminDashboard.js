@@ -27,7 +27,7 @@ import { CurrentUser } from '../User';
 
 const drawerWidth = 240;
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     display: 'flex'
   },
@@ -107,7 +107,7 @@ class AdminDashboard extends Component {
     activeWindow: 'AdminHome'
   };
 
-  setActiveWindow = activeWindow => {
+  setActiveWindow = (activeWindow) => {
     this.setState({ activeWindow: activeWindow });
   };
 
@@ -136,12 +136,12 @@ class AdminDashboard extends Component {
                     <Error
                       error={{ message: 'You are no admin, please go back' }}
                     />
-                    <Link href="/">
+                    <Link href='/'>
                       <ListItem button>
                         <ListItemIcon>
                           <HomeIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Home" />
+                        <ListItemText primary='Home' />
                       </ListItem>
                     </Link>
                   </main>
@@ -151,7 +151,7 @@ class AdminDashboard extends Component {
             return (
               <div className={classes.root}>
                 <AppBar
-                  position="absolute"
+                  position='absolute'
                   className={classNames(
                     classes.appBar,
                     this.state.open && classes.appBarShift
@@ -162,8 +162,8 @@ class AdminDashboard extends Component {
                     className={classes.toolbar}
                   >
                     <IconButton
-                      color="inherit"
-                      aria-label="Open drawer"
+                      color='inherit'
+                      aria-label='Open drawer'
                       onClick={this.handleDrawerOpen}
                       className={classNames(
                         classes.menuButton,
@@ -173,9 +173,9 @@ class AdminDashboard extends Component {
                       <MenuIcon />
                     </IconButton>
                     <Typography
-                      component="h1"
-                      variant="h6"
-                      color="inherit"
+                      component='h1'
+                      variant='h6'
+                      color='inherit'
                       noWrap
                       className={classes.title}
                     >
@@ -184,7 +184,7 @@ class AdminDashboard extends Component {
                   </Toolbar>
                 </AppBar>
                 <Drawer
-                  variant="permanent"
+                  variant='permanent'
                   classes={{
                     paper: classNames(
                       classes.drawerPaper,
@@ -200,12 +200,12 @@ class AdminDashboard extends Component {
                   </div>
                   <Divider />
                   <List>
-                    <Link href="/">
+                    <Link href='/'>
                       <ListItem button>
                         <ListItemIcon>
                           <HomeIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Home" />
+                        <ListItemText primary='Home' />
                       </ListItem>
                     </Link>
                     <ListItem
@@ -215,7 +215,7 @@ class AdminDashboard extends Component {
                       <ListItemIcon>
                         <LaptopIcon />
                       </ListItemIcon>
-                      <ListItemText primary="Admin Home" />
+                      <ListItemText primary='Admin Home' />
                     </ListItem>
                     <ListItem
                       button
@@ -226,7 +226,7 @@ class AdminDashboard extends Component {
                       <ListItemIcon>
                         <AssignmentIcon />
                       </ListItemIcon>
-                      <ListItemText primary="Brewing Processes" />
+                      <ListItemText primary='Brewing Processes' />
                     </ListItem>
                     <ListItem
                       button
@@ -235,7 +235,7 @@ class AdminDashboard extends Component {
                       <ListItemIcon>
                         <AssignmentIcon />
                       </ListItemIcon>
-                      <ListItemText primary="Media Streams" />
+                      <ListItemText primary='Media Streams' />
                     </ListItem>
                     <ListItem
                       button
@@ -244,7 +244,7 @@ class AdminDashboard extends Component {
                       <ListItemIcon>
                         <AssignmentIcon />
                       </ListItemIcon>
-                      <ListItemText primary="Graphs" />
+                      <ListItemText primary='Graphs' />
                     </ListItem>
                   </List>
                 </Drawer>

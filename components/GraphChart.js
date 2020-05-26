@@ -12,25 +12,25 @@ import { renderDate, parseSensorValue } from '../lib/utils.js';
 
 class GraphChart extends Component {
   render() {
-    var renderData = this.props.data.map(dataPoint => ({
+    var renderData = this.props.data.map((dataPoint) => ({
       time: renderDate(dataPoint.time),
       value: parseSensorValue(dataPoint.value)
     }));
     return (
-      <ResponsiveContainer width="99%" height={180}>
+      <ResponsiveContainer width='99%' height={180}>
         <LineChart
           data={renderData}
           margin={{ top: 5, right: 5, left: -15, bottom: 5 }}
         >
-          <XAxis dataKey="time" interval="preserveStartEnd" />
+          <XAxis dataKey='time' interval='preserveStartEnd' />
           <YAxis />
-          <CartesianGrid vertical={false} strokeDasharray="3 3" />
+          <CartesianGrid vertical={false} strokeDasharray='3 3' />
           <Tooltip isAnimationActive={false} />
           <Legend />
           <Line
-            type="monotone"
-            dataKey="value"
-            stroke="#8884d8"
+            type='monotone'
+            dataKey='value'
+            stroke='#8884d8'
             dot={false}
             activeDot={{ r: 8 }}
             name={this.props.name}

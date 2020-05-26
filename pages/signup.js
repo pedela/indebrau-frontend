@@ -12,7 +12,7 @@ const SignUpPage = () => (
         return (
           <>
             {!me && <SignUp />}
-            {me &&  <Home/>}
+            {me && <Home />}
           </>
         );
       }}

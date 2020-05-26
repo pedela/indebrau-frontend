@@ -6,7 +6,7 @@ import AllBrewingProcesses from './AllBrewingProcesses';
 import AllMediaStreams from './AllMediaStreams';
 import LatestSensorData from './LatestSensorData';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     textAlign: 'center',
     padding: theme.spacing(2),
@@ -26,9 +26,7 @@ class DashboardContent extends Component {
       return <AllMediaStreams />;
     }
     if (this.props.activeWindow == 'AdminHome') {
-      return(
-        <LatestSensorData />
-      );
+      return <LatestSensorData />;
     }
   };
 
