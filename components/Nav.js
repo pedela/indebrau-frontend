@@ -23,11 +23,6 @@ const styles = (theme) => ({
     [theme.breakpoints.down(580 + theme.spacing(2))]: {
       display: 'none'
     }
-  },
-  buttonLinks: {
-    width: 'auto',
-    textDecoration: 'none',
-    size: 'small'
   }
 });
 

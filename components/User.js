@@ -14,9 +14,6 @@ const styles = (theme) => ({
     textAlign: 'center',
     padding: theme.spacing(2),
     maxHeight: '100%'
-  },
-  buttonLinks: {
-    textDecoration: 'none'
   }
 });
 

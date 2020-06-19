@@ -60,9 +60,6 @@ const styles = (theme) => ({
     marginLeft: 12,
     marginRight: 36
   },
-  buttonLinks: {
-    textDecoration: 'none'
-  },
   menuButtonHidden: {
     display: 'none'
   },

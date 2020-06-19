@@ -14,10 +14,13 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2)
   },
   card: {
-    width: 300
+    width: 320
   },
   media: {
     height: 300
+  },
+  untappd: {
+    width: 50
   }
 }));
 
@@ -34,14 +37,20 @@ export default function Beers() {
                 <CardActionArea>
                   <CardMedia
                     className={classes.media}
-                    image='../karnevalsKoelsch.jpg'
-                    title='Karnevals Kölsch'
+                    image='../witbier.jpg'
+                    title='Witbier'
                   />
                   <CardContent>
                     <Typography gutterBottom variant='h5' component='h2'>
-                      Karnevals Kölsch
+                      Witbier{' '}
+                      <a href='https://untappd.com/b/indebrau-witbier/3750739'>
+                        <img
+                          src='https://untappd.akamaized.net/social/ut_icon_144b.png'
+                          className={classes.untappd}
+                          align='right'
+                        />
+                      </a>
                     </Typography>
-                    <Typography component='p'>Delicious!</Typography>
                   </CardContent>
                 </CardActionArea>
               </Card>
@@ -52,13 +61,19 @@ export default function Beers() {
                   <CardMedia
                     className={classes.media}
                     image='../epa.jpg'
-                    title='Eschweiler Pale Ale'
+                    title='EPA - Eschweiler Pale Ale'
                   />
                   <CardContent>
                     <Typography gutterBottom variant='h5' component='h2'>
-                      Eschweiler Pale Ale
+                      Eschweiler Pale Ale{' '}
+                      <a href='https://untappd.com/b/indebrau-epa-eschweiler-pale-ale/3555273'>
+                        <img
+                          src='https://untappd.akamaized.net/social/ut_icon_144b.png'
+                          className={classes.untappd}
+                          align='right'
+                        />
+                      </a>
                     </Typography>
-                    <Typography component='p'>Delicious!</Typography>
                   </CardContent>
                 </CardActionArea>
               </Card>

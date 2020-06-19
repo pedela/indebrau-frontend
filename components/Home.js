@@ -13,6 +13,12 @@ const styles = (theme) => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     width: 270
+  },
+  untappd: {
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: 150
   }
 });
 
@@ -30,6 +36,13 @@ class Home extends Component {
         <Typography variant='subtitle1' gutterBottom>
           A beer as smooth as its river!
         </Typography>
+        <br />
+        <a href='https://untappd.com/Indebrau?ref=followbtn'>
+          <img
+            src='https://untappd.akamaized.net/social/ut_follow_lg.png'
+            className={classes.untappd}
+          />
+        </a>
       </div>
     );
   }
