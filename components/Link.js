@@ -21,10 +21,9 @@ NextComposed.propTypes = {
   href: PropTypes.string,
   prefetch: PropTypes.bool
 };
-NextComposed.displayName = 'NextComposed'; // ESLint Cries otherwise
+NextComposed.displayName = 'NextComposed'; // ESLint cries otherwise
 
-// A styled version of the Next.js Link component:
-// https://nextjs.org/docs/#with-link
+// A styled version of the Next.js Link component
 const Link = forwardRef((props, ref) => {
   const {
     activeClassName,
@@ -47,6 +46,7 @@ const Link = forwardRef((props, ref) => {
       component={NextComposed}
       className={className}
       ref={ref}
+      style={{ textDecoration: 'none' }}
       {...other}
     />
   );

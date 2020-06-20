@@ -18,35 +18,32 @@ const styles = (theme) => ({
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
-    width: 150
+    width: 200
   }
 });
 
-class Home extends Component {
+class Info extends Component {
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
         <Typography variant='h5' gutterBottom>
-          Indebrau
+          About Indebrau
           <br />
-          Beer from Eschweiler
         </Typography>
         <img src='../logo.png' className={classes.image} />
-        <Typography variant='subtitle1' gutterBottom>
-          A beer as smooth as its river!
-        </Typography>
         <br />
-        <a href='https://untappd.com/Indebrau?ref=followbtn'>
-          <img src='../untappd/banner.png' className={classes.untappd} />
-        </a>
+        <br />
+        <Typography variant='subtitle1' gutterBottom>
+          Soon more...
+        </Typography>
       </div>
     );
   }
 }
 
-Home.propTypes = {
+Info.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Home);
+export default withStyles(styles)(Info);

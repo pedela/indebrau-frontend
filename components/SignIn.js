@@ -17,6 +17,7 @@ import {
   CURRENT_USER_QUERY,
   SIGNIN_MUTATION
 } from '../lib/queriesAndMutations';
+import Link from './Link';
 
 const styles = (theme) => ({
   main: {
@@ -45,7 +46,7 @@ const styles = (theme) => ({
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1)
   },
-  submit: {
+  button: {
     marginTop: theme.spacing(3)
   }
 });
@@ -115,10 +116,22 @@ class SignIn extends Component {
                   variant='contained'
                   color='primary'
                   disabled={loading}
-                  className={classes.submit}
+                  className={classes.button}
                 >
                   Sign in
                 </Button>
+                <Link href='/signup'>
+                  <Button
+                    type='submit'
+                    fullWidth
+                    variant='contained'
+                    color='secondary'
+                    disabled={loading}
+                    className={classes.button}
+                  >
+                    No Account? Sign up here!
+                  </Button>
+                </Link>
               </form>
             </Paper>
           </main>

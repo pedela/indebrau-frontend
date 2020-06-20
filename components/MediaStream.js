@@ -20,7 +20,8 @@ const styles = (theme) => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     padding: theme.spacing(1),
-    maxWidth: '100%'
+    maxWidth: '65%',
+    maxHeight: '50em'
   }
 });
 

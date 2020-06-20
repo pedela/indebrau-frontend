@@ -14,14 +14,7 @@ const styles = (theme) => ({
     width: '100%',
     overflowX: 'auto',
     padding: theme.spacing(1),
-    maxHeight: '1withStyles(styles)00%'
-  },
-  image: {
-    display: 'block',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    padding: theme.spacing(1),
-    width: 270
+    maxHeight: '100%'
   }
 });
 

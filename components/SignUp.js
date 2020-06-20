@@ -109,7 +109,6 @@ class SignUp extends Component {
                     autoComplete='email'
                     value={this.state.email}
                     onChange={this.saveToState}
-                    autoFocus
                   />
                 </FormControl>
                 <FormControl margin='normal' required fullWidth>
@@ -131,7 +130,7 @@ class SignUp extends Component {
                   disabled={loading}
                   className={classes.submit}
                 >
-                  Sign in
+                  Sign Up
                 </Button>
               </form>
             </Paper>

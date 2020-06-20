@@ -5,6 +5,7 @@ import { Paper, Button, Typography, withStyles } from '@material-ui/core';
 import Link from './Link';
 import BrewingProcessTable from './BrewingProcessTable';
 import SignIn from './SignIn';
+import SignOut from './SignOut';
 import { CURRENT_USER_QUERY } from '../lib/queriesAndMutations';
 
 const styles = (theme) => ({
@@ -63,6 +64,10 @@ class User extends Component {
                           <Button>Go to Admin Area</Button>
                         </Link>
                       )}
+                      <br />
+                      <Link href='/'>
+                        <SignOut />
+                      </Link>
                     </Paper>
                   </>
                 )}

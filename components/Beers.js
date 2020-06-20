@@ -45,7 +45,7 @@ export default function Beers() {
                       Witbier{' '}
                       <a href='https://untappd.com/b/indebrau-witbier/3750739'>
                         <img
-                          src='https://untappd.akamaized.net/social/ut_icon_144b.png'
+                          src='../untappd/logo.png'
                           className={classes.untappd}
                           align='right'
                         />
@@ -68,7 +68,7 @@ export default function Beers() {
                       Eschweiler Pale Ale{' '}
                       <a href='https://untappd.com/b/indebrau-epa-eschweiler-pale-ale/3555273'>
                         <img
-                          src='https://untappd.akamaized.net/social/ut_icon_144b.png'
+                          src='../untappd/logo.png'
                           className={classes.untappd}
                           align='right'
                         />
