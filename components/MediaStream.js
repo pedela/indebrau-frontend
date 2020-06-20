@@ -28,7 +28,7 @@ const styles = (theme) => ({
 class MediaStream extends Component {
   render() {
     const { classes } = this.props;
-
+    // fetch poilicy here is network only to prevent (cached) broken media link usage
     return (
       <Paper className={classes.root}>
         <Query
@@ -37,12 +37,14 @@ class MediaStream extends Component {
             id: this.props.id
           }}
           pollInterval={this.props.updateFrequency * 1000}
+          fetchPolicy='network-only'
         >
           {({ data, error, loading }) => {
             if (loading) return <Loading />;
             if (error) return <Error error={error} />;
             if (data) {
               if (data.mediaStream.mediaFiles[0]) {
+                let mediaFile = data.mediaStream.mediaFiles[0];
                 return (
                   <>
                     <img
@@ -54,7 +56,7 @@ class MediaStream extends Component {
                         '/' +
                         this.props.id +
                         '/' +
-                        data.mediaStream.mediaFiles[0].publicIdentifier
+                        mediaFile.publicIdentifier
                       }
                       className={classes.image}
                     />
@@ -64,8 +66,7 @@ class MediaStream extends Component {
                     </Typography>
                     <Typography variant='subtitle2'>
                       Last Update:
-                      {' ' +
-                        renderDate(data.mediaStream.mediaFiles[0].time, true)}
+                      {' ' + renderDate(mediaFile.time, true)}
                     </Typography>
                   </>
                 );
