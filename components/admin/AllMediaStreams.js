@@ -4,7 +4,7 @@ import { withStyles, Paper, Typography } from '@material-ui/core';
 import { Query } from 'react-apollo';
 import { ALL_MEDIA_STREAMS_QUERY } from '../../lib/queriesAndMutations';
 import MediaStreamTable from './MediaStreamTable';
-import MediaStream from '../MediaStream';
+import LatestMediaFile from '../LatestMediaFile';
 import CreateMediaStream from './CreateMediaStream';
 import Loading from '../Loading';
 import Error from '../Error';
@@ -31,7 +31,7 @@ class AllMediaStreams extends Component {
             if (data) {
               const activeMediaStreams = data.mediaStreams.map(
                 (mediaStream) => (
-                  <MediaStream
+                  <LatestMediaFile
                     key={mediaStream.id}
                     id={mediaStream.id}
                     brewingProcessId={mediaStream.brewingProcess.id}
