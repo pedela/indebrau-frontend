@@ -66,7 +66,7 @@ class CreateGraph extends Component {
     name: '',
     sensorName: '',
     updateFrequency: '',
-    brewingProcessId: 'Select..'
+    brewingProcessId: 'Select Brewing Process..'
   };
 
   saveToState = (e) => {
@@ -99,7 +99,7 @@ class CreateGraph extends Component {
       name: '',
       sensorName: '',
       updateFrequency: '',
-      brewingProcessId: 'Select..'
+      brewingProcessId: 'Select Brewing Process..'
     });
   };
 
@@ -147,6 +147,7 @@ class CreateGraph extends Component {
                           value={this.state.name}
                           onChange={this.saveToState}
                           fullWidth
+                          autoFocus
                         />
                       </Grid>
                       <Grid item xs={12}>
@@ -175,7 +176,7 @@ class CreateGraph extends Component {
                         <Query query={ALL_BREWING_PROCESSES_QUERY}>
                           {({ data }) => {
                             var processIds = [];
-                            if (data.brewingProcesses) {
+                            if (data) {
                               data.brewingProcesses.map((n) =>
                                 processIds.push(n.id)
                               );
@@ -183,7 +184,7 @@ class CreateGraph extends Component {
                             return (
                               <FormControl className={classes.formControl}>
                                 <InputLabel htmlFor='select-chip'>
-                                  Brewing Process Id
+                                  Brewing Process
                                 </InputLabel>
                                 <Select
                                   open={this.state.brewingProcessOpen}
@@ -193,8 +194,11 @@ class CreateGraph extends Component {
                                   value={this.state.brewingProcessId}
                                   input={<Input id='select-chip' />}
                                 >
-                                  <MenuItem key='Select..' value='Select..'>
-                                    Select..
+                                  <MenuItem
+                                    key='Select Brewing Process..'
+                                    value='Select Brewing Process..'
+                                  >
+                                    Select Brewing Process..
                                   </MenuItem>
                                   {processIds.map((id) => (
                                     <MenuItem key={id} value={id}>

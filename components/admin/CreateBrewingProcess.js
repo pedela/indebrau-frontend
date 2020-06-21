@@ -153,6 +153,7 @@ class CreateBrewingProcess extends Component {
                   value={this.state.name}
                   onChange={this.saveToState}
                   fullWidth
+                  autoFocus
                 />
               </Grid>
               <Grid item xs={12}>

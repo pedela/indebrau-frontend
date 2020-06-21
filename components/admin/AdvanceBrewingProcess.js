@@ -23,6 +23,7 @@ import {
   ALL_BREWING_PROCESSES_QUERY,
   ADVANCE_BREWING_PROCESS_MUTATION
 } from '../../lib/queriesAndMutations';
+import STEPS from '../../lib/brewingSteps';
 
 const styles = (theme) => ({
   layout: {
@@ -78,22 +79,6 @@ const MenuProps = {
     }
   }
 };
-
-// TODO: Read steps from backend!
-const STEPS = [
-  'MALT_CRUSHING',
-  'HEATING_UP',
-  'MASH_IN',
-  'MASHING',
-  'HEATING_SPARGE',
-  'LAUTERING',
-  'SPARGING',
-  'BOILING',
-  'CHILLING',
-  'FERMENTING',
-  'CONDITIONING',
-  'BOTTLED'
-];
 
 class AdvanceBrewingProcess extends Component {
   state = {

@@ -13,6 +13,9 @@ import {
   Dialog,
   DialogContent,
   Fab,
+  FormControlLabel,
+  Checkbox,
+  Chip,
   DialogTitle,
   withStyles
 } from '@material-ui/core';
@@ -24,6 +27,7 @@ import {
   ALL_MEDIA_STREAMS_QUERY,
   CREATE_MEDIA_STREAM_MUTATION
 } from '../../lib/queriesAndMutations';
+import STEPS from '../../lib/brewingSteps';
 
 const styles = (theme) => ({
   layout: {
@@ -51,8 +55,27 @@ const styles = (theme) => ({
   },
   fab: {
     margin: theme.spacing(1)
+  },
+  chips: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-end'
+  },
+  chip: {
+    margin: theme.spacing(1) / 4
   }
 });
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250
+    }
+  }
+};
 
 class CreateMediaStream extends Component {
   state = {
@@ -61,22 +84,10 @@ class CreateMediaStream extends Component {
 
     // mutation variables
     mediaFilesName: '',
-    overwrite: true,
-    brewingSteps: [],
-    updateFrequency: 60,
-    brewingProcessId: 'Select..'
-  };
-
-  saveToState = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  handleNewBrewingProcessId = (event) => {
-    this.setState({ brewingProcessId: event.target.value });
-  };
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
+    overwrite: false,
+    brewingSteps: new Array(STEPS[0]),
+    updateFrequency: '',
+    brewingProcessId: 'Select Brewing Process..'
   };
 
   handleClose = () => {
@@ -86,11 +97,31 @@ class CreateMediaStream extends Component {
 
       // mutation variables
       mediaFilesName: '',
-      overwrite: true,
-      brewingSteps: [],
-      updateFrequency: 60,
-      brewingProcessId: 'Select..'
+      overwrite: false,
+      brewingSteps: new Array(STEPS[0]),
+      updateFrequency: '',
+      brewingProcessId: 'Select Brewing Process..'
     });
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  saveToState = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  saveCheckToState = (name) => (event) => {
+    this.setState({ [name]: event.target.checked });
+  };
+
+  handleNewBrewingProcessId = (event) => {
+    this.setState({ brewingProcessId: event.target.value });
+  };
+
+  handleNewBrewingSteps = (event) => {
+    this.setState({ brewingSteps: event.target.value });
   };
 
   render() {
@@ -136,6 +167,7 @@ class CreateMediaStream extends Component {
                           value={this.state.mediaFilesName}
                           onChange={this.saveToState}
                           fullWidth
+                          autoFocus
                         />
                       </Grid>
                       <Grid item xs={12}>
@@ -150,10 +182,56 @@ class CreateMediaStream extends Component {
                         />
                       </Grid>
                       <Grid item xs={12}>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              color='secondary'
+                              id='overwrite'
+                              name='overwrite'
+                              value='overwrite'
+                              checked={this.state.overwrite}
+                              onChange={this.saveCheckToState('overwrite')}
+                            />
+                          }
+                          label='Overwrite'
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <FormControl className={classes.formControl}>
+                          <InputLabel htmlFor='select-multiple-chip'>
+                            Steps
+                          </InputLabel>
+                          <Select
+                            multiple
+                            value={this.state.brewingSteps}
+                            onChange={this.handleNewBrewingSteps}
+                            input={<Input id='select-multiple-chip' />}
+                            renderValue={(selected) => (
+                              <div className={classes.chips}>
+                                {selected.map((value) => (
+                                  <Chip
+                                    key={value}
+                                    label={value}
+                                    className={classes.chip}
+                                  />
+                                ))}
+                              </div>
+                            )}
+                            MenuProps={MenuProps}
+                          >
+                            {STEPS.map((step) => (
+                              <MenuItem key={step} value={step}>
+                                {step}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </Grid>
+                      <Grid item xs={12}>
                         <Query query={ALL_BREWING_PROCESSES_QUERY}>
                           {({ data }) => {
                             var processIds = [];
-                            if (data.brewingProcesses) {
+                            if (data) {
                               data.brewingProcesses.map((n) =>
                                 processIds.push(n.id)
                               );
@@ -161,7 +239,7 @@ class CreateMediaStream extends Component {
                             return (
                               <FormControl className={classes.formControl}>
                                 <InputLabel htmlFor='select-chip'>
-                                  Brewing Process Id
+                                  Brewing Process
                                 </InputLabel>
                                 <Select
                                   open={this.state.brewingProcessOpen}
@@ -171,8 +249,11 @@ class CreateMediaStream extends Component {
                                   value={this.state.brewingProcessId}
                                   input={<Input id='select-chip' />}
                                 >
-                                  <MenuItem key='Select..' value='Select..'>
-                                    Select..
+                                  <MenuItem
+                                    key='Select Brewing Process..'
+                                    value='Select Brewing Process..'
+                                  >
+                                    Select Brewing Process..
                                   </MenuItem>
                                   {processIds.map((id) => (
                                     <MenuItem key={id} value={id}>
@@ -201,7 +282,6 @@ class CreateMediaStream extends Component {
                         color='primary'
                         onClick={async () => {
                           // fire mutation (clear old error)
-                          // TODO brewing steps and updateFrequency
                           this.setState({ queryError: null });
                           await createMediaStream({
                             variables: {
