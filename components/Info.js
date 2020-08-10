@@ -35,7 +35,7 @@ class Info extends Component {
         <br />
         <br />
         <Typography variant='subtitle1' gutterBottom>
-          Soon more...
+          info[at]indebrau.de
         </Typography>
       </div>
     );
