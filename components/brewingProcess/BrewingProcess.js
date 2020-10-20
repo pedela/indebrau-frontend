@@ -42,11 +42,7 @@ class BrewingProcess extends Component {
             if (error) return <Error error={error} />;
             if (data && data.brewingProcess) {
               let { brewingProcess } = data;
-              let {
-                brewingProcessDetails,
-                graphs,
-                activeSteps
-              } = brewingProcess;
+              let { graphs, activeSteps } = brewingProcess;
               // return components - please mind that graph parsing
               // and data correctness checking is done inside
               // components, this is just a preselection
@@ -62,74 +58,40 @@ class BrewingProcess extends Component {
                     justify='center'
                   >
                     <Grid item>
-                      <GrainMill
-                        details={brewingProcessDetails}
-                        graphs={graphs}
-                        activeSteps={activeSteps}
-                      />
+                      <GrainMill graphs={graphs} activeSteps={activeSteps} />
                     </Grid>
                     <Grid item>
-                      <MashTun
-                        details={brewingProcessDetails}
-                        graphs={graphs}
-                        activeSteps={activeSteps}
-                      />
+                      <MashTun graphs={graphs} activeSteps={activeSteps} />
                     </Grid>
                     <Grid item>
                       <SpargingVessel
-                        details={brewingProcessDetails}
                         graphs={graphs}
                         activeSteps={activeSteps}
                       />
                     </Grid>
                     <Grid item>
-                      <Pump
-                        details={brewingProcessDetails}
-                        graphs={graphs}
-                        activeSteps={activeSteps}
-                      />
+                      <Pump graphs={graphs} activeSteps={activeSteps} />
                     </Grid>
                     <Grid item>
-                      <WortCopper
-                        details={brewingProcessDetails}
-                        graphs={graphs}
-                        activeSteps={activeSteps}
-                      />
+                      <WortCopper graphs={graphs} activeSteps={activeSteps} />
                     </Grid>
                     <Grid item>
-                      <WortChiller
-                        details={brewingProcessDetails}
-                        graphs={graphs}
-                        activeSteps={activeSteps}
-                      />
+                      <WortChiller graphs={graphs} activeSteps={activeSteps} />
                     </Grid>
                     <Grid item>
-                      <Fermenter
-                        details={brewingProcessDetails}
-                        graphs={graphs}
-                        activeSteps={activeSteps}
-                      />
+                      <Fermenter graphs={graphs} activeSteps={activeSteps} />
                     </Grid>
                     <Grid item>
                       <ElectronicHydrometer
-                        details={brewingProcessDetails}
                         graphs={graphs}
                         activeSteps={activeSteps}
                       />
                     </Grid>
                     <Grid item>
-                      <Keg
-                        details={brewingProcessDetails}
-                        graphs={graphs}
-                        activeSteps={activeSteps}
-                      />
+                      <Keg graphs={graphs} activeSteps={activeSteps} />
                     </Grid>
                     <Grid item>
-                      <Bottle
-                        details={brewingProcessDetails}
-                        graphs={graphs}
-                        activeSteps={activeSteps}
-                      />
+                      <Bottle graphs={graphs} activeSteps={activeSteps} />
                     </Grid>
                   </Grid>
                 </>

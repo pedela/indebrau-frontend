@@ -105,7 +105,7 @@ class SpargingVessel extends Component {
   }
 
   render() {
-    const { classes, details } = this.props;
+    const { classes } = this.props;
     return (
       <>
         {this.handleDialogs()}
@@ -136,8 +136,7 @@ class SpargingVessel extends Component {
 SpargingVessel.propTypes = {
   classes: PropTypes.object.isRequired,
   activeSteps: PropTypes.array.isRequired,
-  graphs: PropTypes.array.isRequired,
-  details: PropTypes.object.isRequired
+  graphs: PropTypes.array.isRequired
 };
 
 export default withStyles(styles)(SpargingVessel);

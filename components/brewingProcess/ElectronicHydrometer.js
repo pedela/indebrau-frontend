@@ -276,8 +276,7 @@ class ElectronicHydrometer extends Component {
 ElectronicHydrometer.propTypes = {
   classes: PropTypes.object.isRequired,
   activeSteps: PropTypes.array.isRequired,
-  graphs: PropTypes.array.isRequired,
-  details: PropTypes.object.isRequired
+  graphs: PropTypes.array.isRequired
 };
 
 export default withStyles(styles)(ElectronicHydrometer);

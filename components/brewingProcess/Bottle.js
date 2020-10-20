@@ -79,6 +79,7 @@ class Bottle extends Component {
             </Paper>
           </DialogContent>
         </Dialog>
+
         <Dialog
           fullWidth={true}
           maxWidth='lg'
@@ -264,8 +265,7 @@ class Bottle extends Component {
 Bottle.propTypes = {
   classes: PropTypes.object.isRequired,
   activeSteps: PropTypes.array.isRequired,
-  graphs: PropTypes.array.isRequired,
-  details: PropTypes.object.isRequired
+  graphs: PropTypes.array.isRequired
 };
 
 export default withStyles(styles)(Bottle);

@@ -51,9 +51,7 @@ class User extends Component {
                       </Typography>
                       <Paper className={classes.root}>
                         <BrewingProcessTable
-                          brewingProcesses={
-                            data.me.participatingBrewingProcesses
-                          }
+                          brewingProcesses={me.participatingBrewingProcesses}
                           adminView={false}
                         />
                       </Paper>
