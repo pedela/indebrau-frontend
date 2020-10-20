@@ -20,5 +20,3 @@ Build latest docker image:
 ```
 docker build -t indebrau/indebrau-frontend .
 ```
-
-Then, use docker-compose scripts from main repository.
