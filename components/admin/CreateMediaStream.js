@@ -15,7 +15,6 @@ import {
   Fab,
   FormControlLabel,
   Checkbox,
-  Chip,
   DialogTitle,
   withStyles
 } from '@material-ui/core';
@@ -64,17 +63,6 @@ const styles = (theme) => ({
     margin: theme.spacing(1) / 4
   }
 });
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250
-    }
-  }
-};
 
 class CreateMediaStream extends Component {
   state = {
