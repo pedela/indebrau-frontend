@@ -31,7 +31,7 @@ class Info extends Component {
           About Indebrau
           <br />
         </Typography>
-        <img src='../hopfiUndMalzi.png' className={classes.image} />
+        <img src='../hopfiMalzi.png' className={classes.image} />
         <br />
         <br />
         <Typography variant='subtitle1' gutterBottom>
