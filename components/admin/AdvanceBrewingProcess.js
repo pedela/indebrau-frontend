@@ -187,7 +187,7 @@ class AdvanceBrewingProcess extends Component {
                           await advanceBrewingProcess({
                             variables: {
                               id: this.props.id,
-                              newActiveSteps: this.state.newActiveSteps
+                              new_active_steps: this.state.newActiveSteps
                             }
                           }).catch((e) => {
                             this.setState({ queryError: e });

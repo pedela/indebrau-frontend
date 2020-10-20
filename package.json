@@ -1,6 +1,6 @@
 {
   "name": "indebrau-frontend",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "description": "The frontend of indebrau",
   "repository": "https://github.com/PedeLa/indebrau-frontend",
@@ -11,8 +11,8 @@
     "start": "next start"
   },
   "engines": {
-    "node": "~12.14.0",
-    "npm": "~6.13.4"
+    "node": "~12.19.0",
+    "npm": "~6.14.8"
   },
   "dependencies": {
     "@material-ui/core": "4.11.0",
@@ -21,23 +21,22 @@
     "apollo-boost": "0.4.9",
     "apollo-client": "2.6.10",
     "dotenv": "8.2.0",
-    "graphql": "15.1.0",
-    "next": "9.4.4",
+    "graphql": "15.3.0",
+    "next": "9.5.5",
     "next-with-apollo": "5.1.0",
     "nprogress": "0.2.0",
     "prop-types": "15.7.2",
-    "react": "16.13.1",
+    "react": "16.14.0",
     "react-apollo": "3.1.5",
-    "react-dom": "16.13.1",
-    "recharts": "2.0.0-beta.6"
+    "react-dom": "16.14.0",
+    "recharts": "2.0.0-beta.7"
   },
   "devDependencies": {
     "babel-eslint": "10.1.0",
-    "eslint": "7.6.0",
-    "eslint-config-airbnb": "18.2.0",
-    "eslint-plugin-import": "2.22.0",
+    "eslint": "7.11.0",
+    "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsx-a11y": "6.3.1",
-    "eslint-plugin-react": "7.20.5"
+    "eslint-plugin-react": "7.21.5"
   },
   "author": "Peter de Lange",
   "license": "ISC"

@@ -10,7 +10,7 @@ const NextComposed = forwardRef((props, ref) => {
   const { as, href, prefetch, ...other } = props;
 
   return (
-    <NextLink href={href} prefetch={prefetch} as={as} ref={ref}>
+    <NextLink href={href} prefetch={prefetch} as={as} innerRef={ref}>
       <a {...other} />
     </NextLink>
   );

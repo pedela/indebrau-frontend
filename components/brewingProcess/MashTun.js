@@ -165,7 +165,7 @@ class MashTun extends Component {
   }
 
   render() {
-    const { classes, details } = this.props;
+    const { classes } = this.props;
     return (
       <>
         {this.handleDialogs()}
@@ -186,12 +186,6 @@ class MashTun extends Component {
             <Button size='small' color='primary' onClick={this.handleInfoClick}>
               More Info
             </Button>
-            {this.state.active && (
-              <Typography gutterBottom variant='body2'>
-                Mash In: {details.mashInTemperature}°C Water:{' '}
-                {details.mashWaterLiter}L
-              </Typography>
-            )}
           </CardActions>
         </Card>
       </>
@@ -202,8 +196,7 @@ class MashTun extends Component {
 MashTun.propTypes = {
   classes: PropTypes.object.isRequired,
   activeSteps: PropTypes.array.isRequired,
-  graphs: PropTypes.array.isRequired,
-  details: PropTypes.object.isRequired
+  graphs: PropTypes.array.isRequired
 };
 
 export default withStyles(styles)(MashTun);
