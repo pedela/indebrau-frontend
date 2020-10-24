@@ -102,7 +102,7 @@ class DeleteGraph extends Component {
                         this.setState({ queryError: null });
                         await deleteGraph({
                           variables: {
-                            id: this.props.id
+                            graphId: this.props.id
                           }
                         }).catch((e) => {
                           this.setState({ queryError: e });
