@@ -9,7 +9,10 @@ import {
 import Error from '../Error';
 import {
   ALL_BREWING_PROCESSES_QUERY,
-  ADVANCE_BREWING_PROCESS_MUTATION
+  ADVANCE_BREWING_PROCESS_MUTATION,
+  ACTIVE_GRAPHS_QUERY,
+  ALL_GRAPHS_QUERY,
+  ALL_MEDIA_STREAMS_QUERY
 } from '../../lib/queriesAndMutations';
 
 const styles = (theme) => ({
@@ -80,7 +83,13 @@ class AdvanceBrewingProcess extends Component {
       <>
         <Mutation
           mutation={ADVANCE_BREWING_PROCESS_MUTATION}
-          refetchQueries={[{ query: ALL_BREWING_PROCESSES_QUERY }]}
+          refetchQueries={[
+            { query: ALL_BREWING_PROCESSES_QUERY},
+            { query: ACTIVE_GRAPHS_QUERY},
+            { query: ALL_GRAPHS_QUERY},
+            { query: ALL_MEDIA_STREAMS_QUERY}
+
+          ]}
         >
           {(advanceBrewingProcess, { loading }) => (
             <>

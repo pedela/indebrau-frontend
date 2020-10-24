@@ -29,7 +29,8 @@ class AllMediaStreams extends Component {
             if (loading) return <Loading />;
             if (error) return <Error error={error} />;
             if (data) {
-              const activeMediaStreams = data.mediaStreams.map(
+              // TODO: Currently also inactive ones are shown here
+              const mediaFiles = data.mediaStreams.map(
                 (mediaStream) => (
                   <LatestMediaFile
                     key={mediaStream.id}
@@ -43,8 +44,8 @@ class AllMediaStreams extends Component {
                 <Paper className={classes.root}>
                   <Typography variant='h5'>All Media Streams</Typography>
                   <MediaStreamTable mediaStreams={data.mediaStreams} />
-                  <Typography variant='h5'>Active Media Streams</Typography>
-                  {activeMediaStreams}
+                  <Typography variant='h5'>Current Images</Typography>
+                  {mediaFiles}
                 </Paper>
               );
             }
