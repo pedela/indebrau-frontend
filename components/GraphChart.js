@@ -33,7 +33,7 @@ class GraphChart extends Component {
             stroke='#8884d8'
             dot={false}
             activeDot={{ r: 8 }}
-            name={this.props.name}
+            name={this.props.sensorName}
           />
         </LineChart>
       </ResponsiveContainer>
@@ -43,7 +43,7 @@ class GraphChart extends Component {
 
 GraphChart.propTypes = {
   data: PropTypes.array.isRequired,
-  name: PropTypes.string.isRequired
+  sensorName: PropTypes.string.isRequired
 };
 
 export default GraphChart;

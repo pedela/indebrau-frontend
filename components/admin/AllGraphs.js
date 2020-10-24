@@ -48,7 +48,7 @@ class AllGraphs extends Component {
                 <GraphChart
                   data={activeGraph.graphData}
                   key={activeGraph.id}
-                  name={activeGraph.name}
+                  sensorName={activeGraph.sensorName}
                 />
               ));
               return (

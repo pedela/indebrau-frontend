@@ -36,32 +36,30 @@ class GraphTable extends Component {
         <Table size='small'>
           <TableHead>
             <TableRow>
-              <TableCell align='center'>Name</TableCell>
               <TableCell align='center'>Last Update</TableCell>
               <TableCell align='center'>Last Value</TableCell>
-              <TableCell align='center'>Active</TableCell>
-              <TableCell align='center'>Frequency</TableCell>
-              <TableCell align='center'>Sensor Name</TableCell>
+              <TableCell align='center'>Sensor</TableCell>
               <TableCell align='center'>ID</TableCell>
-              <TableCell align='center'>Linked Brewing Process</TableCell>
+              <TableCell align='center'>Step</TableCell>
+              <TableCell align='center'>Process ID</TableCell>
+              <TableCell align='center'>Frequency</TableCell>
               <TableCell align='center' />
             </TableRow>
           </TableHead>
           <TableBody>
             {this.props.graphs.map((n) => (
               <TableRow key={n.id}>
-                <TableCell align='center'>{n.name}</TableCell>
                 <TableCell align='center'>
                   {n.graphData[0] && renderDate(n.graphData[0].time)}
                 </TableCell>
                 <TableCell align='center'>
                   {n.graphData[0] && parseSensorValue(n.graphData[0].value)}
                 </TableCell>
-                <TableCell align='center'>{n.active.toString()}</TableCell>
-                <TableCell align='center'>{n.updateFrequency} Sec</TableCell>
                 <TableCell align='center'>{n.sensorName}</TableCell>
                 <TableCell align='center'>{n.id}</TableCell>
-                <TableCell align='center'>{n.brewingProcess.id}</TableCell>
+                <TableCell align='center'>{n.brewingStep.name}</TableCell>
+                <TableCell align='center'>{n.brewingStep.brewingProcess.id}</TableCell>
+                <TableCell align='center'>{n.updateFrequency} Sec</TableCell>
                 <TableCell align='center'>
                   <Fab
                     color='secondary'

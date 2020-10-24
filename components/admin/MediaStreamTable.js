@@ -35,24 +35,16 @@ class MediaStreamTable extends Component {
         <Table size='small'>
           <TableHead>
             <TableRow>
-              <TableCell align='center'>ID</TableCell>
-              <TableCell align='center'>Media File Name</TableCell>
-              <TableCell align='center'>Active</TableCell>
-              <TableCell align='center'>Update Frequency</TableCell>
-              <TableCell align='center'>Linked Brewing Process</TableCell>
+              <TableCell align='center' > ID </TableCell>
+              <TableCell align='center' > Details </TableCell>
               <TableCell align='center' />
             </TableRow>
           </TableHead>
           <TableBody>
             {this.props.mediaStreams.map((n) => (
               <TableRow key={n.id}>
-                <TableCell component='th' scope='row'>
-                  {n.id}
-                </TableCell>
-                <TableCell align='center'>{n.mediaFilesName}</TableCell>
-                <TableCell align='center'>{n.active.toString()}</TableCell>
-                <TableCell align='center'>{n.updateFrequency}</TableCell>
-                <TableCell align='center'>{n.brewingProcess.id}</TableCell>
+                <TableCell align='center'>{n.id}</TableCell>
+                <TableCell align='center'>Name: {n.mediaFilesName} Step: {n.brewingStep.name} Process ID: {n.brewingStep.brewingProcess.id} Update: {n.updateFrequency} sec</TableCell>
                 <TableCell align='center'>
                   <Fab
                     color='secondary'

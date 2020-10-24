@@ -3,18 +3,6 @@ import PropTypes from 'prop-types';
 import { Mutation } from 'react-apollo';
 import PlayIcon from '@material-ui/icons/PlayArrowOutlined';
 import {
-  Paper,
-  Button,
-  Chip,
-  MenuItem,
-  Input,
-  Select,
-  FormControl,
-  InputLabel,
-  Grid,
-  Dialog,
-  DialogTitle,
-  DialogContent,
   Fab,
   withStyles
 } from '@material-ui/core';
@@ -23,7 +11,6 @@ import {
   ALL_BREWING_PROCESSES_QUERY,
   ADVANCE_BREWING_PROCESS_MUTATION
 } from '../../lib/queriesAndMutations';
-import STEPS from '../../lib/brewingSteps';
 
 const styles = (theme) => ({
   layout: {
@@ -69,40 +56,21 @@ const styles = (theme) => ({
   }
 });
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250
-    }
-  }
-};
-
 class AdvanceBrewingProcess extends Component {
   state = {
-    open: false,
-    queryError: null,
-    newActiveSteps: this.props.activeSteps
+    queryError: null
   };
 
-  handleClickOpen = () => {
+  handleClick = () => {
     this.setState({
-      open: true,
-      newActiveSteps: this.props.activeSteps
+      open: true
     });
   };
 
   handleClose = () => {
     this.setState({
-      open: false,
       queryError: null
     });
-  };
-
-  handleNewActiveSteps = (event) => {
-    this.setState({ newActiveSteps: event.target.value });
   };
 
   render() {
@@ -110,102 +78,34 @@ class AdvanceBrewingProcess extends Component {
 
     return (
       <>
-        <Fab
-          color='primary'
-          aria-label='Add'
-          className={classes.fab}
-          onClick={this.handleClickOpen}
-        >
-          <PlayIcon />
-        </Fab>
         <Mutation
           mutation={ADVANCE_BREWING_PROCESS_MUTATION}
           refetchQueries={[{ query: ALL_BREWING_PROCESSES_QUERY }]}
         >
           {(advanceBrewingProcess, { loading }) => (
-            <Dialog
-              open={this.state.open}
-              onClose={this.handleClose}
-              aria-labelledby='form-dialog-title'
-              disableBackdropClick
-            >
+            <>
+              <Fab
+                color='primary'
+                aria-label='Add'
+                className={classes.fab}
+                onClick={async () => {
+                // fire mutation (clear old error)
+                  this.setState({ queryError: null });
+                  await advanceBrewingProcess({
+                    variables: {
+                      brewingProcessId: this.props.brewingProcessId,
+                    }
+                  }).catch((e) => {
+                    this.setState({ queryError: e });
+                  });
+                }}
+                disabled={loading}
+              >
+                <PlayIcon                 disabled={loading}
+                />
+              </Fab>
               <Error error={this.state.queryError} />
-              <DialogTitle id='form-dialog-title'>
-                Advance Brewing Process
-              </DialogTitle>
-
-              <DialogContent>
-                <main className={classes.layout}>
-                  <Paper className={classes.paper}>
-                    <Grid container spacing={8}>
-                      <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor='select-multiple-chip'>
-                          Steps
-                        </InputLabel>
-                        <Select
-                          multiple
-                          value={this.state.newActiveSteps}
-                          onChange={this.handleNewActiveSteps}
-                          input={<Input id='select-multiple-chip' />}
-                          renderValue={(selected) => (
-                            <div className={classes.chips}>
-                              {selected.map((value) => (
-                                <Chip
-                                  key={value}
-                                  label={value}
-                                  className={classes.chip}
-                                />
-                              ))}
-                            </div>
-                          )}
-                          MenuProps={MenuProps}
-                        >
-                          {STEPS.map((step) => (
-                            <MenuItem key={step} value={step}>
-                              {step}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </Grid>
-
-                    <div className={classes.buttons}>
-                      <Button
-                        onClick={this.handleClose}
-                        className={classes.button}
-                        color='secondary'
-                        variant='contained'
-                      >
-                        Cancel
-                      </Button>
-                      <Button
-                        variant='contained'
-                        color='primary'
-                        onClick={async () => {
-                          // fire mutation (clear old error)
-                          this.setState({ queryError: null });
-                          await advanceBrewingProcess({
-                            variables: {
-                              id: this.props.id,
-                              new_active_steps: this.state.newActiveSteps
-                            }
-                          }).catch((e) => {
-                            this.setState({ queryError: e });
-                          });
-                          if (this.state.queryError == null) {
-                            this.handleClose();
-                          }
-                        }}
-                        className={classes.button}
-                        disabled={loading}
-                      >
-                        Advance!
-                      </Button>
-                    </div>
-                  </Paper>
-                </main>
-              </DialogContent>
-            </Dialog>
+            </>
           )}
         </Mutation>
       </>
@@ -215,8 +115,7 @@ class AdvanceBrewingProcess extends Component {
 
 AdvanceBrewingProcess.propTypes = {
   classes: PropTypes.object.isRequired,
-  id: PropTypes.string.isRequired,
-  activeSteps: PropTypes.array.isRequired
+  brewingProcessId: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(AdvanceBrewingProcess);

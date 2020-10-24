@@ -34,7 +34,7 @@ class AllMediaStreams extends Component {
                   <LatestMediaFile
                     key={mediaStream.id}
                     id={mediaStream.id}
-                    brewingProcessId={mediaStream.brewingProcess.id}
+                    brewingStepId={mediaStream.brewingStep.id}
                     updateFrequency={mediaStream.updateFrequency}
                   />
                 )

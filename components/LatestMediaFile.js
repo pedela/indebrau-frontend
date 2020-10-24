@@ -33,9 +33,7 @@ class LatestMediaFile extends Component {
       <Paper className={classes.root}>
         <Query
           query={LATEST_MEDIA_STREAM_FILE_QUERY}
-          variables={{
-            id: this.props.id
-          }}
+          variables={{ id: this.props.id }}
           pollInterval={this.props.updateFrequency * 1000}
           fetchPolicy='network-only'
         >
@@ -49,19 +47,12 @@ class LatestMediaFile extends Component {
                   <>
                     <img
                       src={
-                        // eslint-disable-next-line no-undef
-                        process.env.BACKEND_ENDPOINT +
-                        '/media/' +
-                        this.props.brewingProcessId +
-                        '/' +
-                        this.props.id +
-                        '/' +
-                        mediaFile.publicIdentifier
+                        `${process.env.BACKEND_ENDPOINT}/media/${this.props.brewingStepId}/${this.props.id}/${mediaFile.publicIdentifier}`
                       }
                       className={classes.image}
                     />
                     <Typography variant='subtitle1'>
-                      {data.mediaStream.mediaFilesName}
+                      {data.mediaStream.id}
                     </Typography>
                     <Typography variant='subtitle2'>
                       Last Update:
@@ -70,7 +61,7 @@ class LatestMediaFile extends Component {
                   </>
                 );
               } else {
-                return <Typography variant='subtitle1'>No Image</Typography>;
+                return <Typography variant='subtitle1'>{data.mediaStream.id}: No Image</Typography>;
               }
             }
           }}
@@ -83,7 +74,7 @@ class LatestMediaFile extends Component {
 LatestMediaFile.propTypes = {
   id: PropTypes.string.isRequired,
   updateFrequency: PropTypes.number.isRequired,
-  brewingProcessId: PropTypes.string.isRequired,
+  brewingStepId: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired
 };
 

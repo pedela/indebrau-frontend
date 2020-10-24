@@ -51,7 +51,7 @@ class Brewery extends Component {
             <BreweryComponent type='Fermenter' />
           </Grid>
           <Grid item>
-            <BreweryComponent type='ElectronicHydrometer' />
+            <BreweryComponent type='Hydrometer' />
           </Grid>
           <Grid item>
             <BreweryComponent type='Keg' />

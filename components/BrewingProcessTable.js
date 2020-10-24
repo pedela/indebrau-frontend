@@ -42,8 +42,8 @@ class BrewingProcessTable extends Component {
         <Table size='small'>
           <TableHead>
             <TableRow>
-              {this.props.adminView && <TableCell align='center'>ID</TableCell>}
               <TableCell align='center'>Name</TableCell>
+              <TableCell align='center'>Step</TableCell>
               {!this.props.adminView && (
                 <TableCell align='center'>Description</TableCell>
               )}
@@ -53,30 +53,21 @@ class BrewingProcessTable extends Component {
           <TableBody>
             {this.props.brewingProcesses.map((n) => (
               <TableRow key={n.id} hover>
-                {this.props.adminView && (
-                  <TableCell align='center'>{n.id}</TableCell>
-                )}
-                <TableCell
-                  align='center'
-                  onClick={() => this.handleClick(n.id)}
-                >
-                  {n.name}
+                <TableCell align='center'>
+                  {this.props.adminView && n.id}: {n.name}
+                </TableCell>
+                <TableCell align='center' onClick={() => this.handleClick(n.id)}>
+                  {n.brewingSteps[0] && n.brewingSteps[0].name}{!n.start && 'inactive'}{n.end && 'ended'}
                 </TableCell>
                 {!this.props.adminView && (
-                  <TableCell
-                    align='center'
-                    onClick={() => this.handleClick(n.id)}
-                  >
+                  <TableCell align='center'>
                     {n.description}
                   </TableCell>
                 )}
                 {this.props.adminView && (
                   <TableCell align='center'>
                     <DeleteBrewingProcess id={n.id} />
-                    <AdvanceBrewingProcess
-                      id={n.id}
-                      activeSteps={n.activeSteps}
-                    />
+                    <AdvanceBrewingProcess brewingProcessId={n.id}/>
                   </TableCell>
                 )}
               </TableRow>

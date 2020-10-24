@@ -20,6 +20,8 @@ import {
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { Query, Mutation } from 'react-apollo';
+
+import STEPS from '../../lib/brewingSteps';
 import Error from '../Error';
 import {
   ALL_BREWING_PROCESSES_QUERY,
@@ -73,7 +75,8 @@ class CreateMediaStream extends Component {
     mediaFilesName: '',
     overwrite: false,
     updateFrequency: '',
-    brewingProcessId: 'Select Brewing Process..'
+    brewingProcessId: '',
+    brewingStepName: STEPS[0]
   };
 
   handleClose = () => {
@@ -85,16 +88,17 @@ class CreateMediaStream extends Component {
       mediaFilesName: '',
       overwrite: false,
       updateFrequency: '',
-      brewingProcessId: 'Select Brewing Process..'
+      brewingProcessId: '',
+      brewingStepName: STEPS[0]
     });
-  };
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
   };
 
   saveToState = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
   };
 
   saveCheckToState = (name) => (event) => {
@@ -103,6 +107,10 @@ class CreateMediaStream extends Component {
 
   handleNewBrewingProcessId = (event) => {
     this.setState({ brewingProcessId: event.target.value });
+  };
+
+  handleNewBrewingStepName = (event) => {
+    this.setState({ brewingStepName: event.target.value });
   };
 
   render() {
@@ -180,44 +188,46 @@ class CreateMediaStream extends Component {
                       <Grid item xs={12}>
                         <Query query={ALL_BREWING_PROCESSES_QUERY}>
                           {({ data }) => {
-                            var processIds = [];
+                            let brewingProcesses = [''];
                             if (data) {
-                              data.brewingProcesses.map((n) =>
-                                processIds.push(n.id)
-                              );
+                              brewingProcesses = data.brewingProcesses;
                             }
                             return (
                               <FormControl className={classes.formControl}>
-                                <InputLabel htmlFor='select-chip'>
+                                <InputLabel htmlFor='select-brewingProcess'>
                                   Brewing Process
                                 </InputLabel>
                                 <Select
-                                  open={this.state.brewingProcessOpen}
-                                  onClose={this.handleBrewingProcessClose}
-                                  onOpen={this.handleBrewingProcessOpen}
                                   onChange={this.handleNewBrewingProcessId}
                                   value={this.state.brewingProcessId}
-                                  input={<Input id='select-chip' />}
+                                  input={<Input id='select-brewingProcess' />}
+                                  displayEmpty={true}
                                 >
-                                  <MenuItem
-                                    key='Select Brewing Process..'
-                                    value='Select Brewing Process..'
-                                  >
-                                    Select Brewing Process..
-                                  </MenuItem>
-                                  {processIds.map((id) => (
-                                    <MenuItem key={id} value={id}>
-                                      {id}
-                                    </MenuItem>
+                                  {brewingProcesses.map((process) => (
+                                    <MenuItem key={process.id} value={process.id}>{process.id}: {process.name}</MenuItem>
                                   ))}
                                 </Select>
                               </FormControl>
                             );
-                          }}
+                          }
+                          }
                         </Query>
                       </Grid>
                     </Grid>
-
+                    <FormControl className={classes.formControl}>
+                      <InputLabel htmlFor='select-brewingStepName'>
+                        Brewing Step
+                      </InputLabel>
+                      <Select
+                        onChange={this.handleNewBrewingStepName}
+                        value={this.state.brewingStepName}
+                        input={<Input id='select-brewingStepName' />}
+                      >
+                        {STEPS.map((step) => (
+                          <MenuItem key={step} value={step}>{step}</MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
                     <div className={classes.buttons}>
                       <Button
                         onClick={this.handleClose}
@@ -240,7 +250,8 @@ class CreateMediaStream extends Component {
                               updateFrequency: parseInt(
                                 this.state.updateFrequency
                               ),
-                              brewingProcessId: this.state.brewingProcessId
+                              brewingProcessId: this.state.brewingProcessId,
+                              brewingStepName: this.state.brewingStepName
                             }
                           }).catch((e) => {
                             this.setState({ queryError: e });

@@ -21,10 +21,10 @@ const styles = (theme) => ({
     flexGrow: 1
   },
   card: {
-    width: 300
+    width: 100
   },
   media: {
-    height: 300
+    height: 100
   }
 });
 
@@ -35,26 +35,26 @@ class BreweryComponent extends Component {
 
   getProperties = (type) => {
     switch (type) {
-      case 'GrainMill':
-        return properties.GrainMillProps;
-      case 'MashTun':
-        return properties.MashTunProps;
-      case 'SpargingVessel':
-        return properties.SpargingVesselProps;
-      case 'Pump':
-        return properties.PumpProps;
-      case 'WortCopper':
-        return properties.WortCopperProps;
-      case 'ElectronicHydrometer':
-        return properties.ElectronicHydrometerProps;
-      case 'Fermenter':
-        return properties.FermenterProps;
-      case 'WortChiller':
-        return properties.WortChillerProps;
-      case 'Keg':
-        return properties.KegProps;
-      case 'Bottle':
-        return properties.BottleProps;
+    case 'GrainMill':
+      return properties.GrainMillProps;
+    case 'MashTun':
+      return properties.MashTunProps;
+    case 'SpargingVessel':
+      return properties.SpargingVesselProps;
+    case 'Pump':
+      return properties.PumpProps;
+    case 'WortCopper':
+      return properties.WortCopperProps;
+    case 'Hydrometer':
+      return properties.HydrometerProps;
+    case 'Fermenter':
+      return properties.FermenterProps;
+    case 'WortChiller':
+      return properties.WortChillerProps;
+    case 'Keg':
+      return properties.KegProps;
+    case 'Bottle':
+      return properties.BottleProps;
     }
   };
 
@@ -100,7 +100,7 @@ class BreweryComponent extends Component {
               title={this.getProperties(type).title}
             />
             <CardContent>
-              <Typography gutterBottom variant='h5' component='h2'>
+              <Typography gutterBottom variant='body2'>
                 {this.getProperties(type).title}
               </Typography>
             </CardContent>
@@ -119,7 +119,7 @@ BreweryComponent.propTypes = {
     'SpargingVessel',
     'Pump',
     'WortCopper',
-    'ElectronicHydrometer',
+    'Hydrometer',
     'Fermenter',
     'WortChiller',
     'Keg',

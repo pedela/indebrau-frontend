@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { CurrentUser } from '../components/User';
 import Home from '../components/Home';
 import Nav from '../components/Nav';
-import BrewingProcess from '../components/brewingProcess/BrewingProcess';
+import BrewingProcess from '../components/BrewingProcess';
 
 class BrewingProcessPage extends Component {
   static async getInitialProps({ query }) {
@@ -27,7 +27,7 @@ class BrewingProcessPage extends Component {
               } else {
                 // does user participate?
                 me.participatingBrewingProcesses.map((brewingProcess) => {
-                  if (brewingProcess.id === this.props.brewingProcessId) {
+                  if (brewingProcess.id == this.props.brewingProcessId) {
                     hasRights = true;
                   }
                 });
