@@ -1,10 +1,11 @@
 module.exports = {
-  parser: 'babel-eslint',
   env: {
+    commonjs: true,
     browser: true,
     es6: true,
   },
   extends: ['eslint:recommended', 'plugin:react/recommended'],
+  parser: 'babel-eslint',
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -14,7 +15,6 @@ module.exports = {
       jsx: true,
     },
     ecmaVersion: 2018,
-    sourceType: 'module',
   },
   plugins: ['react'],
   rules: {

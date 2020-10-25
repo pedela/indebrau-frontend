@@ -47,6 +47,7 @@ const Link = forwardRef((props, ref) => {
       className={className}
       ref={ref}
       style={{ textDecoration: 'none' }}
+      color= 'inherit'
       {...other}
     />
   );

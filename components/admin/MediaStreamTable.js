@@ -1,13 +1,11 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import EditIcon from '@material-ui/icons/Edit';
 import {
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
-  Fab,
   withStyles
 } from '@material-ui/core';
 import DeleteMediaStream from './DeleteMediaStream';
@@ -35,8 +33,8 @@ class MediaStreamTable extends Component {
         <Table size='small'>
           <TableHead>
             <TableRow>
-              <TableCell align='center' > ID </TableCell>
-              <TableCell align='center' > Details </TableCell>
+              <TableCell align='center'>ID</TableCell>
+              <TableCell align='center'>Details</TableCell>
               <TableCell align='center' />
             </TableRow>
           </TableHead>
@@ -44,15 +42,8 @@ class MediaStreamTable extends Component {
             {this.props.mediaStreams.map((n) => (
               <TableRow key={n.id}>
                 <TableCell align='center'>{n.id}</TableCell>
-                <TableCell align='center'>Name: {n.mediaFilesName} Step: {n.brewingStep.name} Process ID: {n.brewingStep.brewingProcess.id} Update: {n.updateFrequency} sec</TableCell>
+                <TableCell align='center'>Name: {n.mediaFilesName} Step: {n.brewingStep.name} Process: {n.brewingStep.brewingProcess.id} Update: {n.updateFrequency} Sec</TableCell>
                 <TableCell align='center'>
-                  <Fab
-                    color='secondary'
-                    aria-label='Edit'
-                    className={classes.fab}
-                  >
-                    <EditIcon />
-                  </Fab>
                   <DeleteMediaStream id={n.id} />
                 </TableCell>
               </TableRow>

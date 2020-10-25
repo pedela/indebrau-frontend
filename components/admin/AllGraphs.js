@@ -15,6 +15,7 @@ import CreateGraph from './CreateGraph';
 const styles = (theme) => ({
   root: {
     width: '100%',
+    textAlign: 'center',
     overflowX: 'auto',
     padding: theme.spacing(1),
     maxHeight: '100%'
@@ -34,7 +35,7 @@ class AllGraphs extends Component {
     };
 
     return (
-      <div className={classes.root}>
+      <>
         <Query
           query={ACTIVE_GRAPHS_QUERY}
           variables={activeGraphsVariables}
@@ -53,7 +54,7 @@ class AllGraphs extends Component {
               ));
               return (
                 <Paper className={classes.root}>
-                  <Typography variant='h5'>Active Graphs</Typography>
+                  <Typography variant='subtitle1'>Active Graphs</Typography>
                   {activeGraphs}
                 </Paper>
               );
@@ -67,7 +68,7 @@ class AllGraphs extends Component {
             if (data) {
               return (
                 <Paper className={classes.root}>
-                  <Typography variant='h5'>All Graphs</Typography>
+                  <Typography variant='subtitle1'>All Graphs</Typography>
                   <GraphTable graphs={data.graphs} />
                 </Paper>
               );
@@ -77,7 +78,7 @@ class AllGraphs extends Component {
         <Paper className={classes.root}>
           <CreateGraph className={classes.root} />
         </Paper>
-      </div>
+      </>
     );
   }
 }

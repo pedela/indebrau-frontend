@@ -14,7 +14,8 @@ const styles = (theme) => ({
     width: '100%',
     overflowX: 'auto',
     padding: theme.spacing(1),
-    maxHeight: '100%'
+    maxHeight: '100%',
+    textAlign: 'center'
   }
 });
 
@@ -23,7 +24,7 @@ class AllMediaStreams extends Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
+      <>
         <Query query={ALL_MEDIA_STREAMS_QUERY}>
           {({ data, error, loading }) => {
             if (loading) return <Loading />;
@@ -42,9 +43,9 @@ class AllMediaStreams extends Component {
               );
               return (
                 <Paper className={classes.root}>
-                  <Typography variant='h5'>All Media Streams</Typography>
+                  <Typography variant='subtitle1'>All Media Streams</Typography>
                   <MediaStreamTable mediaStreams={data.mediaStreams} />
-                  <Typography variant='h5'>Current Images</Typography>
+                  <Typography variant='subtitle1'>Current Images</Typography>
                   {mediaFiles}
                 </Paper>
               );
@@ -54,7 +55,7 @@ class AllMediaStreams extends Component {
         <Paper className={classes.root}>
           <CreateMediaStream className={classes.root} />
         </Paper>
-      </div>
+      </>
     );
   }
 }

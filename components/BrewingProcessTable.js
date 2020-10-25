@@ -54,7 +54,7 @@ class BrewingProcessTable extends Component {
             {this.props.brewingProcesses.map((n) => (
               <TableRow key={n.id} hover>
                 <TableCell align='center'>
-                  {this.props.adminView && n.id}: {n.name}
+                  {this.props.adminView && n.id+':'} {n.name}
                 </TableCell>
                 <TableCell align='center' onClick={() => this.handleClick(n.id)}>
                   {n.brewingSteps[0] && n.brewingSteps[0].name}{!n.start && 'inactive'}{n.end && 'ended'}

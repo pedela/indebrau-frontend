@@ -13,7 +13,8 @@ const styles = (theme) => ({
     width: '100%',
     overflowX: 'auto',
     padding: theme.spacing(1),
-    maxHeight: '100%'
+    maxHeight: '100%',
+    textAlign: 'center'
   },
   fab: {
     margin: theme.spacing(1)
@@ -24,7 +25,7 @@ class AllBrewingProcesses extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.root}>
+      <>
         <Query query={ALL_BREWING_PROCESSES_QUERY}>
           {({ data, error, loading }) => {
             if (loading) return <Loading />;
@@ -32,7 +33,7 @@ class AllBrewingProcesses extends Component {
             // success!
             return (
               <Paper>
-                <Typography variant='h5' className={classes.root}>
+                <Typography variant='subtitle1' className={classes.root}>
                   All Brewing Processes
                 </Typography>
                 <Paper className={classes.root}>
@@ -48,7 +49,7 @@ class AllBrewingProcesses extends Component {
         <Paper className={classes.root}>
           <CreateBrewingProcess className={classes.root} />
         </Paper>
-      </div>
+      </>
     );
   }
 }

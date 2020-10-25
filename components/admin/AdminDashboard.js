@@ -1,10 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import LaptopIcon from '@material-ui/icons/Laptop';
-import AssignmentIcon from '@material-ui/icons/Assignment';
 import MenuIcon from '@material-ui/icons/Menu';
-import HomeIcon from '@material-ui/icons/Home';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import {
   Drawer,
@@ -14,9 +11,9 @@ import {
   Divider,
   IconButton,
   ListItem,
-  ListItemIcon,
   ListItemText,
   Typography,
+  Button,
   withStyles
 } from '@material-ui/core';
 
@@ -25,14 +22,11 @@ import DashboardContent from './DashboardContent';
 import Error from '../Error';
 import { CurrentUser } from '../User';
 
-const drawerWidth = 240;
+const drawerWidth = 160;
 
 const styles = (theme) => ({
   root: {
     display: 'flex'
-  },
-  toolbar: {
-    paddingRight: 24
   },
   toolbarIcon: {
     display: 'flex',
@@ -57,14 +51,19 @@ const styles = (theme) => ({
     })
   },
   menuButton: {
-    marginLeft: 12,
-    marginRight: 36
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
   },
   menuButtonHidden: {
     display: 'none'
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
+  homeLink: {
+    color: 'inherit',
   },
   drawerPaper: {
     position: 'relative',
@@ -81,9 +80,9 @@ const styles = (theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    width: theme.spacing(7),
+    width: theme.spacing(0),
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(7)
+      width: theme.spacing(0)
     }
   },
   appBarSpacer: theme.mixins.toolbar,
@@ -135,10 +134,7 @@ class AdminDashboard extends Component {
                     />
                     <Link href='/'>
                       <ListItem button>
-                        <ListItemIcon>
-                          <HomeIcon />
-                        </ListItemIcon>
-                        <ListItemText primary='Home' />
+                        <ListItemText primary='Back' />
                       </ListItem>
                     </Link>
                   </main>
@@ -170,14 +166,16 @@ class AdminDashboard extends Component {
                       <MenuIcon />
                     </IconButton>
                     <Typography
-                      component='h1'
-                      variant='h6'
+                      variant='subtitle1'
                       color='inherit'
                       noWrap
                       className={classes.title}
                     >
                       Indebrau - Admin Area
                     </Typography>
+                    <Link href='/'>
+                      <Button className={classes.homeLink}>Back</Button>
+                    </Link>
                   </Toolbar>
                 </AppBar>
                 <Drawer
@@ -197,51 +195,35 @@ class AdminDashboard extends Component {
                   </div>
                   <Divider />
                   <List>
-                    <Link href='/'>
-                      <ListItem button>
-                        <ListItemIcon>
-                          <HomeIcon />
-                        </ListItemIcon>
-                        <ListItemText primary='Home' />
-                      </ListItem>
-                    </Link>
                     <ListItem
                       button
+                      selected={this.state.activeWindow=='AdminHome'}
                       onClick={() => this.setActiveWindow('AdminHome')}
                     >
-                      <ListItemIcon>
-                        <LaptopIcon />
-                      </ListItemIcon>
-                      <ListItemText primary='Admin Home' />
+                      <ListItemText primary='Sensor Overview' />
                     </ListItem>
                     <ListItem
                       button
+                      selected={this.state.activeWindow=='AllBrewingProcesses'}
                       onClick={() =>
                         this.setActiveWindow('AllBrewingProcesses')
                       }
                     >
-                      <ListItemIcon>
-                        <AssignmentIcon />
-                      </ListItemIcon>
                       <ListItemText primary='Brewing Processes' />
                     </ListItem>
                     <ListItem
                       button
+                      selected={this.state.activeWindow=='AllGraphs'}
                       onClick={() => this.setActiveWindow('AllGraphs')}
                     >
-                      <ListItemIcon>
-                        <AssignmentIcon />
-                      </ListItemIcon>
-                      <ListItemText primary='Media Streams' />
+                      <ListItemText primary='Graphs' />
                     </ListItem>
                     <ListItem
                       button
+                      selected={this.state.activeWindow=='AllMediaStreams'}
                       onClick={() => this.setActiveWindow('AllMediaStreams')}
                     >
-                      <ListItemIcon>
-                        <AssignmentIcon />
-                      </ListItemIcon>
-                      <ListItemText primary='Graphs' />
+                      <ListItemText primary='Media Streams' />
                     </ListItem>
                   </List>
                 </Drawer>
