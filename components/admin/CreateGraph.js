@@ -21,6 +21,7 @@ import { Query, Mutation } from 'react-apollo';
 
 import STEPS from '../../lib/brewingSteps';
 import Error from '../Error';
+import Loading from '../Loading';
 import {
   ACTIVE_GRAPHS_QUERY,
   ALL_GRAPHS_QUERY,
@@ -159,7 +160,9 @@ class CreateGraph extends Component {
                       </Grid>
                       <Grid item xs={12}>
                         <Query query={ALL_BREWING_PROCESSES_QUERY}>
-                          {({ data }) => {
+                          {({ data, error, loading }) => {
+                            if (loading) return <Loading />;
+                            if (error) return <Error error={error} />;
                             let brewingProcesses = [''];
                             if (data) {
                               brewingProcesses = data.brewingProcesses;
