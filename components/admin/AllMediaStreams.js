@@ -2,7 +2,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, Paper, Typography } from '@material-ui/core';
 import { Query } from 'react-apollo';
-import { ALL_MEDIA_STREAMS_QUERY } from '../../lib/queriesAndMutations';
+import { ALL_MEDIA_STREAMS_QUERY, ACTIVE_MEDIA_STREAMS_QUERY } from '../../lib/queriesAndMutations';
 import MediaStreamTable from './MediaStreamTable';
 import LatestMediaFile from '../LatestMediaFile';
 import CreateMediaStream from './CreateMediaStream';
@@ -30,7 +30,20 @@ class AllMediaStreams extends Component {
             if (loading) return <Loading />;
             if (error) return <Error error={error} />;
             if (data) {
-              // TODO: Currently also inactive ones are shown here
+              return (
+                <Paper className={classes.root}>
+                  <Typography variant='subtitle1'>All Media Streams</Typography>
+                  <MediaStreamTable mediaStreams={data.mediaStreams} />
+                </Paper>
+              );
+            }
+          }}
+        </Query>
+        <Query query={ACTIVE_MEDIA_STREAMS_QUERY}>
+          {({ data, error, loading }) => {
+            if (loading) return <Loading />;
+            if (error) return <Error error={error} />;
+            if (data) {
               const mediaFiles = data.mediaStreams.map(
                 (mediaStream) => (
                   <LatestMediaFile
@@ -43,8 +56,6 @@ class AllMediaStreams extends Component {
               );
               return (
                 <Paper className={classes.root}>
-                  <Typography variant='subtitle1'>All Media Streams</Typography>
-                  <MediaStreamTable mediaStreams={data.mediaStreams} />
                   <Typography variant='subtitle1'>Current Images</Typography>
                   {mediaFiles}
                 </Paper>

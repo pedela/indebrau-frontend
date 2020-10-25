@@ -28,7 +28,7 @@ const styles = (theme) => ({
 class LatestMediaFile extends Component {
   render() {
     const { classes } = this.props;
-    // fetch poilicy here is network only to prevent (cached) broken media link usage
+    // fetch poilicy here is network-only to prevent (cached) broken media link usage
     return (
       <Paper className={classes.root}>
         <Query

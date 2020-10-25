@@ -27,6 +27,7 @@ import Loading from '../Loading';
 import {
   ALL_BREWING_PROCESSES_QUERY,
   ALL_MEDIA_STREAMS_QUERY,
+  ACTIVE_MEDIA_STREAMS_QUERY,
   CREATE_MEDIA_STREAM_MUTATION
 } from '../../lib/queriesAndMutations';
 
@@ -129,7 +130,7 @@ class CreateMediaStream extends Component {
         </Fab>
         <Mutation
           mutation={CREATE_MEDIA_STREAM_MUTATION}
-          refetchQueries={[{ query: ALL_MEDIA_STREAMS_QUERY }]}
+          refetchQueries={[{ query: ALL_MEDIA_STREAMS_QUERY }, {query: ACTIVE_MEDIA_STREAMS_QUERY}]}
         >
           {(createMediaStream, { loading }) => (
             <Dialog
