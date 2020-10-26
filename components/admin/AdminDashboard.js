@@ -198,30 +198,40 @@ class AdminDashboard extends Component {
                     <ListItem
                       button
                       selected={this.state.activeWindow=='AdminHome'}
-                      onClick={() => this.setActiveWindow('AdminHome')}
+                      onClick={() => {
+                        this.setActiveWindow('AdminHome');
+                        this.handleDrawerClose();
+                      }}
                     >
                       <ListItemText primary='Sensor Overview' />
                     </ListItem>
                     <ListItem
                       button
                       selected={this.state.activeWindow=='AllBrewingProcesses'}
-                      onClick={() =>
-                        this.setActiveWindow('AllBrewingProcesses')
-                      }
+                      onClick={() => {
+                        this.setActiveWindow('AllBrewingProcesses');
+                        this.handleDrawerClose();
+                      }}
                     >
                       <ListItemText primary='Brewing Processes' />
                     </ListItem>
                     <ListItem
                       button
                       selected={this.state.activeWindow=='AllGraphs'}
-                      onClick={() => this.setActiveWindow('AllGraphs')}
+                      onClick={() => {
+                        this.setActiveWindow('AllGraphs');
+                        this.handleDrawerClose();
+                      }}
                     >
                       <ListItemText primary='Graphs' />
                     </ListItem>
                     <ListItem
                       button
                       selected={this.state.activeWindow=='AllMediaStreams'}
-                      onClick={() => this.setActiveWindow('AllMediaStreams')}
+                      onClick={() => {
+                        this.setActiveWindow('AllMediaStreams');
+                        this.handleDrawerClose();
+                      }}
                     >
                       <ListItemText primary='Media Streams' />
                     </ListItem>
