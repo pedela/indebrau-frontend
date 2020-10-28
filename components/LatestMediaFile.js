@@ -51,17 +51,17 @@ class LatestMediaFile extends Component {
                       }
                       className={classes.image}
                     />
-                    <Typography variant='subtitle1'>
+                    <Typography variant='body2'>
                       {data.mediaStream.id}
                     </Typography>
-                    <Typography variant='subtitle2'>
+                    <Typography variant='body2'>
                       Last Update:
                       {' ' + renderDate(mediaFile.time, true)}
                     </Typography>
                   </>
                 );
               } else {
-                return <Typography variant='subtitle1'>{data.mediaStream.id}: No Image</Typography>;
+                return <Typography variant='body2'>{data.mediaStream.id}: No Image</Typography>;
               }
             }
           }}

@@ -70,14 +70,12 @@ class AllGraphs extends Component {
                 <Paper className={classes.root}>
                   <Typography variant='subtitle1'>All Graphs</Typography>
                   <GraphTable graphs={data.graphs} />
+                  <CreateGraph className={classes.root} />
                 </Paper>
               );
             }
           }}
         </Query>
-        <Paper className={classes.root}>
-          <CreateGraph className={classes.root} />
-        </Paper>
       </>
     );
   }

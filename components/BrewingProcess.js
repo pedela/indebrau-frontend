@@ -2,7 +2,11 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import { Grid, Typography, withStyles } from '@material-ui/core';
+import ResponsiveContainer from 'recharts/lib/component/ResponsiveContainer';
 import BreweryComponent from './BreweryComponent';
+import GraphChart from './GraphChart';
+import LatestMediaFile from './LatestMediaFile';
+
 import Loading from './Loading';
 import Error from './Error';
 import { BREWING_PROCESS_QUERY } from '../lib/queriesAndMutations';
@@ -25,13 +29,14 @@ class BrewingProcess extends Component {
         <Query
           query={BREWING_PROCESS_QUERY}
           variables={{ id: this.props.brewingProcessId }}
-          pollInterval={10000}
+          pollInterval={5000}
         >
           {({ data, error, loading }) => {
             if (loading) return <Loading />;
             if (error) return <Error error={error} />;
             if (data && data.brewingProcess) {
               let { brewingProcess } = data;
+
               if (brewingProcess.end) {
                 return (
                   <Typography variant='h5' gutterBottom>
@@ -48,6 +53,29 @@ class BrewingProcess extends Component {
               }
               let brewingStep = brewingProcess.brewingSteps[0]; // "active" is set in query!
               let name = brewingStep.name;
+              const activeGraphs = [];
+              brewingStep.graphs.map(activeGraph => {
+                activeGraphs.push(
+                  <ResponsiveContainer width='99%'  key={activeGraph.id}>
+                    <GraphChart
+                      data={activeGraph.graphData}
+                      key={activeGraph.id}
+                      sensorName={activeGraph.sensorName}
+                    />
+                  </ResponsiveContainer>);
+              });
+              const activeStreams = [];
+              brewingStep.mediaStreams.map(mediaStream => {
+                activeStreams.push(
+                  <Grid item key={mediaStream.id}>
+                    <LatestMediaFile
+                      key={mediaStream.id}
+                      id={mediaStream.id}
+                      brewingStepId={brewingStep.id}
+                      updateFrequency={mediaStream.updateFrequency}
+                    />
+                  </Grid>);
+              });
               return (
                 <>
                   <Typography variant='h5' gutterBottom>
@@ -89,6 +117,15 @@ class BrewingProcess extends Component {
                     <Grid item>
                       {name == 'BOTTLING' && <BreweryComponent type='Bottle' />}
                     </Grid>
+                  </Grid>
+                  <Grid
+                    container
+                    className={classes.container}
+                    spacing={1}
+                    justify='center'
+                  >
+                    {activeGraphs}
+                    {activeStreams}
                   </Grid>
                 </>
               );

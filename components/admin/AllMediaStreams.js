@@ -58,14 +58,12 @@ class AllMediaStreams extends Component {
                 <Paper className={classes.root}>
                   <Typography variant='subtitle1'>Current Images</Typography>
                   {mediaFiles}
+                  <CreateMediaStream className={classes.root} />
                 </Paper>
               );
             }
           }}
         </Query>
-        <Paper className={classes.root}>
-          <CreateMediaStream className={classes.root} />
-        </Paper>
       </>
     );
   }
