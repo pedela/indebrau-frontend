@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Typography, withStyles } from '@material-ui/core';
+import Image from 'next/image';
 
 const styles = (theme) => ({
   root: {
@@ -8,17 +9,9 @@ const styles = (theme) => ({
     padding: theme.spacing(2),
     maxHeight: '100%'
   },
-  image: {
-    display: 'block',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    width: 270
-  },
-  untappd: {
-    display: 'block',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    width: 150
+  imageWrap: {
+    display: 'flex',
+    justifyContent: 'center'
   }
 });
 
@@ -32,13 +25,17 @@ class Home extends Component {
           <br />
           Beer from Eschweiler
         </Typography>
-        <img src='../logo.png' className={classes.image} />
+        <div className={classes.imageWrap}>
+          <Image src='/logo.png' width={882} height={617} />
+        </div>
         <Typography variant='subtitle1' gutterBottom>
           A beer as smooth as its river!
         </Typography>
         <br />
         <a href='https://untappd.com/Indebrau?ref=followbtn'>
-          <img src='../untappd/banner.png' className={classes.untappd} />
+          <div className={classes.imageWrap}>
+            <Image src='/untappd/banner.png' width={380} height={100}/>
+          </div>
         </a>
       </div>
     );
