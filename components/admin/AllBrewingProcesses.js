@@ -32,23 +32,19 @@ class AllBrewingProcesses extends Component {
             if (error) return <Error error={error} />;
             // success!
             return (
-              <Paper>
+              <Paper className={classes.root}>
                 <Typography variant='subtitle1' className={classes.root}>
                   All Brewing Processes
                 </Typography>
-                <Paper className={classes.root}>
-                  <BrewingProcessTable
-                    brewingProcesses={data.brewingProcesses}
-                    adminView={true}
-                  />
-                </Paper>
+                <BrewingProcessTable
+                  brewingProcesses={data.brewingProcesses}
+                  adminView={true}
+                />
+                <CreateBrewingProcess className={classes.root} />
               </Paper>
             );
           }}
         </Query>
-        <Paper className={classes.root}>
-          <CreateBrewingProcess className={classes.root} />
-        </Paper>
       </>
     );
   }

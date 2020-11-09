@@ -88,7 +88,6 @@ class AdvanceBrewingProcess extends Component {
             { query: ACTIVE_GRAPHS_QUERY},
             { query: ALL_GRAPHS_QUERY},
             { query: ALL_MEDIA_STREAMS_QUERY}
-
           ]}
         >
           {(advanceBrewingProcess, { loading }) => (
@@ -110,8 +109,7 @@ class AdvanceBrewingProcess extends Component {
                 }}
                 disabled={loading}
               >
-                <PlayIcon                 disabled={loading}
-                />
+                <PlayIcon disabled={loading} />
               </Fab>
               <Error error={this.state.queryError} />
             </>

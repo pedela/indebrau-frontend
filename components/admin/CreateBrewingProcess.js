@@ -163,58 +163,54 @@ class CreateBrewingProcess extends Component {
               </DialogTitle>
 
               <DialogContent>
-                <main className={classes.layout}>
-                  <Paper className={classes.paper}>
-                    {this.getGridContent()}
-                    <div className={classes.buttons}>
-                      <Button
-                        onClick={this.handleClose}
-                        className={classes.button}
-                        color='secondary'
-                        variant='contained'
-                      >
-                        Cancel
-                      </Button>
-                      <Button
-                        variant='contained'
-                        color='primary'
-                        onClick={async () => {
-                          // prepare variables
-                          try {
-                            let createBrewingProcessVars = {
-                              name: this.state.name,
-                              description: this.state.description,
-                              startNow: this.state.startNow
-                            };
-                            this.setState({
-                              formatting: 'ok'
-                            });
-                            this.setState({ queryStatus: 'ok' });
-                            await createBrewingProcess({
-                              variables: { ...createBrewingProcessVars }
-                            }).catch((e) => {
-                              this.setState({ queryStatus: e });
-                            });
-                          } catch (exception) {
-                            this.setState({
-                              formatting: exception
-                            });
-                          }
-                          if (
-                            this.state.formatting === 'ok' &&
+                <Paper className={classes.paper}>
+                  {this.getGridContent()}
+                  <Button
+                    onClick={this.handleClose}
+                    className={classes.button}
+                    color='secondary'
+                    variant='contained'
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    variant='contained'
+                    color='primary'
+                    onClick={async () => {
+                      // prepare variables
+                      try {
+                        let createBrewingProcessVars = {
+                          name: this.state.name,
+                          description: this.state.description,
+                          startNow: this.state.startNow
+                        };
+                        this.setState({
+                          formatting: 'ok'
+                        });
+                        this.setState({ queryStatus: 'ok' });
+                        await createBrewingProcess({
+                          variables: { ...createBrewingProcessVars }
+                        }).catch((e) => {
+                          this.setState({ queryStatus: e });
+                        });
+                      } catch (exception) {
+                        this.setState({
+                          formatting: exception
+                        });
+                      }
+                      if (
+                        this.state.formatting === 'ok' &&
                             this.state.queryStatus === 'ok'
-                          ) {
-                            this.handleClose();
-                          }
-                        }}
-                        className={classes.button}
-                        disabled={loading}
-                      >
-                        Create
-                      </Button>
-                    </div>
-                  </Paper>
-                </main>
+                      ) {
+                        this.handleClose();
+                      }
+                    }}
+                    className={classes.button}
+                    disabled={loading}
+                  >
+                      Create
+                  </Button>
+                </Paper>
               </DialogContent>
             </Dialog>
           )}

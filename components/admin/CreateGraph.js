@@ -18,7 +18,6 @@ import {
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { Query, Mutation } from 'react-apollo';
-
 import STEPS from '../../lib/brewingSteps';
 import Error from '../Error';
 import Loading from '../Loading';

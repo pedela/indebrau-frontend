@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import DeleteBrewingProcess from './admin/DeleteBrewingProcess';
 import AdvanceBrewingProcess from './admin/AdvanceBrewingProcess';
+import AddUserToBrewingProcess from './admin/AddUserToBrewingProcess';
 
 const styles = (theme) => ({
   root: {
@@ -66,8 +67,9 @@ class BrewingProcessTable extends Component {
                 )}
                 {this.props.adminView && (
                   <TableCell align='center'>
-                    <DeleteBrewingProcess id={n.id} />
+                    <DeleteBrewingProcess brewingProcessId={n.id} />
                     <AdvanceBrewingProcess brewingProcessId={n.id}/>
+                    <AddUserToBrewingProcess brewingProcessId={n.id} participatingUsers={n.participatingUsers}/>
                   </TableCell>
                 )}
               </TableRow>
