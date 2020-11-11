@@ -31,7 +31,6 @@ CurrentUser.propTypes = {
 class User extends Component {
   render() {
     const { classes } = this.props;
-
     return (
       <div className={classes.root}>
         <CurrentUser>
@@ -41,33 +40,28 @@ class User extends Component {
               <>
                 {!me && <SignIn />}
                 {me && (
-                  <>
-                    <Paper className={classes.root}>
-                      <Typography variant='h5' gutterBottom>
+                  <Paper className={classes.root}>
+                    <Typography variant='h5' gutterBottom>
                         Hello {me.name}
-                      </Typography>
-                      <Typography variant='subtitle1' gutterBottom>
+                    </Typography>
+                    <Typography variant='subtitle1' gutterBottom>
                         Your Brewing Processes
-                      </Typography>
-                      <Paper className={classes.root}>
-                        <BrewingProcessTable
-                          brewingProcesses={me.participatingBrewingProcesses}
-                          adminView={false}
-                        />
-                      </Paper>
-                    </Paper>
-                    <Paper className={classes.root}>
-                      {me && me.permissions.includes('ADMIN') && (
-                        <Link href='/adminDashboard'>
-                          <Button>Go to Admin Area</Button>
-                        </Link>
-                      )}
-                      <br />
-                      <Link href='/'>
-                        <SignOut />
+                    </Typography>
+                    <BrewingProcessTable
+                      brewingProcesses={me.participatingBrewingProcesses}
+                      adminView={false}
+                    />
+                    <br />
+                    {me && me.permissions.includes('ADMIN') && (
+                      <Link href='/adminDashboard'>
+                        <Button>Go to Admin Area</Button>
                       </Link>
-                    </Paper>
-                  </>
+                    )}
+                    <br />
+                    <Link href='/'>
+                      <SignOut />
+                    </Link>
+                  </Paper>
                 )}
               </>
             );

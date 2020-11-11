@@ -49,7 +49,7 @@ class LatestSensorValues extends Component {
               if (data) {
                 const sensorDataTable = data.latestSensorData.map(
                   (sensorData) => (
-                    <TableRow key={sensorData.sensorName}>
+                    <TableRow key={sensorData.sensorName} hover>
                       <TableCell align='center'>
                         {sensorData.sensorName.replace(/[/]/g, ' ')}
                       </TableCell>

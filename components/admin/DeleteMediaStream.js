@@ -7,8 +7,7 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
-  Fab,
-  withStyles
+  Fab
 } from '@material-ui/core';
 import Error from '../Error';
 import {
@@ -16,26 +15,6 @@ import {
   ACTIVE_MEDIA_STREAMS_QUERY,
   DELETE_MEDIA_STREAM_MUTATION
 } from '../../lib/queriesAndMutations';
-
-const styles = (theme) => ({
-  layout: {
-    width: 'auto',
-    textAlign: 'center',
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2)
-  },
-  buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end'
-  },
-  button: {
-    marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(1)
-  },
-  fab: {
-    margin: theme.spacing(1)
-  }
-});
 
 class DeleteMediaStream extends Component {
   state = {
@@ -57,13 +36,10 @@ class DeleteMediaStream extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-
     return (
       <>
         <Fab
           aria-label='Delete'
-          className={classes.fab}
           onClick={this.handleClickOpen}
         >
           <DeleteIcon />
@@ -83,40 +59,34 @@ class DeleteMediaStream extends Component {
                 Delete Media Stream
               </DialogTitle>
               <DialogContent>
-                <main className={classes.layout}>
-                  <div className={classes.buttons}>
-                    <Button
-                      onClick={this.handleClose}
-                      className={classes.button}
-                      color='secondary'
-                      variant='contained'
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      variant='contained'
-                      color='primary'
-                      onClick={async () => {
-                        // fire mutation (clear old error)
-                        this.setState({ queryError: null });
-                        await deleteMediaStream({
-                          variables: {
-                            mediaStreamId: this.props.id
-                          }
-                        }).catch((e) => {
-                          this.setState({ queryError: e });
-                        });
-                        if (this.state.queryError == null) {
-                          this.handleClose();
-                        }
-                      }}
-                      className={classes.button}
-                      disabled={loading}
-                    >
-                      Delete
-                    </Button>
-                  </div>
-                </main>
+                <Button
+                  onClick={this.handleClose}
+                  color='secondary'
+                  variant='contained'
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant='contained'
+                  color='primary'
+                  onClick={async () => {
+                    // fire mutation (clear old error)
+                    this.setState({ queryError: null });
+                    await deleteMediaStream({
+                      variables: {
+                        mediaStreamId: this.props.id
+                      }
+                    }).catch((e) => {
+                      this.setState({ queryError: e });
+                    });
+                    if (this.state.queryError == null) {
+                      this.handleClose();
+                    }
+                  }}
+                  disabled={loading}
+                >
+                  Delete
+                </Button>
               </DialogContent>
             </Dialog>
           )}
@@ -127,8 +97,7 @@ class DeleteMediaStream extends Component {
 }
 
 DeleteMediaStream.propTypes = {
-  classes: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(DeleteMediaStream);
+export default DeleteMediaStream;

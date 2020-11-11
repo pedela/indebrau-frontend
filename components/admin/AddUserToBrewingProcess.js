@@ -18,7 +18,7 @@ import {
 import EditIcon from '@material-ui/icons/Edit';
 import { Query, Mutation } from 'react-apollo';
 import Error from '../Error';
-import Loading from '../Error';
+import Loading from '../Loading';
 import {
   ADD_USERS_TO_BREWING_PROCESS_MUTATION,
   ALL_BREWING_PROCESSES_QUERY,
@@ -52,10 +52,6 @@ const styles = (theme) => ({
   },
   chip: {
     margin: theme.spacing(1) / 4
-  },
-  buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
   },
   button: {
     marginTop: theme.spacing(3),

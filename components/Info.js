@@ -20,9 +20,8 @@ class Info extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Typography variant='h5' gutterBottom>
+        <Typography variant='h4' gutterBottom>
           About Indebrau
-          <br />
         </Typography>
         <div className={classes.imageWrap}>
           <Image src='/hopfiMalzi.png' width={699} height={504}  />

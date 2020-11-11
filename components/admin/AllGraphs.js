@@ -19,9 +19,6 @@ const styles = (theme) => ({
     overflowX: 'auto',
     padding: theme.spacing(1),
     maxHeight: '100%'
-  },
-  fab: {
-    margin: theme.spacing(1)
   }
 });
 

@@ -8,7 +8,6 @@ import { forwardRef } from 'react';
 
 const NextComposed = forwardRef((props, ref) => {
   const { as, href, prefetch, ...other } = props;
-
   return (
     <NextLink href={href} prefetch={prefetch} as={as} innerRef={ref}>
       <a {...other} />

@@ -14,10 +14,8 @@ import { BREWING_PROCESS_QUERY } from '../lib/queriesAndMutations';
 const styles = (theme) => ({
   root: {
     textAlign: 'center',
-    padding: theme.spacing(2),
-    flexGrow: 1
-  },
-  container: {}
+    padding: theme.spacing(2)
+  }
 });
 
 class BrewingProcess extends Component {
@@ -36,7 +34,6 @@ class BrewingProcess extends Component {
             if (error) return <Error error={error} />;
             if (data && data.brewingProcess) {
               let { brewingProcess } = data;
-
               if (brewingProcess.end) {
                 return (
                   <Typography variant='h5' gutterBottom>
@@ -83,7 +80,6 @@ class BrewingProcess extends Component {
                   </Typography>
                   <Grid
                     container
-                    className={classes.container}
                     spacing={1}
                     justify='center'
                   >
@@ -120,7 +116,6 @@ class BrewingProcess extends Component {
                   </Grid>
                   <Grid
                     container
-                    className={classes.container}
                     spacing={1}
                     justify='center'
                   >

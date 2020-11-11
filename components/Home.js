@@ -20,9 +20,10 @@ class Home extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Typography variant='h5' gutterBottom>
+        <Typography variant='h4' gutterBottom>
           Indebrau
-          <br />
+        </Typography>
+        <Typography variant='h5' gutterBottom>
           Beer from Eschweiler
         </Typography>
         <div className={classes.imageWrap}>

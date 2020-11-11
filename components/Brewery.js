@@ -6,10 +6,8 @@ import BreweryComponent from './BreweryComponent';
 const styles = (theme) => ({
   root: {
     textAlign: 'center',
-    padding: theme.spacing(2),
-    flexGrow: 1
-  },
-  container: {}
+    padding: theme.spacing(2)
+  }
 });
 class Brewery extends Component {
   render() {
@@ -25,7 +23,6 @@ class Brewery extends Component {
         </Typography>
         <Grid
           container
-          className={classes.container}
           spacing={1}
           justify='center'
         >

@@ -15,9 +15,6 @@ const styles = (theme) => ({
     padding: theme.spacing(1),
     maxHeight: '100%',
     textAlign: 'center'
-  },
-  fab: {
-    margin: theme.spacing(1)
   }
 });
 
@@ -25,27 +22,25 @@ class AllBrewingProcesses extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <>
-        <Query query={ALL_BREWING_PROCESSES_QUERY}>
-          {({ data, error, loading }) => {
-            if (loading) return <Loading />;
-            if (error) return <Error error={error} />;
-            // success!
-            return (
-              <Paper className={classes.root}>
-                <Typography variant='subtitle1' className={classes.root}>
-                  All Brewing Processes
-                </Typography>
-                <BrewingProcessTable
-                  brewingProcesses={data.brewingProcesses}
-                  adminView={true}
-                />
-                <CreateBrewingProcess className={classes.root} />
-              </Paper>
-            );
-          }}
-        </Query>
-      </>
+      <Query query={ALL_BREWING_PROCESSES_QUERY}>
+        {({ data, error, loading }) => {
+          if (loading) return <Loading />;
+          if (error) return <Error error={error} />;
+          // success!
+          return (
+            <Paper className={classes.root}>
+              <Typography variant='subtitle1' className={classes.root}>
+                All Brewing Processes
+              </Typography>
+              <BrewingProcessTable
+                brewingProcesses={data.brewingProcesses}
+                adminView={true}
+              />
+              <CreateBrewingProcess className={classes.root} />
+            </Paper>
+          );
+        }}
+      </Query>
     );
   }
 }
